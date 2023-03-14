@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="start">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/geometries/Cylinder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/geometries/Geometry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/geometries/Plane.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/geometries/Polygon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/geometries/RadialGeometry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/geometries/Sphere.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/geometries/Triangle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/geometries/Tube.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/primitives/Double3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/primitives/Point.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/primitives/Ray.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/primitives/Vector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/targil_1.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="0a01466e-4cfc-4574-a7d5-e2ba7d95c1b1" />
+        <option name="url" value="https://github.com/avfrwk/mini_project_malat.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2N0h0WINjGlTf7tgaQZIzt3XNCt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/user/Documents/קורסים/יב/סמס ב/מלת פרוייקט/targil_1",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="" />
+      <created>1678806687792</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1678806687792</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="start" />
+    <option name="LAST_COMMIT_MESSAGE" value="start" />
+  </component>
+</project>
