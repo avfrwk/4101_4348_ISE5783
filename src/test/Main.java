@@ -6,6 +6,11 @@ import static primitives.Util.isZero;
 import primitives.Point;
 import primitives.Vector;
 
+/*
+Elad Yoshei 327884101 yoshi@yatmal.co.il
+Aviad Friedman 215204348 avfrwk@gmail.com
+*/
+
 /** Test program for the 1st stage
  * @author Dan Zilberstein */
 public final class Main {
