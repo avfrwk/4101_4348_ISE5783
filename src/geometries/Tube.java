@@ -22,10 +22,15 @@ public class Tube extends RadialGeometry{
         return ray;
     }
     /** get the normal to the tube at specific point
-     *  @param point the tube of normal's head
+     *  @param point the point of normal's head
      * @return normal to the tube at specific point*/
     public Vector getNormal(Point point){
-        return null;
+        double t=this.ray.getDir().dotProduct(point.subtract(this.ray.getP0()));
+        Point O;
+        if(t==0) O=this.ray.getP0();
+        else O=this.ray.getP0().add(this.ray.getDir().scale(t));
+        Vector n=point.subtract(O);
+        return n.normalize();
     }
 
     @Override

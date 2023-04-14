@@ -24,7 +24,7 @@ public class Sphere extends RadialGeometry{
     *  @param point the point of normal's head
      * @return normal to the sphere at specific point*/
     public Vector getNormal(Point point){
-        return null;
+        return point.subtract(this.center).normalize();
     }
 
     @Override

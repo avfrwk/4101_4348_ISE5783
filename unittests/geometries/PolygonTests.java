@@ -1,3 +1,5 @@
+package geometries;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -7,13 +9,13 @@ import static primitives.Util.isZero;
 
 import org.junit.jupiter.api.Test;
 
-import geometries.Polygon;
 import primitives.Point;
 import primitives.Vector;
 
 /** Testing Polygons
  * @author Dan */
 public class PolygonTests {
+
 
    /** Test method for {@link geometries.Polygon#Polygon(primitives.Point...)}. */
    @Test
@@ -51,7 +53,7 @@ public class PolygonTests {
                                      new Point(0, 0.5, 0.5)),
                    "Constructed a polygon with vertix on a side");
 
-      // TC11: Last point = first point
+      // TC11:Last point = first point
       assertThrows(IllegalArgumentException.class, //
                    () -> new Polygon(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0), new Point(0, 0, 1)),
                    "Constructed a polygon with vertice on a side");

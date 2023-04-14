@@ -1,6 +1,9 @@
 package geometries;
 
 import org.junit.jupiter.api.Test;
+import primitives.Point;
+import primitives.Ray;
+import primitives.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
 /**
@@ -8,33 +11,24 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class TubeTests {
     /**
-     * Test method for {@link geometries.Tube#getRadius()}.
-     */
-    @Test
-    void getRadius() {
-        // ============ Equivalence Partitions Tests ==============
-
-        // =============== Boundary Values Tests ==================
-
-    }
-    /**
-     * Test method for {@link geometries.Tube#getRay()}.
-     */
-    @Test
-    void getRay() {
-        // ============ Equivalence Partitions Tests ==============
-
-        // =============== Boundary Values Tests ==================
-
-    }
-    /**
      * Test method for {@link geometries.Tube#getNormal(primitives.Point)}.
      */
     @Test
     void getNormal() {
+
+        Tube tb = new Tube(5,new Ray(new Point(0, 0, 0), new Vector(0, 0, 1)));
+
         // ============ Equivalence Partitions Tests ==============
 
+        Vector norm = tb.getNormal(new Point(0, 5,2 ));
+        assertEquals(new Vector(0, 1, 0), norm,
+                "Tube's getNormal does not work well");
+
         // =============== Boundary Values Tests ==================
+        norm = tb.getNormal(new Point(0, 5, 0));
+
+        assertEquals(new Vector(0, 1, 0), norm,
+                "Tube's getNormal does not work well when the the normal touch the start point");
 
     }
 }

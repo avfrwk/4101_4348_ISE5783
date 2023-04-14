@@ -28,7 +28,22 @@ public class Cylinder extends Tube{
      *  @param point the point of normal's head
      * @return normal to the cylinder at specific point*/
     public Vector getNormal(Point point){
-        return null;
+        Vector dir=this.ray.getDir();
+
+        if(this.ray.getP0().distanceSquared(point)<this.radius*this.radius){
+            return dir.scale(-1);
+
+        }if (this.ray.getP0().add(dir.scale(this.height)).distanceSquared(point)<this.radius*this.radius) {
+            return dir;
+        }
+        /*if(point.equals(this.ray.getP0())||point.subtract(this.ray.getP0()).dotProduct(dir)==0){
+            return dir.scale(-1);
+        }
+        Point heightP0=this.ray.getP0().add(dir.scale(this.height));
+        if(point.equals(heightP0)||point.subtract(heightP0).dotProduct(dir)==0){
+            return dir;
+        }*/
+        return super.getNormal(point);
     }
 
     @Override
