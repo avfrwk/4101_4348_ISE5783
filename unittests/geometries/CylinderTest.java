@@ -11,10 +11,21 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class CylinderTest {
     /**
+     * Test method for {@link geometries.Cylinder#findIntsersections(Ray)}.
+     */
+    @Test
+    void TestFindIntersections() {
+        // ============ Equivalence Partitions Tests ==============
+
+        // =============== Boundary Values Tests ==================
+
+    }
+
+    /**
      * Test method for {@link geometries.Cylinder#getNormal(primitives.Point)}.
      */
     @Test
-    void getNormal() {
+    void testGetNormal() {
         Tube tb = new Cylinder(5,new Ray(new Point(0, 0, 0), new Vector(0, 0, 1)),5);
         // ============ Equivalence Partitions Tests ==============
         Vector norm = tb.getNormal(new Point(0, 5,2 ));

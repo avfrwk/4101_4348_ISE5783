@@ -11,10 +11,20 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class TubeTests {
     /**
+     * Test method for {@link geometries.Tube#findIntsersections(Ray)}.
+     */
+    @Test
+    void TestFindIntersections() {
+        // ============ Equivalence Partitions Tests ==============
+
+        // =============== Boundary Values Tests ==================
+
+    }
+    /**
      * Test method for {@link geometries.Tube#getNormal(primitives.Point)}.
      */
     @Test
-    void getNormal() {
+    void testGetNormal() {
 
         Tube tb = new Tube(5,new Ray(new Point(0, 0, 0), new Vector(0, 0, 1)));
 

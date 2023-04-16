@@ -3,6 +3,7 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
 import java.util.Objects;
 
 /** This class represent a cylinder*/
@@ -44,6 +45,14 @@ public class Cylinder extends Tube{
             return dir;
         }
         return super.getNormal(point);
+    }
+
+    /** get list of intersection between ray and Cylinder
+     * @param ray the ray
+     * @return list of intersections
+     * */
+    public List<Point> findIntsersections(Ray ray){
+        return null;
     }
 
     @Override

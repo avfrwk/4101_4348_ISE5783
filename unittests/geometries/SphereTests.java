@@ -2,6 +2,7 @@ package geometries;
 
 import org.junit.jupiter.api.Test;
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,10 +11,20 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class SphereTests {
     /**
+     * Test method for {@link geometries.Sphere#findIntsersections(Ray)}.
+     */
+    @Test
+    void TestFindIntersections() {
+        // ============ Equivalence Partitions Tests ==============
+
+        // =============== Boundary Values Tests ==================
+
+    }
+    /**
      * Test method for {@link geometries.Sphere#getNormal(primitives.Point)}.
      */
     @Test
-    void getNormal() {
+    void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
         Sphere sp=new Sphere(5,new Point(0,0,0));
         assertEquals(new Vector(0,0,1),sp.getNormal(new Point(0,0,5)),

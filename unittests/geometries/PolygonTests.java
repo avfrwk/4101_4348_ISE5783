@@ -10,13 +10,22 @@ import static primitives.Util.isZero;
 import org.junit.jupiter.api.Test;
 
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
 
 /** Testing Polygons
  * @author Dan */
 public class PolygonTests {
+   /**
+    * Test method for {@link geometries.Polygon#findIntsersections(Ray)}.
+    */
+   @Test
+   void TestFindIntersections() {
+      // ============ Equivalence Partitions Tests ==============
 
+      // =============== Boundary Values Tests ==================
 
+   }
    /** Test method for {@link geometries.Polygon#Polygon(primitives.Point...)}. */
    @Test
    public void testConstructor() {

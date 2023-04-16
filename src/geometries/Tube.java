@@ -3,6 +3,7 @@ import primitives.Point;
 import primitives.Vector;
 import primitives.Ray;
 
+import java.util.List;
 import java.util.Objects;
 
 /** This class represent a tube*/
@@ -32,7 +33,13 @@ public class Tube extends RadialGeometry{
         Vector n=point.subtract(O);
         return n.normalize();
     }
-
+    /** get list of intersection between ray and Tube
+     * @param ray the ray
+     * @return list of intersections
+     * */
+    public List<Point> findIntsersections(Ray ray){
+        return null;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,7 +1,9 @@
 package geometries;
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
 import java.util.Objects;
 
 /** This class represent a plane*/
@@ -24,6 +26,20 @@ public class Plane implements Geometry {
         this.p0=p1;
         this.normal=p2.subtract(p1).crossProduct(p3.subtract(p1)).normalize();
     }
+    /** get the normal to the plane at specific point
+     *  @param point the point of normal's head
+     * @return normal to the plane at specific point*/
+    public Vector getNormal(Point point){
+        return normal;
+    }
+    /** get list of intersection between ray and Plane
+     * @param ray the ray
+     * @return list of intersections
+     * */
+    public List<Point> findIntsersections(Ray ray){
+        return null;
+    }
+
     /** get the normal
      * @return normal to the plane*/
     public Vector getNormal() {
@@ -34,13 +50,6 @@ public class Plane implements Geometry {
     public Point getP0() {
         return p0;
     }
-    /** get the normal to the plane at specific point
-     *  @param point the point of normal's head
-     * @return normal to the plane at specific point*/
-    public Vector getNormal(Point point){
-        return normal;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,7 +1,9 @@
 package geometries;
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
 import java.util.Objects;
 
 /** This class represent a sphere*/
@@ -26,8 +28,13 @@ public class Sphere extends RadialGeometry{
     public Vector getNormal(Point point){
         return point.subtract(this.center).normalize();
     }
-
-    @Override
+    /** get list of intersection between ray and Sphere
+     * @param ray the ray
+     * @return list of intersections
+     * */
+    public List<Point> findIntsersections(Ray ray){
+        return null;
+    }    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
