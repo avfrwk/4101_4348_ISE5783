@@ -14,7 +14,6 @@ public class Double3 {
    final double                d2;
    /** Third number */
    final double                d3;
-
    /** Zero triad (0,0,0) */
    public static final Double3 ZERO = new Double3(0, 0, 0);
 
@@ -38,7 +37,6 @@ public class Double3 {
       this.d2 = value;
       this.d3 = value;
    }
-
    @Override
    public boolean equals(Object obj) {
       if (this == obj) return true;

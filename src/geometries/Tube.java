@@ -1,7 +1,5 @@
 package geometries;
-import primitives.Point;
-import primitives.Vector;
-import primitives.Ray;
+import primitives.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -39,9 +37,55 @@ public class Tube extends RadialGeometry{
      * @return list of intersections
      * */
     @Override
-    public List<Point> findIntsersections(Ray ray){
+    public List<Point> findIntsersections(Ray ray) {
+        Point rayp0=ray.getP0();
+        Point tubep0=this.ray.getP0();
+        if(rayp0.equals(tubep0)){
+            rayp0=ray.getPoint(0.00000000001);
+        }
+        Vector Dp = rayp0.subtract(tubep0);
+        Vector v = ray.getDir();
+        Vector va = this.ray.getDir();
+        double temp = v.dotProduct(va);
+        Vector vtemp = v;
+        if (!Util.isZero(temp)) {
+            vtemp = va.scale(temp);
+            if (vtemp.equals(v)) {
+                return null;
+            }
+            vtemp = v.subtract(vtemp);
+        }
 
-
+        double A = vtemp.dotProduct(vtemp);
+        temp = Dp.dotProduct(va);
+        Vector vtemp2 = Dp;
+        if (!Util.isZero(temp)) {
+            vtemp2 = va.scale(temp);
+            vtemp2 = Dp.subtract(vtemp2);
+        }
+        double B = 2 * vtemp.dotProduct(vtemp2);
+        temp = Dp.dotProduct(va);
+        vtemp = Dp;
+        if (!Util.isZero(temp)) {
+            vtemp = va.scale(temp);
+            vtemp = Dp.subtract(vtemp);
+        }
+        double C = vtemp.dotProduct(vtemp) - this.radius * this.radius;
+        double root = B * B - 4 * A * C;
+        if (root < 0)
+            return null;
+        root = Math.sqrt(root);
+        double p0 = (-B + root) / 2 * A;
+        double p1 = (-B - root) / 2 * A;
+        if(Util.alignZero(p0)>0){
+            if(Util.alignZero(p1)>0){
+                return List.of(ray.getPoint(p0), ray.getPoint(p1));
+            }
+            return List.of(ray.getPoint(p0));
+        }
+        if(Util.alignZero(p1)>0) {
+            return List.of(ray.getPoint(p1));
+        }
         return null;
     }
     @Override
