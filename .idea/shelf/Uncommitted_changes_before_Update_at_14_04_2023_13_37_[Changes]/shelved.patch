@@ -1,0 +1,464 @@
+Index: unittests/primitives/VectorTests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package primitives;\r\n\r\nimport org.junit.jupiter.api.Test;\r\n\r\nimport static org.junit.jupiter.api.Assertions.*;\r\n/**\r\n * Unit tests for primitives.Vector class\r\n */\r\nclass VectorTests {\r\n    /**\r\n     * Test method for {@link primitives.Vector#add(primitives.Vector)}.\r\n     */\r\n    @Test\r\n    void add() {\r\n        // ============ Equivalence Partitions Tests ==============\r\n\r\n        // =============== Boundary Values Tests ==================\r\n\r\n    }\r\n    /**\r\n     * Test method for {@link primitives.Vector#scale(double)}.\r\n     */\r\n    @Test\r\n    void scale() {\r\n        // ============ Equivalence Partitions Tests ==============\r\n\r\n        // =============== Boundary Values Tests ==================\r\n\r\n    }\r\n    /**\r\n     * Test method for {@link primitives.Vector#dotProduct(primitives.Vector)}.\r\n     */\r\n    @Test\r\n    void dotProduct() {\r\n        // ============ Equivalence Partitions Tests ==============\r\n\r\n        // =============== Boundary Values Tests ==================\r\n\r\n    }\r\n    /**\r\n     * Test method for {@link primitives.Vector#crossProduct(primitives.Vector)}.\r\n     */\r\n    @Test\r\n    void crossProduct() {\r\n        // ============ Equivalence Partitions Tests ==============\r\n\r\n        // =============== Boundary Values Tests ==================\r\n\r\n    }\r\n    /**\r\n     * Test method for {@link primitives.Vector#lengthSquared()}.\r\n     */\r\n    @Test\r\n    void lengthSquared() {\r\n        // ============ Equivalence Partitions Tests ==============\r\n\r\n        // =============== Boundary Values Tests ==================\r\n\r\n    }\r\n    /**\r\n     * Test method for {@link primitives.Vector#length()}.\r\n     */\r\n    @Test\r\n    void length() {\r\n        // ============ Equivalence Partitions Tests ==============\r\n\r\n        // =============== Boundary Values Tests ==================\r\n\r\n    }\r\n    /**\r\n     * Test method for {@link primitives.Vector#normalize()}.\r\n     */\r\n    @Test\r\n    void normalize() {\r\n        // ============ Equivalence Partitions Tests ==============\r\n\r\n        // =============== Boundary Values Tests ==================\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/unittests/primitives/VectorTests.java b/unittests/primitives/VectorTests.java
+--- a/unittests/primitives/VectorTests.java	(revision d8755d7577587a8550f17daf1f927dad2618bd07)
++++ b/unittests/primitives/VectorTests.java	(date 1681424374431)
+@@ -1,21 +1,44 @@
+ package primitives;
+ 
++import geometries.Polygon;
+ import org.junit.jupiter.api.Test;
+ 
++import static java.lang.System.out;
+ import static org.junit.jupiter.api.Assertions.*;
++import static org.junit.jupiter.api.Assertions.assertTrue;
++import static primitives.Util.isZero;
++
+ /**
+  * Unit tests for primitives.Vector class
+  */
+ class VectorTests {
++    /** Test method for {@link primitives.Vector#Vector(primitives.Double3)},
++     * {@link primitives.Vector#Vector(double,double,double)}.
++     * */
++    @Test
++    public void testConstructor() {
++        // ============ Equivalence Partitions Tests ==============
++        try { // test zero vector
++            new Vector(0, 0, 0);
++            fail("ERROR: zero vector does not throw an exception");
++        } catch (IllegalArgumentException ignore) {} catch (Exception ignore) {
++            fail("ERROR: zero vector throws wrong exception");
++        }
++        // =============== Boundary Values Tests ==================
++    }
+     /**
+      * Test method for {@link primitives.Vector#add(primitives.Vector)}.
+      */
+     @Test
+     void add() {
++        Vector v1 = new Vector(1, 2, 3);
++        Vector v2 = new Vector(-2, -4, -6);
+         // ============ Equivalence Partitions Tests ==============
+-
++        assertEquals(v1.add(v2),new Vector(-1, -2, -3)
++            ,"ERROR: Point - Point does not work correctly");
+         // =============== Boundary Values Tests ==================
+-
++        assertThrows(IllegalArgumentException.class,()->v1.add(new Vector(-1, -2, -3)),
++                "ERROR: Vector + -itself does not throw an exception");
+     }
+     /**
+      * Test method for {@link primitives.Vector#scale(double)}.
+@@ -23,29 +46,44 @@
+     @Test
+     void scale() {
+         // ============ Equivalence Partitions Tests ==============
+-
++        Vector v1 = new Vector(1, 2, 3);
++        //
++        assertEquals(v1.scale(2).xyz,new primitives.Double3(2,4,6),"doesnt scaling good");
++        //
++        assertEquals(v1.scale(-1).xyz,new primitives.Double3(-1,-2,-3),"doesnt scaling good negative scalar");
+         // =============== Boundary Values Tests ==================
+-
++        assertThrows(IllegalArgumentException.class,()->v1.scale(0),"scale by 0 enabled");
+     }
+     /**
+      * Test method for {@link primitives.Vector#dotProduct(primitives.Vector)}.
+      */
+     @Test
+     void dotProduct() {
++        Vector v1 = new Vector(1, 2, 3);
++        Vector v2 = new Vector(-2, -4, -6);
++        Vector v3 = new Vector(0, 3, -2);
+         // ============ Equivalence Partitions Tests ==============
+-
++        assertTrue(isZero(v1.dotProduct(v2) + 28),"ERROR: dotProduct() wrong value");
+         // =============== Boundary Values Tests ==================
+-
++        assertTrue(isZero(v1.dotProduct(v3)),"ERROR: dotProduct() for orthogonal vectors is not zero");
+     }
+     /**
+      * Test method for {@link primitives.Vector#crossProduct(primitives.Vector)}.
+      */
+     @Test
+     void crossProduct() {
++        Vector v1 = new Vector(1, 2, 3);
++        Vector v2 = new Vector(-2, -4, -6);
++        Vector v3 = new Vector(0, 3, -2);
+         // ============ Equivalence Partitions Tests ==============
+-
++        Vector vr = v1.crossProduct(v3);
++        assertTrue(isZero(vr.length() - v1.length() * v3.length()),
++        "ERROR: crossProduct() wrong result length");
++        assertTrue(isZero(vr.dotProduct(v1)) && isZero(vr.dotProduct(v3)),
++            "ERROR: crossProduct() result is not orthogonal to its operands");
+         // =============== Boundary Values Tests ==================
+-
++        assertThrows(IllegalArgumentException.class, ()->v1.crossProduct(v2),
++                "ERROR: crossProduct() for parallel vectors does not throw an exception");
+     }
+     /**
+      * Test method for {@link primitives.Vector#lengthSquared()}.
+@@ -53,9 +91,8 @@
+     @Test
+     void lengthSquared() {
+         // ============ Equivalence Partitions Tests ==============
+-
++        assertTrue(isZero(new Vector(1, 2, 3).lengthSquared() - 14),"ERROR: lengthSquared() wrong value");
+         // =============== Boundary Values Tests ==================
+-
+     }
+     /**
+      * Test method for {@link primitives.Vector#length()}.
+@@ -63,9 +100,9 @@
+     @Test
+     void length() {
+         // ============ Equivalence Partitions Tests ==============
++        assertTrue(!isZero(new Vector(0, 3, 4).length() - 5),"ERROR: length() wrong value");
+ 
+         // =============== Boundary Values Tests ==================
+-
+     }
+     /**
+      * Test method for {@link primitives.Vector#normalize()}.
+@@ -73,7 +110,15 @@
+     @Test
+     void normalize() {
+         // ============ Equivalence Partitions Tests ==============
++        Vector v = new Vector(1, 2, 3);
++        Vector u = v.normalize();
++        assertTrue (isZero(u.length() - 1),"ERROR: the normalized vector is not a unit vector");
+ 
++        assertThrows(IllegalArgumentException.class,()->v.crossProduct(u),
++            "ERROR: the normalized vector is not parallel to the original one");
++
++        assertFalse (v.dotProduct(u) < 0,
++                "ERROR: the normalized vector is opposite to the original one");
+         // =============== Boundary Values Tests ==================
+ 
+     }
+Index: unittests/PolygonTests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/unittests/PolygonTests.java b/unittests/geometries/PolygonTests.java
+rename from unittests/PolygonTests.java
+rename to unittests/geometries/PolygonTests.java
+--- a/unittests/PolygonTests.java	(revision d8755d7577587a8550f17daf1f927dad2618bd07)
++++ b/unittests/geometries/PolygonTests.java	(date 1681427110920)
+@@ -1,3 +1,5 @@
++package geometries;
++
+ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+ import static org.junit.jupiter.api.Assertions.assertEquals;
+ import static org.junit.jupiter.api.Assertions.assertThrows;
+@@ -15,6 +17,7 @@
+  * @author Dan */
+ public class PolygonTests {
+ 
++
+    /** Test method for {@link geometries.Polygon#Polygon(primitives.Point...)}. */
+    @Test
+    public void testConstructor() {
+@@ -51,7 +54,7 @@
+                                      new Point(0, 0.5, 0.5)),
+                    "Constructed a polygon with vertix on a side");
+ 
+-      // TC11: Last point = first point
++      // TC11:Last point = first point
+       assertThrows(IllegalArgumentException.class, //
+                    () -> new Polygon(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0), new Point(0, 0, 1)),
+                    "Constructed a polygon with vertice on a side");
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"54be8a47-8dc1-423f-8d61-257d13ba4836\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/unittests/PolygonTests.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/unittests/geometries/CylinderTest.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/unittests/geometries/PlaneTests.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/unittests/geometries/SphereTests.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/unittests/geometries/TriangleTests.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/unittests/geometries/TubeTests.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/unittests/primitives/PointTests.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/unittests/primitives/VectorTests.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/geometries/Triangle.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/geometries/Triangle.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/unittests/Main.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/targil_1.iml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/targil_1.iml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n        <option value=\"JUnit5 Test Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;history&quot;: [\r\n    {\r\n      &quot;state&quot;: &quot;OPEN&quot;,\r\n      &quot;author&quot;: &quot;avfrwk&quot;\r\n    }\r\n  ],\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;author&quot;: &quot;avfrwk&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"0a01466e-4cfc-4574-a7d5-e2ba7d95c1b1\" />\r\n        <option name=\"url\" value=\"https://github.com/avfrwk/mini_project_malat.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2N0h0WINjGlTf7tgaQZIzt3XNCt\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ASKED_ADD_EXTERNAL_FILES\": \"true\",\r\n    \"Downloaded.Files.Path.Enabled\": \"false\",\r\n    \"Repository.Attach.Annotations\": \"false\",\r\n    \"Repository.Attach.JavaDocs\": \"false\",\r\n    \"Repository.Attach.Sources\": \"false\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary\": \"JUnit5\",\r\n    \"com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5\": \"\",\r\n    \"create.test.in.the.same.root\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/user/Documents/קורסים/יב/סמס ב/מלת פרוייקט/targil_1\",\r\n    \"project.structure.last.edited\": \"Modules\",\r\n    \"project.structure.proportion\": \"0.0\",\r\n    \"project.structure.side.proportion\": \"0.0\",\r\n    \"settings.editor.selected.configurable\": \"settings.sync\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateTestDialog.Recents.Supers\">\r\n      <recent name=\"\" />\r\n    </key>\r\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\r\n      <recent name=\"\" />\r\n    </key>\r\n    <key name=\"CreateTestDialog.RecentsKey\">\r\n      <recent name=\"geometries\" />\r\n      <recent name=\"primitives\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"54be8a47-8dc1-423f-8d61-257d13ba4836\" name=\"Changes\" comment=\"\" />\r\n      <created>1678806687792</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1678806687792</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E-00001\" summary=\"start\">\r\n      <created>1678826787818</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\u200E\" />\r\n      <updated>1678826787818</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E-00002\" summary=\"remarks added, small corrections\">\r\n      <created>1678978144935</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\u200E\" />\r\n      <updated>1678978144935</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E-00003\" summary=\"add util\">\r\n      <created>1678978322721</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\u200E\" />\r\n      <updated>1678978322721</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"4\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"start\" />\r\n    <MESSAGE value=\"remarks added, small corrections\" />\r\n    <MESSAGE value=\"add util\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"add util\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d8755d7577587a8550f17daf1f927dad2618bd07)
++++ b/.idea/workspace.xml	(date 1681428408510)
+@@ -4,19 +4,17 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/unittests/PolygonTests.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/unittests/geometries/CylinderTest.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/unittests/geometries/PlaneTests.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/unittests/geometries/SphereTests.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/unittests/geometries/TriangleTests.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/unittests/geometries/TubeTests.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/unittests/primitives/PointTests.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/unittests/primitives/VectorTests.java" afterDir="false" />
++    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="test's skeletons added">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/geometries/Cylinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Cylinder.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/geometries/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Plane.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/geometries/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Sphere.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/geometries/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Triangle.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/Main.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/targil_1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/targil_1.iml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/geometries/Tube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Tube.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/unittests/PolygonTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/geometries/PolygonTests.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/unittests/geometries/TriangleTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/geometries/TriangleTests.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/unittests/primitives/PointTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/primitives/PointTests.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/unittests/primitives/VectorTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/primitives/VectorTests.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -90,6 +88,7 @@
+       <recent name="" />
+     </key>
+     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
++      <recent name="geometries" />
+       <recent name="" />
+     </key>
+     <key name="CreateTestDialog.RecentsKey">
+@@ -127,7 +126,14 @@
+       <option name="project" value="LOCAL‎" />
+       <updated>1678978322721</updated>
+     </task>
+-    <option name="localTasksCounter" value="4" />
++    <task id="LOCAL‎-00004" summary="test's skeletons added">
++      <created>1681396737801</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL‎-00004" />
++      <option name="project" value="LOCAL‎" />
++      <updated>1681396737802</updated>
++    </task>
++    <option name="localTasksCounter" value="5" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -146,7 +152,8 @@
+     <MESSAGE value="start" />
+     <MESSAGE value="remarks added, small corrections" />
+     <MESSAGE value="add util" />
+-    <option name="LAST_COMMIT_MESSAGE" value="add util" />
++    <MESSAGE value="test's skeletons added" />
++    <option name="LAST_COMMIT_MESSAGE" value="test's skeletons added" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />
+Index: src/geometries/Plane.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package geometries;\r\nimport primitives.Point;\r\nimport primitives.Vector;\r\n\r\nimport java.util.Objects;\r\n\r\n/** This class represent a plane*/\r\npublic class Plane implements Geometry {\r\n    final private Vector normal;\r\n    final private Point p0;\r\n    /** Constructor to initialize Plane based on the normal to the plane and point on the plane\r\n     * @param p point on the plane\r\n     * @param v the normal to the plane*/\r\n    public Plane(Point p,Vector v){\r\n        this.p0=p;\r\n        this.normal=v.normalize();\r\n    }\r\n    /** Constructor to initialize Plane based on three points\r\n     * @param p1 first point on the plane\r\n     * @param p2 second point on the plane\r\n     * @param p3 third point on the plane\r\n     * */\r\n    public Plane(Point p1,Point p2,Point p3){\r\n        this.p0=p1;\r\n        this.normal=null;\r\n    }\r\n    /** get the normal\r\n     * @return normal to the plane*/\r\n    public Vector getNormal() {\r\n        return normal;\r\n    }\r\n    /** get point from the plane\r\n     * @return point on the plane*/\r\n    public Point getP0() {\r\n        return p0;\r\n    }\r\n    /** get the normal to the plane at specific point\r\n     *  @param point the point of normal's head\r\n     * @return normal to the plane at specific point*/\r\n    public Vector getNormal(Point point){\r\n        return normal;\r\n    }\r\n\r\n    @Override\r\n    public boolean equals(Object o) {\r\n        if (this == o) return true;\r\n        if (o == null || getClass() != o.getClass()) return false;\r\n        Plane plane = (Plane) o;\r\n        return Objects.equals(normal, plane.normal) && Objects.equals(p0, plane.p0);\r\n    }\r\n    @Override\r\n    public int hashCode() {\r\n        return Objects.hash(normal, p0);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/geometries/Plane.java b/src/geometries/Plane.java
+--- a/src/geometries/Plane.java	(revision d8755d7577587a8550f17daf1f927dad2618bd07)
++++ b/src/geometries/Plane.java	(date 1681428040027)
+@@ -22,7 +22,7 @@
+      * */
+     public Plane(Point p1,Point p2,Point p3){
+         this.p0=p1;
+-        this.normal=null;
++        this.normal=p2.subtract(p1).crossProduct(p3.subtract(p1)).normalize();
+     }
+     /** get the normal
+      * @return normal to the plane*/
+Index: src/geometries/Triangle.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package geometries;\r\nimport primitives.Point;\r\n\r\n/** This class represent a triangle*/\r\npublic class Triangle extends Polygon{\r\n    /** Constructor to initialize Triangle based on three points(vertices)\r\n     * @param p1 first point\r\n     * @param p2 second point\r\n     * @param p3 third point */\r\n    public Triangle(Point p1,Point p2,Point p3) {\r\n        super(p1, p2, p3);\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/geometries/Triangle.java b/src/geometries/Triangle.java
+--- a/src/geometries/Triangle.java	(revision d8755d7577587a8550f17daf1f927dad2618bd07)
++++ b/src/geometries/Triangle.java	(date 1681427385917)
+@@ -10,5 +10,4 @@
+     public Triangle(Point p1,Point p2,Point p3) {
+         super(p1, p2, p3);
+     }
+-
+ }
+\ No newline at end of file
+Index: src/geometries/Sphere.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package geometries;\r\nimport primitives.Point;\r\nimport primitives.Vector;\r\n\r\nimport java.util.Objects;\r\n\r\n/** This class represent a sphere*/\r\npublic class Sphere extends RadialGeometry{\r\n    final private Point center;\r\n\r\n    /** Constructor to initialize Tube based on radius and direction\r\n     * @param Radius the radius length\r\n     * @param Center the central point of the tube*/\r\n    Sphere(double Radius, Point Center){\r\n        super(Radius);\r\n        this.center=Center;\r\n    }\r\n    /** get the center of the sphere\r\n     * @return the central point of the sphere*/\r\n    public Point getCenter() {\r\n        return center;\r\n    }\r\n    /** get the normal to the sphere at specific point\r\n    *  @param point the point of normal's head\r\n     * @return normal to the sphere at specific point*/\r\n    public Vector getNormal(Point point){\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public boolean equals(Object o) {\r\n        if (this == o) return true;\r\n        if (o == null || getClass() != o.getClass()) return false;\r\n        if (!super.equals(o)) return false;\r\n        Sphere sphere = (Sphere) o;\r\n        return Objects.equals(center, sphere.center);\r\n    }\r\n    @Override\r\n    public int hashCode() {\r\n        return Objects.hash(super.hashCode(), center);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/geometries/Sphere.java b/src/geometries/Sphere.java
+--- a/src/geometries/Sphere.java	(revision d8755d7577587a8550f17daf1f927dad2618bd07)
++++ b/src/geometries/Sphere.java	(date 1681427537207)
+@@ -24,7 +24,7 @@
+     *  @param point the point of normal's head
+      * @return normal to the sphere at specific point*/
+     public Vector getNormal(Point point){
+-        return null;
++        return point.subtract(this.center).normalize();
+     }
+ 
+     @Override
+Index: unittests/primitives/PointTests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package primitives;\r\n\r\nimport org.junit.jupiter.api.Test;\r\n\r\nimport static org.junit.jupiter.api.Assertions.*;\r\n/**\r\n * Unit tests for primitives.Point class\r\n */\r\nclass PointTests {\r\n    /**\r\n     * Test method for {@link primitives.Point#subtract(primitives.Point)}.\r\n     */\r\n    @Test\r\n    void subtract() {\r\n        // ============ Equivalence Partitions Tests ==============\r\n\r\n        // =============== Boundary Values Tests ==================\r\n\r\n    }\r\n    /**\r\n     * Test method for {@link primitives.Point#add(primitives.Vector)}.\r\n     */\r\n    @Test\r\n    void add() {\r\n        // ============ Equivalence Partitions Tests ==============\r\n\r\n        // =============== Boundary Values Tests ==================\r\n\r\n    }\r\n    /**\r\n     * Test method for {@link primitives.Point#distanceSquared(primitives.Point)}.\r\n     */\r\n    @Test\r\n    void distanceSquared() {\r\n        // ============ Equivalence Partitions Tests ==============\r\n\r\n        // =============== Boundary Values Tests ==================\r\n\r\n    }\r\n    /**\r\n     * Test method for {@link primitives.Point#distance(primitives.Point)}.\r\n     */\r\n    @Test\r\n    void distance() {\r\n        // ============ Equivalence Partitions Tests ==============\r\n\r\n        // =============== Boundary Values Tests ==================\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/unittests/primitives/PointTests.java b/unittests/primitives/PointTests.java
+--- a/unittests/primitives/PointTests.java	(revision d8755d7577587a8550f17daf1f927dad2618bd07)
++++ b/unittests/primitives/PointTests.java	(date 1681425194662)
+@@ -2,49 +2,72 @@
+ 
+ import org.junit.jupiter.api.Test;
+ 
++import static java.lang.System.out;
+ import static org.junit.jupiter.api.Assertions.*;
+ /**
+  * Unit tests for primitives.Point class
+  */
+ class PointTests {
++    /** Test method for {@link primitives.Point#Point(primitives.Double3)},
++     * {@link primitives.Point#Point(double,double,double)}.
++     * */
++    @Test
++    public void testConstructor() {
++        // ============ Equivalence Partitions Tests ==============
++
++        // =============== Boundary Values Tests ==================
++    }
++
+     /**
+      * Test method for {@link primitives.Point#subtract(primitives.Point)}.
+      */
+     @Test
+     void subtract() {
++        Point p1 = new Point(1, 2, 3);
+         // ============ Equivalence Partitions Tests ==============
++        assertEquals(new Vector(1, 1, 1),new Point(2, 3, 4).subtract(p1),
++                "ERROR: Point - Point does not work correctly");
+ 
+         // =============== Boundary Values Tests ==================
+-
++        assertThrows(IllegalArgumentException.class,()->p1.subtract(p1),
++                "subtract point from herself does not handled properly");
+     }
+     /**
+      * Test method for {@link primitives.Point#add(primitives.Vector)}.
+      */
+     @Test
+     void add() {
++        Point p1 = new Point(1, 2, 3);
+         // ============ Equivalence Partitions Tests ==============
+-
++        assertEquals(p1.add(new Vector(-1, -2, -3)),new Point(0, 0, 0),
++                "ERROR: Point + Vector does not work correctly");
+         // =============== Boundary Values Tests ==================
+-
+     }
+     /**
+      * Test method for {@link primitives.Point#distanceSquared(primitives.Point)}.
+      */
+     @Test
+     void distanceSquared() {
++        Point p1 = new Point(1, 2, 3);
+         // ============ Equivalence Partitions Tests ==============
+-
++        assertEquals(p1.distanceSquared(new Point(1, 2, 5)),4,
++                "distanceSquared doesnt do well");
+         // =============== Boundary Values Tests ==================
+-
++        assertEquals(p1.distanceSquared(p1),0,
++                "the distanceSquared between the same point isnt 0");
+     }
+     /**
+      * Test method for {@link primitives.Point#distance(primitives.Point)}.
+      */
+     @Test
+     void distance() {
++        Point p1 = new Point(1, 2, 3);
+         // ============ Equivalence Partitions Tests ==============
+-
++        assertEquals(p1.distance(new Point(1, 2, 4)),1,
++                "distance doesnt do well");
+         // =============== Boundary Values Tests ==================
++        assertEquals(p1.distance(p1),0,
++                "the distance between the same point isnt 0");
+ 
+     }
+ }
+\ No newline at end of file
+Index: src/geometries/Tube.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package geometries;\r\nimport primitives.Point;\r\nimport primitives.Vector;\r\nimport primitives.Ray;\r\n\r\nimport java.util.Objects;\r\n\r\n/** This class represent a tube*/\r\npublic class Tube extends RadialGeometry{\r\n    /** the central axis of the Tube*/\r\n    protected final Ray ray;\r\n    /** Constructor to initialize Tube based on radius and direction\r\n     * @param Radius the radius length\r\n     * @param ray the central axis of the Tube*/\r\n    Tube(double Radius,Ray ray){\r\n        super(Radius);\r\n        this.ray=ray;\r\n    }\r\n    /** get the central axis of the Tube\r\n     * @return the central axis of the Tube*/\r\n    public Ray getRay() {\r\n        return ray;\r\n    }\r\n    /** get the normal to the tube at specific point\r\n     *  @param point the tube of normal's head\r\n     * @return normal to the tube at specific point*/\r\n    public Vector getNormal(Point point){\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public boolean equals(Object o) {\r\n        if (this == o) return true;\r\n        if (o == null || getClass() != o.getClass()) return false;\r\n        if (!super.equals(o)) return false;\r\n        Tube tube = (Tube) o;\r\n        return Objects.equals(ray, tube.ray);\r\n    }\r\n    @Override\r\n    public int hashCode() {\r\n        return Objects.hash(super.hashCode(), ray);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/geometries/Tube.java b/src/geometries/Tube.java
+--- a/src/geometries/Tube.java	(revision d8755d7577587a8550f17daf1f927dad2618bd07)
++++ b/src/geometries/Tube.java	(date 1681429157410)
+@@ -25,7 +25,13 @@
+      *  @param point the tube of normal's head
+      * @return normal to the tube at specific point*/
+     public Vector getNormal(Point point){
+-        return null;
++        if(point.equals(this.ray.getP0())||point.subtract(this.ray.getP0()).dotProduct(this.ray.getDir())==0){
++            return this.ray.getDir();
++        }
++        double t=this.ray.getDir().dotProduct(point.subtract(this.ray.getP0()));
++        Point O=this.ray.getP0().add(this.ray.getDir().scale(t));
++        Vector n=point.subtract(O);
++        return n.normalize();
+     }
+ 
+     @Override
+Index: src/geometries/Cylinder.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package geometries;\r\nimport primitives.Point;\r\nimport primitives.Ray;\r\nimport primitives.Vector;\r\n\r\nimport java.util.Objects;\r\n\r\n/** This class represent a cylinder*/\r\n\r\npublic class Cylinder extends Tube{\r\n    final private double height;\r\n    /** Constructor to initialize Cylinder based on radius, the center axis and height\r\n     * @param Radius first number value\r\n     * @param ray second number value\r\n     * @param Height third number value */\r\n    Cylinder(double Radius, Ray ray, double Height){\r\n        super(Radius, ray);\r\n        this.height=Height;\r\n    }\r\n\r\n    /** get the height of the cylinder\r\n     * @return the height of the cylinder*/\r\n    public double getHeight() {\r\n        return height;\r\n    }\r\n\r\n    /** get the normal to the cylinder at specific point\r\n     *  @param point the point of normal's head\r\n     * @return normal to the cylinder at specific point*/\r\n    public Vector getNormal(Point point){\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public boolean equals(Object o) {\r\n        if (this == o) return true;\r\n        if (o == null || getClass() != o.getClass()) return false;\r\n        if (!super.equals(o)) return false;\r\n        Cylinder cylinder = (Cylinder) o;\r\n        return Double.compare(cylinder.height, height) == 0;\r\n    }\r\n    @Override\r\n    public int hashCode() {\r\n        return Objects.hash(super.hashCode(), height);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/geometries/Cylinder.java b/src/geometries/Cylinder.java
+--- a/src/geometries/Cylinder.java	(revision d8755d7577587a8550f17daf1f927dad2618bd07)
++++ b/src/geometries/Cylinder.java	(date 1681429420696)
+@@ -28,7 +28,12 @@
+      *  @param point the point of normal's head
+      * @return normal to the cylinder at specific point*/
+     public Vector getNormal(Point point){
+-        return null;
++        Point heightP0=this.ray.getP0().add(this.ray.getDir().scale(this.height));
++        if(point.equals(heightP0)||point.subtract(heightP0).dotProduct(this.ray.getDir())==0){
++            return this.ray.getDir();
++        }
++
++        return super.getNormal(point);
+     }
+ 
+     @Override
+Index: unittests/geometries/TriangleTests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package geometries;\r\n\r\nimport org.junit.jupiter.api.Test;\r\n\r\nimport static org.junit.jupiter.api.Assertions.*;\r\n/**\r\n * Unit tests for geometries.Triangle class\r\n */\r\nclass TriangleTests {\r\n    /** Test method for {@link geometries.Triangle#getNormal(primitives.Point)}. */\r\n    @Test\r\n    public void testGetNormal() {\r\n        // ============ Equivalence Partitions Tests ==============\r\n\r\n        // =============== Boundary Values Tests ==================\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/unittests/geometries/TriangleTests.java b/unittests/geometries/TriangleTests.java
+--- a/unittests/geometries/TriangleTests.java	(revision d8755d7577587a8550f17daf1f927dad2618bd07)
++++ b/unittests/geometries/TriangleTests.java	(date 1681396824565)
+@@ -13,5 +13,6 @@
+         // ============ Equivalence Partitions Tests ==============
+ 
+         // =============== Boundary Values Tests ==================
++
+     }
+ }
+\ No newline at end of file
