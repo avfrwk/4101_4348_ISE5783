@@ -25,6 +25,7 @@ public class Tube extends RadialGeometry{
     /** get the normal to the tube at specific point
      *  @param point the point of normal's head
      * @return normal to the tube at specific point*/
+    @Override
     public Vector getNormal(Point point){
         double t=this.ray.getDir().dotProduct(point.subtract(this.ray.getP0()));
         Point O;
@@ -37,7 +38,10 @@ public class Tube extends RadialGeometry{
      * @param ray the ray
      * @return list of intersections
      * */
+    @Override
     public List<Point> findIntsersections(Ray ray){
+
+
         return null;
     }
     @Override

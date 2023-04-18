@@ -20,7 +20,7 @@ abstract class RadialGeometry implements Geometry {
     public double getRadius() {
         return radius;
     }
-
+    @Override
     abstract public Vector getNormal(Point point);
     @Override
     public boolean equals(Object o) {

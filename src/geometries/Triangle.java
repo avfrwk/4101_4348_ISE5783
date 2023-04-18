@@ -1,6 +1,7 @@
 package geometries;
 import primitives.Point;
 import primitives.Ray;
+import primitives.Vector;
 
 import java.util.List;
 
@@ -19,7 +20,27 @@ public class Triangle extends Polygon{
      * @param ray the ray
      * @return list of intersections
      * */
+    @Override
     public List<Point> findIntsersections(Ray ray){
+        List<Point> planeInsect=this.plane.findIntsersections(ray);
+        if(planeInsect!=null){
+            Point p0=planeInsect.get(0);
+            Vector v0=this.vertices.get(1).subtract(this.vertices.get(0));
+            Vector v1=this.vertices.get(2).subtract(this.vertices.get(0));
+            Vector v2= p0.subtract(this.vertices.get(0));
+            double d00 = v0.dotProduct(v0);
+            double d01 = v0.dotProduct(v1);
+            double d11 = v1.dotProduct(v1);
+            double d20 = v2.dotProduct(v0);
+            double d21 = v2.dotProduct(v1);
+            double invDenom = 1 / (d00 * d11 - d01 * d01);
+            double u = (d11 * d20 - d01 * d21) * invDenom;
+            double v = (d00 * d21 - d01 * d20) * invDenom;
+            double w = 1 - u - v;
+            if (u > 0 && v > 0 && w > 0) {
+                return List.of(p0);
+            }
+        }
         return null;
     }
 }

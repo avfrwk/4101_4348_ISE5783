@@ -5,6 +5,8 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static primitives.Util.isZero;
 
@@ -18,8 +20,16 @@ class TriangleTests {
     @Test
     void TestFindIntersections() {
         // ============ Equivalence Partitions Tests ==============
+        Triangle t=new Triangle(new Point(0,2,0),new Point(2,0,0),new Point(0,-2,0));
+        assertEquals(List.of(new Point(1,0,0)),
+                t.findIntsersections(new Ray(new Point(1,0,1),new Vector(0,0,-1))),
+                "ray's vector is orthogonal to the triangle");
+
 
         // =============== Boundary Values Tests ==================
+        assertNotEquals(List.of(new Point(1,0,0)),
+                t.findIntsersections(new Ray(new Point(1,0,1),new Vector(0,0,1))),
+                "ray's vector is in the opposite direction to the triangle");
 
     }
 

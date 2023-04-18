@@ -11,6 +11,9 @@ public class Ray {
         this.p0 = p;
         this.dir = v.normalize();
     }
+    public Point getPoint(double t){
+        return p0.add(dir.scale(t));
+    }
     /** get the start point
      * @return  the start point of the ray*/
     public Point getP0() {

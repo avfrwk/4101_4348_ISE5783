@@ -33,21 +33,21 @@ class CylinderTest {
                 "Tube's getNormal does not work well");
 
         norm = tb.getNormal(new Point(1, 1,0 ));
-        assertEquals(new Vector(0,0, -1), norm,
-                "Tube's getNormal does not work well on base 1");
+        assertEquals(new Vector(0,0,1 /*-1*/), norm,
+                "Cylinder's getNormal does not work well on base 1");
 
         norm = tb.getNormal(new Point(1, 1,5 ));
         assertEquals(new Vector(0,0 , 1), norm,
-                "Tube's getNormal does not work well on base 2");
+                "Cylinder's getNormal does not work well on base 2");
 
 
         // =============== Boundary Values Tests ==================
         norm = tb.getNormal(new Point(0, 0,0 ));
-        assertEquals(new Vector(0,0, -1), norm,
-                "Tube's getNormal does not work well on the center of base 1");
+        assertEquals(new Vector(0,0,1/* -1*/), norm,
+                "Cylinder's getNormal does not work well on the center of base 1");
 
         norm = tb.getNormal(new Point(0, 0,5 ));
         assertEquals(new Vector(0,0 , 1), norm,
-                "Tube's getNormal does not work well on the center of base 2");
+                "Cylinder's getNormal does not work well on the center of base 2");
     }
 }

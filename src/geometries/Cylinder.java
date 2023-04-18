@@ -28,20 +28,21 @@ public class Cylinder extends Tube{
     /** get the normal to the cylinder at specific point
      *  @param point the point of normal's head
      * @return normal to the cylinder at specific point*/
+    @Override
     public Vector getNormal(Point point){
         Vector dir=this.ray.getDir();
-
-        /*if(this.ray.getP0().distanceSquared(point)<this.radius*this.radius){
+        Point P00= this.ray.getP0();
+        /*if(P00.distanceSquared(point)<this.radius*this.radius){
             return dir.scale(-1);
 
-        }if (this.ray.getP0().add(dir.scale(this.height)).distanceSquared(point)<this.radius*this.radius) {
+        }if (P00.add(dir.scale(this.height)).distanceSquared(point)<this.radius*this.radius) {
             return dir;
         }*/
-        if(point.equals(this.ray.getP0())||point.subtract(this.ray.getP0()).dotProduct(dir)==0){
-            return dir.scale(-1);
-        }
-        Point heightP0=this.ray.getP0().add(dir.scale(this.height));
-        if(point.equals(heightP0)||point.subtract(heightP0).dotProduct(dir)==0){
+        Point heightP0=this.ray.getPoint(this.height);
+        //if(point.equals(this.ray.getP0())||point.subtract(P00).dotProduct(dir)==0){
+        //    return dir.scale(-1);
+        //}
+        if(point.equals(heightP0)||point.equals(P00)||point.subtract(P00).dotProduct(dir)==0||point.subtract(heightP0).dotProduct(dir)==0){
             return dir;
         }
         return super.getNormal(point);
@@ -51,7 +52,9 @@ public class Cylinder extends Tube{
      * @param ray the ray
      * @return list of intersections
      * */
+    @Override
     public List<Point> findIntsersections(Ray ray){
+
         return null;
     }
 

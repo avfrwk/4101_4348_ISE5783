@@ -25,6 +25,7 @@ public class Sphere extends RadialGeometry{
     /** get the normal to the sphere at specific point
     *  @param point the point of normal's head
      * @return normal to the sphere at specific point*/
+    @Override
     public Vector getNormal(Point point){
         return point.subtract(this.center).normalize();
     }
@@ -32,8 +33,26 @@ public class Sphere extends RadialGeometry{
      * @param ray the ray
      * @return list of intersections
      * */
+    @Override
     public List<Point> findIntsersections(Ray ray){
-        return null;
+        Point  rayp0=ray.getP0();
+        Vector raydir=ray.getDir();
+        Vector u=this.center.subtract(rayp0);
+        double tm=raydir.dotProduct(u);
+        double dsquare=u.dotProduct(u)-tm*tm;
+        double rsquare=this.radius*this.radius;
+        if(dsquare>=rsquare){
+            return null;
+        }
+        double th=Math.sqrt(rsquare-dsquare);
+        if(tm+th>0){
+            if(tm-th>0){
+                return List.of(ray.getPoint(tm+th),ray.getPoint(tm-th));
+            }
+            return List.of(ray.getPoint(tm+th));
+        }
+        return List.of(ray.getPoint(tm-th));
+        //return List.of((tm+th!=0?rayp0.add(raydir.scale(tm+th)):null),rayp0.add(raydir.scale(tm-th)));
     }    @Override
     public boolean equals(Object o) {
         if (this == o) return true;

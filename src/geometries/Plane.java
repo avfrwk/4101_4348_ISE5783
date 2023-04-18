@@ -1,6 +1,7 @@
 package geometries;
 import primitives.Point;
 import primitives.Ray;
+import primitives.Util;
 import primitives.Vector;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class Plane implements Geometry {
     /** get the normal to the plane at specific point
      *  @param point the point of normal's head
      * @return normal to the plane at specific point*/
+    @Override
     public Vector getNormal(Point point){
         return normal;
     }
@@ -36,7 +38,14 @@ public class Plane implements Geometry {
      * @param ray the ray
      * @return list of intersections
      * */
+    @Override
     public List<Point> findIntsersections(Ray ray){
+        double t=this.normal.dotProduct(ray.getDir());
+        if(!Util.isZero(t)&&!ray.getP0().equals(this.p0)){
+            t=this.normal.dotProduct(this.p0.subtract(ray.getP0()))/t;
+            if(Util.alignZero(t)>0)
+                return List.of(ray.getPoint(t));
+        }
         return null;
     }
 
