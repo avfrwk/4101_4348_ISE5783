@@ -15,7 +15,7 @@ import static primitives.Util.isZero;
  */
 class TriangleTests {
     /**
-     * Test method for {@link geometries.Triangle#findIntsersections(Ray)}.
+     * Test method for {@link geometries.Triangle#findIntersections(Ray)}.
      */
     @Test
     void TestFindIntersections() {
@@ -25,7 +25,7 @@ class TriangleTests {
         Point p1 = new Point(0.5,1, 0);
         List<Point> result = t.findIntersections(new Ray(new Point(-0.5, 0, 1),
                 new Vector(1, 1, -1)));
-        שssertEquals(1, result.size(), "Wrong number of points");
+        assertEquals(1, result.size(), "Wrong number of points");
         assertEquals(List.of(p1),result,"The point inside the triangle");
         // TC02: The point outside the triangle opposite a side (0 points)
         assertNull(t.findIntersections(new Ray(new Point(2,4,5), new Vector(-1,-5,-5))),

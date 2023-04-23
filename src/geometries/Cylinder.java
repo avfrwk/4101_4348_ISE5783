@@ -49,7 +49,7 @@ public class Cylinder extends Tube{
         return super.getNormal(point);
     }
 
-    private Point findIntsersectionsHelper(Ray ray,Point p0,Vector normal,double radius){
+    private Point findIntersectionsHelper(Ray ray,Point p0,Vector normal,double radius){
         double t=normal.dotProduct(ray.getDir());
         if(!Util.isZero(t)&&!ray.getP0().equals(p0)){
             t=normal.dotProduct(p0.subtract(ray.getP0()))/t;
@@ -67,8 +67,8 @@ public class Cylinder extends Tube{
      * @return list of intersections
      * */
     @Override
-    public List<Point> findIntsersections(Ray ray){
-        List<Point> infinityPoints=super.findIntsersections(ray);
+    public List<Point> findIntersections(Ray ray){
+        List<Point> infinityPoints=super.findIntersections(ray);
         Point heightP0=this.ray.getPoint(this.height);
         Point P00=this.ray.getP0();
         Vector dir=this.ray.getDir();
@@ -86,8 +86,8 @@ public class Cylinder extends Tube{
         } if(flag1&&flag2){
             return infinityPoints;
         }
-        Point insect3=this.findIntsersectionsHelper(ray,P00,dir,this.radius);
-        Point insect4=this.findIntsersectionsHelper(ray,heightP0,dir,this.radius);
+        Point insect3=this.findIntersectionsHelper(ray,P00,dir,this.radius);
+        Point insect4=this.findIntersectionsHelper(ray,heightP0,dir,this.radius);
         if (flag1){
             if(insect3!=null){
                 return List.of(infinityPoints.get(0),insect3);

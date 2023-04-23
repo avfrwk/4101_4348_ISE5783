@@ -3,7 +3,6 @@ package geometries;
 import primitives.Point;
 import primitives.Ray;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.LinkedList;
 
@@ -36,11 +35,11 @@ public class Geometries implements Intersectable{
      * @return list of intersections
      * */
     @Override
-    public List<Point> findIntsersections(Ray ray) {
+    public List<Point> findIntersections(Ray ray) {
         List<Point> insects=null;
         List<Point> localInsects;
         for (Intersectable i:this.Intersectables) {
-            localInsects=i.findIntsersections(ray);
+            localInsects=i.findIntersections(ray);
             if(localInsects!=null){
                 if(insects!=null)
                     insects.addAll(localInsects);//-------------------------------------

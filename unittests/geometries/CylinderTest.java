@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class CylinderTest {
     /**
-     * Test method for {@link geometries.Cylinder#findIntsersections(Ray)}.
+     * Test method for {@link geometries.Cylinder#findIntersections(Ray)}.
      */
     @Test
     void TestFindIntersections() {

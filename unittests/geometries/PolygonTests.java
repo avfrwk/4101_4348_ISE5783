@@ -13,7 +13,7 @@ import primitives.Vector;
  * @author Dan */
 public class PolygonTests {
    /**
-    * Test method for {@link geometries.Polygon#findIntsersections(Ray)}.
+    * Test method for {@link geometries.Polygon#findIntersections(Ray)}.
     */
    @Test
    void TestFindIntersections() {

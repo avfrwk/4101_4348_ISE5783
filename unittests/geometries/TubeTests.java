@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class TubeTests {
     /**
-     * Test method for {@link geometries.Tube#findIntsersections(Ray)}.
+     * Test method for {@link geometries.Tube#findIntersections(Ray)}.
      */
     @Test
     void TestFindIntersections() {
         // ============ Equivalence Partitions Tests ==============
-        Tube tub=new Tube(2,new Ray(new Point(0, 0, 0), new Vector(0,1 , 0)));
-        System.out.println(tub.findIntsersections(new Ray(new Point(-2,0,0),new Vector(1,1,0))));
+        //Tube tub=new Tube(2,new Ray(new Point(0, 0, 0), new Vector(0,1 , 0)));
+        //System.out.println(tub.findIntersections(new Ray(new Point(-2,0,0),new Vector(1,1,0))));
 
         // =============== Boundary Values Tests ==================
 

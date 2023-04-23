@@ -85,8 +85,8 @@ public class Polygon implements Geometry {
     * @return list of intersections
     * */
    @Override
-   public List<Point> findIntsersections(Ray ray){
-      List<Point> planeInsect=this.plane.findIntsersections(ray);
+   public List<Point> findIntersections(Ray ray){
+      List<Point> planeInsect=this.plane.findIntersections(ray);
       if(planeInsect!=null){
          Point p0=planeInsect.get(0);
          Vector v0=this.vertices.get(0).subtract(p0);

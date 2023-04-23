@@ -37,7 +37,7 @@ public class Tube extends RadialGeometry{
      * @return list of intersections
      * */
     @Override
-    public List<Point> findIntsersections(Ray ray) {
+    public List<Point> findIntersections(Ray ray) {
         Point rayp0=ray.getP0();
         Point tubep0=this.ray.getP0();
         if(rayp0.equals(tubep0)){

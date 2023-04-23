@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class SphereTests {
     /**
-     * Test method for {@link geometries.Sphere#findIntsersections(Ray)}.
+     * Test method for {@link geometries.Sphere#findIntersections(Ray)}.
      */
     @Test
 

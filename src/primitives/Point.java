@@ -17,7 +17,15 @@ public class Point {
     public Point(double x,double y,double z){
         this.xyz=new Double3(x,y,z);
     }
-
+    public double getX(){
+        return xyz.d1;
+    }
+    public double getY(){
+        return xyz.d2;
+    }
+    public double getZ(){
+        return xyz.d3;
+    }
     /** subtract two points
      * @param b the another point
      * @return   the vector between to points */
