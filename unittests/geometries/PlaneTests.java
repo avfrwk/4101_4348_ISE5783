@@ -52,4 +52,47 @@ class PlaneTests {
             assertTrue(isZero(result.dotProduct(pts[i].subtract(pts[i == 0 ? 2 : i - 1]))),
                     "Plane's normal is not orthogonal to one of the edges");
     }
+
+    @Test
+    public void testFindIntersections() {
+        Plane pl = new Plane(new Point (1, 1, 0),new Point (0, 0, 7),new Point (3, 3, 9) );
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: The ray cuts the plane (1 points)
+        Point p1 = new Point(0.0651530771650466, 0.355051025721682, 0);
+        List<Point> result = sphere.findIntersections(new Ray(new Point(-1, 0, 0),
+                new Vector(0, -1, 2)));
+        assertEquals(1, result.size(), "Wrong number of points");
+        assertEquals(List.of(p1), result, "The ray cuts the plane");
+        // TC02: The ray does not cut the plane (0 points)
+        assertNull(pl.findIntersections(new Ray(new Point(-1, 0, 0), new Vector(-1, 1, 0))),
+                "The ray does not cut the plane");
+
+        // =============== Boundary Values Tests ==================
+        // TC03: The ray is parallel to the plane (0 points)
+        assertNull(pl.findIntersections(new Ray(new Point(-1, 0, 0), new Vector(1, 1, 0))),
+                " The ray is parallel to the plane");
+        // TC04: The ray is merge with the plane (0 points)
+        assertNull(pl.findIntersections(new Ray(new Point(1, 1, 0), new Vector(1, 1, 0))),
+                " The ray is parallel to the plane");
+
+        // TC05: The ray is perpendicular and starts before the plane (1 points)
+        Point p5 = new Point(2, 2, 4);
+        List<Point> result5 = pl.findIntersections(new Ray(new Point(0, 4, 4),
+                new Vector(1, -1, 2)));
+        assertEquals(1, result.size(), "Wrong number of points");
+        assertEquals(List.of(p1), result, "The ray is perpendicular and starts before the plane");
+
+        // TC06: The ray is perpendicular and starts in the plane (0 points)
+        assertNull(pl.findIntersections(new Ray(new Point(2, 2, 0), new Vector(1, -1, 0))),
+                " The ray is perpendicular and starts in the plane");
+        // TC07: The ray is perpendicular and starts after the plane (0 points)
+        assertNull(pl.findIntersections(new Ray(new Point(2, 0, 0), new Vector(1, -1, 0))),
+                "The ray is perpendicular and starts after the plane");
+        // TC08: The ray isn't perpendicular and starts in the plane (0 points)
+        assertNull(pl.findIntersections(new Ray(new Point(2, 2, 0), new Vector(1, 0, 0))),
+                " The ray isn't perpendicular and starts in the plane");
+        // TC09: The ray starts at a reference point
+        assertNull(pl.findIntersections(new Ray(new Point(1, 1, 0), new Vector(1, 0, 0))),
+                "The ray starts at a reference point");
+    }
 }
