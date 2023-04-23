@@ -40,7 +40,7 @@ class GeometriesTests{
                         new Point(5,1,5), new Point(2,3,5),new Point(3,7,5)),
                 new Triangle(new Point(3,6,4),new Point(7,6,4),new Point(5,3,3)),
                 new Tube(5,new Ray(new Point(3,1,1),new Vector(0,1,0))),
-                new Cylinder(5,new Ray(new Point(2,2,1.7),new Vector(0,-1,0)),10),
+                new Cylinder(5,new Ray(new Point(3,2,1.7),new Vector(0,0,-1)),10),
                 new Geometries(new Sphere(6,new Point(1,1,1)))
         );
         // TC03: none of the Intersectables are intersects
@@ -49,16 +49,6 @@ class GeometriesTests{
         // TC04: one of the Intersectables is intersects
         assertEquals(1,geos.findIntersections(new Ray(new Point(15,15,10),new Vector(0,0,-1))).size(),
        "Geometries's TestFindIntersections is not working properly for when just one of the Intersectables is intersects");
-        geos=new Geometries();
-        geos.add(
-                new Plane(new Point(1,1,1),new Vector(0,0,1)),
-                new Polygon(new Point(7,7,5),new Point(7,3,5),
-                        new Point(5,1,5), new Point(2,3,5),new Point(3,7,5)),
-                new Triangle(new Point(3,6,4),new Point(7,6,4),new Point(5,3,3)),
-                new Tube(5,new Ray(new Point(3,1,1),new Vector(0,1,0))),
-                new Cylinder(5,new Ray(new Point(3,2,1.7),new Vector(0,0,-1)),10),
-                new Geometries(new Sphere(6,new Point(1,1,1)))
-        );
         // TC05: all the Intersectables are intersects
         assertEquals(9,geos.findIntersections(new Ray(new Point(5,3.5,10),new Vector(0,0,-1))).size(),
       "Geometries's TestFindIntersections is not working properly for when all the Intersectables are intersects");
