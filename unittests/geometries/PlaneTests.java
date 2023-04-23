@@ -7,6 +7,7 @@ import primitives.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static primitives.Util.isZero;
+import java.util.List;
 
 /**
  * Unit tests for geometries.Plane class
@@ -59,7 +60,7 @@ class PlaneTests {
         // ============ Equivalence Partitions Tests ==============
         // TC01: The ray cuts the plane (1 points)
         Point p1 = new Point(0.0651530771650466, 0.355051025721682, 0);
-        List<Point> result = sphere.findIntersections(new Ray(new Point(-1, 0, 0),
+        List<Point> result = plane.findIntersections(new Ray(new Point(-1, 0, 0),
                 new Vector(0, -1, 2)));
         assertEquals(1, result.size(), "Wrong number of points");
         assertEquals(List.of(p1), result, "The ray cuts the plane");
