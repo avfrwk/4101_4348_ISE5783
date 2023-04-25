@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="fixing wrong code">
+    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="Camera added, include ConstructRay&#10;CameraTest added &#10;start of CameraIntegration added">
+      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unittests/CameraIntegrationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unittests/renderer/CameraTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unittests/geometries/GeometriesTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/geometries/GeometriesTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Sphere.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Tube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Tube.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unittests/geometries/TriangleTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/geometries/TriangleTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unittests/primitives/VectorTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/primitives/VectorTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,9 +23,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -69,7 +76,7 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Documents/קורסים/יב/סמס ב/מלת פרוייקט/targil_1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Documents/קורסים/יב/סמס ב/מלת פרוייקט/targil_1/unittests/renderer&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
@@ -77,6 +84,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Documents\קורסים\יב\סמס ב\מלת פרוייקט\targil_1\unittests\renderer" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
@@ -89,6 +99,13 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="targil_1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in targil_1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="targil_1" />
       <option name="PACKAGE_NAME" value="" />
@@ -97,8 +114,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="VectorTests.dotProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="targil_1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="primitives.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="primitives" />
+      <option name="MAIN_CLASS_NAME" value="primitives.VectorTests" />
+      <option name="METHOD_NAME" value="dotProduct" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.VectorTests.dotProduct" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.All in targil_1" />
       </list>
     </recent_temporary>
@@ -161,7 +196,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1682262220806</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL‎-00008" summary="fixing wrong code">
+      <created>1682262408841</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL‎-00008" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1682262408841</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,7 +226,8 @@
     <MESSAGE value="added:&#10; tests&#10; getNormals" />
     <MESSAGE value="cylinder's getNormal changed" />
     <MESSAGE value="fixing wrong code" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing wrong code" />
+    <MESSAGE value="Camera added, include ConstructRay&#10;CameraTest added &#10;start of CameraIntegration added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Camera added, include ConstructRay&#10;CameraTest added &#10;start of CameraIntegration added" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

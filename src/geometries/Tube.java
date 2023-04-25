@@ -41,7 +41,7 @@ public class Tube extends RadialGeometry{
         Point rayp0=ray.getP0();
         Point tubep0=this.ray.getP0();
         if(rayp0.equals(tubep0)){
-            rayp0=ray.getPoint(0.00000000001);
+            rayp0=ray.getPoint(0.000000001);
         }
         Vector Dp = rayp0.subtract(tubep0);
         Vector v = ray.getDir();

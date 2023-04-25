@@ -14,7 +14,7 @@ public class Sphere extends RadialGeometry{
     /** Constructor to initialize Tube based on radius and direction
      * @param Radius the radius length
      * @param Center the central point of the tube*/
-    Sphere(double Radius, Point Center){
+    public Sphere(double Radius, Point Center){
         super(Radius);
         this.center=Center;
     }

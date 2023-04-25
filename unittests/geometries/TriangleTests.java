@@ -20,30 +20,30 @@ class TriangleTests {
     @Test
     void TestFindIntersections() {
         // ============ Equivalence Partitions Tests ==============
-        Triangle t=new Triangle(new Point(0,2,0),new Point(2,0,0),new Point(0,-2,0));
+        Triangle triangle=new Triangle(new Point(0,2,0),new Point(2,0,0),new Point(0,-2,0));
         // TC01: The point inside the triangle (1 points)
         Point p1 = new Point(0.5,1, 0);
-        List<Point> result = t.findIntersections(new Ray(new Point(-0.5, 0, 1),
+        List<Point> result = triangle.findIntersections(new Ray(new Point(-0.5, 0, 1),
                 new Vector(1, 1, -1)));
         assertEquals(1, result.size(), "Wrong number of points");
         assertEquals(List.of(p1),result,"The point inside the triangle");
         // TC02: The point outside the triangle opposite a side (0 points)
-        assertNull(t.findIntersections(new Ray(new Point(2,4,5), new Vector(-1,-5,-5))),
+        assertNull(triangle.findIntersections(new Ray(new Point(2,4,5), new Vector(-1,-5,-5))),
                 "The point outside the triangle opposite a side");
         // TC03: The point outside the triangle opposite a vertex (0 points)
-        assertNull(t.findIntersections(new Ray(new Point(2,4,5), new Vector(-3,-4,-13))),
+        assertNull(triangle.findIntersections(new Ray(new Point(2,4,5), new Vector(-3,-4,-13))),
                 "The point outside the triangle opposite a side");
 
 
         // =============== Boundary Values Tests ==================
         // TC04: The point on a side (0 points)
-        assertNull(t.findIntersections(new Ray(new Point(2,4,5), new Vector(-2,-3,-5))),
+        assertNull(triangle.findIntersections(new Ray(new Point(2,4,5), new Vector(-2,-3,-5))),
                 "The point outside the triangle opposite a vertex");
         // TC05: The point on the continuation of the rib (0 points)
-        assertNull(t.findIntersections(new Ray(new Point(2,4,5), new Vector(-2,0,-5))),
+        assertNull(triangle.findIntersections(new Ray(new Point(2,4,5), new Vector(-2,0,-5))),
                 "The point on the continuation of the rib");
         // TC05: The point is on a vertex (0 points)
-        assertNull(t.findIntersections(new Ray(new Point(2,4,5), new Vector(-2,-6,-5))),
+        assertNull(triangle.findIntersections(new Ray(new Point(2,4,5), new Vector(-2,-6,-5))),
                 "The point is on a vertex");
 
     }

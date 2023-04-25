@@ -68,7 +68,10 @@ class VectorTests {
         Vector v2 = new Vector(-2, -4, -6);
         Vector v3 = new Vector(0, 3, -2);
         // ============ Equivalence Partitions Tests ==============
-        assertTrue(isZero(v1.dotProduct(v2) + 28),"ERROR: dotProduct() wrong value");
+       assertEquals(-28,
+               v1.dotProduct(v2),
+               0.00001,
+               "ERROR: dotProduct() wrong value");
         // =============== Boundary Values Tests ==================
         assertTrue(isZero(v1.dotProduct(v3)),"ERROR: dotProduct() for orthogonal vectors is not zero");
     }
