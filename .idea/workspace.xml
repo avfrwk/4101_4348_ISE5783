@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="Camera added, include ConstructRay&#10;CameraTest added &#10;start of CameraIntegration added">
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/unittests/CameraIntegrationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unittests/renderer/CameraTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Sphere.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Tube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Tube.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unittests/geometries/TriangleTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/geometries/TriangleTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unittests/primitives/VectorTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/primitives/VectorTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,8 +125,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.VectorTests.dotProduct" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.VectorTests.dotProduct" />
         <item itemvalue="JUnit.All in targil_1" />
       </list>
     </recent_temporary>
@@ -203,7 +196,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1682262408841</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL‎-00009" summary="Camera added, include ConstructRay&#10;CameraTest added &#10;start of CameraIntegration added">
+      <created>1682432186880</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL‎-00009" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1682432186880</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
