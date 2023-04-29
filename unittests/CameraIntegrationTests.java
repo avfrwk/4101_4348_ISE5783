@@ -2,6 +2,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import geometries.Geometry;
+import geometries.Plane;
 import geometries.Sphere;
 import geometries.Triangle;
 import org.junit.jupiter.api.Test;
@@ -85,6 +86,20 @@ public class CameraIntegrationTests {
      */
     @Test
     void planeConstructRayTest() {
+        // TC01: camera's Vto is orthogonal to the plane
+        Camera camera=new Camera(new Point(1,1,2),new Vector(0,0,-1),new Vector(0,1,0))
+                .setVPSize(3,3).setVPDistance(1);
+        Plane plane =new Plane(new Point(1,1,1),new Vector(0,0,1));
+        assertEquals(9,getAmountIntersections(plane,camera,3,3),
+                "ConstructRay from Camera to Plane failed when the camera's Vto is orthogonal to the plane");
+        // TC02: the angle between camera and plane is small
+        plane =new Plane(new Point(1,1,1),new Vector(0,-3,6));
+        assertEquals(9,getAmountIntersections(plane,camera,3,3),
+                "ConstructRay from Camera to Plane failed when the angle between camera and plane is small");
+        // TC03: the angle between camera and plane is large
+        plane =new Plane(new Point(1,1,1),new Vector(0,-4,1));
+        assertEquals(6,getAmountIntersections(plane,camera,3,3),
+                "ConstructRay from Camera to Plane failed when the angle between camera and plane is large");
 
     }
 
