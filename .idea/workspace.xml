@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="CameraIntegrationTests completed for stage 4">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/AmbientLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/AmbientLight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unittests/renderer/ImageWriterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/renderer/ImageWriterTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="AmbientLight" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -211,7 +207,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1682796306094</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL‎-00011" summary="AmbientLight">
+      <created>1682883432924</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL‎-00011" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1682883432924</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -236,7 +239,8 @@
     <MESSAGE value="fixing wrong code" />
     <MESSAGE value="Camera added, include ConstructRay&#10;CameraTest added &#10;start of CameraIntegration added" />
     <MESSAGE value="CameraIntegrationTests completed for stage 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="CameraIntegrationTests completed for stage 4" />
+    <MESSAGE value="AmbientLight" />
+    <option name="LAST_COMMIT_MESSAGE" value="AmbientLight" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
