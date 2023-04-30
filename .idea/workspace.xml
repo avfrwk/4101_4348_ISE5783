@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="the tests for sphere ang triangle">
-      <change beforePath="$PROJECT_DIR$/unittests/CameraIntegrationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/CameraIntegrationTests.java" afterDir="false" />
+    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="CameraIntegrationTests completed for stage 4">
+      <change afterPath="$PROJECT_DIR$/src/basicRenderTestTwoColors.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lighting/AmbientLight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/ImageWriter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unittests/renderer/ImageWriterTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unittests/renderer/RenderTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +208,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1682432186880</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL‎-00010" summary="CameraIntegrationTests completed for stage 4">
+      <created>1682796306094</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL‎-00010" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1682796306094</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -226,7 +239,8 @@
     <MESSAGE value="cylinder's getNormal changed" />
     <MESSAGE value="fixing wrong code" />
     <MESSAGE value="Camera added, include ConstructRay&#10;CameraTest added &#10;start of CameraIntegration added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Camera added, include ConstructRay&#10;CameraTest added &#10;start of CameraIntegration added" />
+    <MESSAGE value="CameraIntegrationTests completed for stage 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="CameraIntegrationTests completed for stage 4" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
