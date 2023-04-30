@@ -1,16 +1,16 @@
 package renderer;
 
-import primitives.Point;
-import primitives.Ray;
-import primitives.Util;
-import primitives.Vector;
+import primitives.*;
+
+import java.util.MissingResourceException;
 
 public class Camera {
     private Point location;
     private Vector Vto,Vup,Vright;
     private double VPDistance,VPHeight,VPWidth;
     private Point Pc;
-
+    private ImageWriter imageWriter;
+    private RayTracerBase rayTracer;
     /** construct Camera from location, and forward and up directions
      * @param location the location of the Camera
      * @param Vto the forward direction of the Camera
@@ -18,11 +18,17 @@ public class Camera {
      * @throws IllegalArgumentException when {@param Vto} and {@param Vup} are not orthogonal*/
     public Camera(Point location,Vector Vto,Vector Vup){
         this.location=location;
+        if(location==null||Vto==null||Vup==null){
+            throw new IllegalArgumentException("one or more of the arguments are null");
+        }
         if(Util.isZero(Vto.dotProduct(Vup))){
             this.Vto=Vto.normalize();
             this.Vup=Vup.normalize();
             this.Vright=Vto.crossProduct(Vup).normalize();
             this.VPDistance=this.VPHeight=this.VPWidth=-1;
+            this.Pc=null;
+            this.imageWriter=null;
+            this.rayTracer=null;
         }else{
             throw new IllegalArgumentException("Vto and Vup are not orthogonal");
         }
@@ -56,6 +62,62 @@ public class Camera {
             this.Pc=this.location.add(this.Vto.scale(this.VPDistance));
         }
         return this;
+    }
+    /**set the imageWriter of the camera
+     * @param imageWriter the imageWriter of the camera
+     * @return the caller Camera*/
+    public Camera setImageWriter(ImageWriter imageWriter) {
+        this.imageWriter = imageWriter;
+        return this;
+    }
+    /**set the rayTracerBase of the camera
+     * @param rayTracer the ray tracer of the camera
+     * @return the caller Camera*/
+    public Camera setRayTracer(RayTracerBase rayTracer) {
+        this.rayTracer = rayTracer;
+        return this;
+    }
+    /**render the Image*/
+    public void renderImage(){
+        if(this.Pc==null){
+            throw new MissingResourceException("Camera's VPDistance or VPHeight or VPWidth are missing","Point","Pc");
+        }if(this.imageWriter==null){
+            throw new MissingResourceException("Camera's imageWriter is missing","ImageWriter","imageWriter");
+        }if(this.rayTracer==null){
+            throw new MissingResourceException("Camera's rayTracer is missing","RayTracerBase","rayTracer");
+        }
+        int Pwidth=this.imageWriter.getNx(),Pheight=this.imageWriter.getNy();
+        for(int i=0;i<Pwidth;++i){
+            for(int j=0;j<Pheight;++j){
+                this.imageWriter.writePixel(i,j,
+                    this.rayTracer.traceRay(
+                        constructRay(Pwidth,Pheight,i,j)
+                    )
+                );
+            }
+        }
+    }
+    /**draw a grid on the image
+     * @param interval the interval of the grid
+     * @param color the color of the grid*/
+    public void printGrid(int interval,Color color){
+        if(this.imageWriter==null){
+            throw new MissingResourceException("Camera's imageWriter is missing","ImageWriter","imageWriter");
+        }
+        int Pwidth=this.imageWriter.getNx(),Pheight=this.imageWriter.getNy();
+        for(int i=0;i<Pwidth;i++){
+            for(int j=0;j<Pheight;j++){
+                if(i%interval==0||j%interval==0){
+                    this.imageWriter.writePixel(i,j,color);
+                }
+            }
+        }
+    }
+    /**
+     * Function writeToImage produces unoptimized png file of the image according to
+     * pixel color matrix in the directory of the project*/
+    public void writeToImage(){
+        this.imageWriter.writeToImage();
     }
 
     /** construct {@link primitives.Ray} from the camera to specific pixel

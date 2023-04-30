@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.List;
+
 /** This class represents a ray*/
 public class Ray {
     final private Point p0;
@@ -24,6 +26,26 @@ public class Ray {
     public Vector getDir() {
         return dir;
     }
+    /** get the closet point of a list to the start of the ray
+     * @param list list of points on the ray
+     * @return the closet point from the points of the list*/
+    public Point findClosestPoint(List<Point> list){
+        if(list==null){
+            return null;
+        }
+        double closetDistance=Double.POSITIVE_INFINITY;
+        Point closetPoint=null;
+        double distacne;
+        for (Point i:list){
+            distacne=i.distanceSquared(this.p0);
+            if(distacne<closetDistance){
+                closetPoint=i;
+                closetDistance=distacne;
+            }
+        }
+        return closetPoint;
+    }
+
 
     @Override
     public boolean equals(Object obj) {

@@ -5,15 +5,15 @@ import primitives.Double3;
 
 /**this class represent the ambient light in the scene*/
 public class AmbientLight {
-    private Color intensity;
+    final private Color intensity;
     public static AmbientLight NONE=new AmbientLight(Color.BLACK,Double3.ZERO);
 
     public AmbientLight(Color IA,Double3 KA){
-        this.intensity=new Color(IA.scale(KA));
+        this.intensity=IA.scale(KA);
     }
 
     public AmbientLight(double KA){
-        this.intensity=new Color().scale(KA);
+        this.intensity=Color.BLACK.scale(KA);
     }
 
     public Color getIntensity() {

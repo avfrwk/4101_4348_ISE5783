@@ -41,16 +41,14 @@ public class Sphere extends RadialGeometry{
         Vector u;
         double tm;
         double dsquare;
-        double rsquare;
+        double rsquare=this.radius*this.radius;
         if(this.center.equals(rayp0)){
             tm=0;
             dsquare=-tm*tm;
-            rsquare=this.radius*this.radius;
         }else{
             u=this.center.subtract(rayp0);
             tm=raydir.dotProduct(u);
             dsquare=u.dotProduct(u)-tm*tm;
-            rsquare=this.radius*this.radius;
         }
         if(dsquare>=rsquare){
             return null;
