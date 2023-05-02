@@ -3,6 +3,7 @@
  */
 package primitives;
 
+import static java.lang.Double.parseDouble;
 import static primitives.Util.isZero;
 
 /** This class will serve all primitive classes based on three numbers
@@ -29,7 +30,14 @@ public class Double3 {
       this.d2 = d2;
       this.d3 = d3;
    }
-
+   /** Constructor to initialize Double3 based on String of 3 double, separated by spaces
+    * @param str String of 3 double, separated by spaces*/
+   public Double3 (String str){
+      String[] ls=str.split(" ");
+      this.d1=parseDouble(ls[0]);
+      this.d2=parseDouble(ls[1]);
+      this.d3=parseDouble(ls[2]);
+   }
    /** Constructor to initialize Double3 based object the same number values
     * @param value number value for all 3 numbers */
    public Double3(double value) {

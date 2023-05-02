@@ -43,8 +43,9 @@ public class Sphere extends RadialGeometry{
         double dsquare;
         double rsquare=this.radius*this.radius;
         if(this.center.equals(rayp0)){
-            tm=0;
-            dsquare=-tm*tm;
+            //tm=0;
+            //dsquare=-tm*tm;
+            return List.of(ray.getPoint(this.radius));
         }else{
             u=this.center.subtract(rayp0);
             tm=raydir.dotProduct(u);

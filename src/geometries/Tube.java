@@ -11,7 +11,7 @@ public class Tube extends RadialGeometry{
     /** Constructor to initialize Tube based on radius and direction
      * @param Radius the radius length
      * @param ray the central axis of the Tube*/
-    Tube(double Radius,Ray ray){
+    public Tube(double Radius,Ray ray){
         super(Radius);
         this.ray=ray;
     }

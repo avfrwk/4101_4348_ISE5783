@@ -31,7 +31,7 @@ public class Color {
     * in
     * range 0..255 (for printed white color) or more [for lights]
     * @param rgb triad of Red/Green/Blue components */
-   private Color(Double3 rgb) {
+   /*private*/public Color(Double3 rgb) {
       if (rgb.d1 < 0 || rgb.d2 < 0 || rgb.d3 < 0)
          throw new IllegalArgumentException("Negative color component is illegal");
       this.rgb = rgb;

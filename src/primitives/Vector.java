@@ -5,7 +5,7 @@ public class Vector extends Point{
     /** Constructor to initialize Vector based on Double3 object
      * @param b the Double3 object that containing the Vector coordinates
      * @throws IllegalArgumentException when a zero vector is inserted*/
-    Vector(Double3 b){
+    public Vector(Double3 b){
         super(b);
         if(this.xyz.equals(Double3.ZERO))
             throw new IllegalArgumentException("cannot assign 0 to vector");

@@ -1,23 +1,27 @@
 package renderer;
 
-import static java.awt.Color.YELLOW;
-
+import geometries.*;
+import lighting.AmbientLight;
 import org.junit.jupiter.api.Test;
 
-import geometries.Sphere;
-import geometries.Triangle;
-import lighting.AmbientLight;
-import primitives.*;
+import primitives.Color;
+import primitives.Double3;
+import primitives.Point;
+import primitives.Vector;
 import scene.Scene;
+
+
+import static java.awt.Color.YELLOW;
+
 
 /** Test rendering a basic image
  * @author Dan */
 public class RenderTests {
-
     /** Produce a scene with basic 3D model and render it into a png image with a
      * grid */
     @Test
     public void basicRenderTwoColorTest() {
+
         Scene scene = new Scene("Test scene")//
                 .setAmbientLight(new AmbientLight(new Color(255, 191, 191), //
                         new Double3(1, 1, 1))) //
@@ -80,8 +84,9 @@ public class RenderTests {
     /** Test for XML based scene - for bonus */
     @Test
     public void basicRenderXml() {
-        /*
+
         Scene  scene  = new Scene("XML Test scene");
+        scene.setFromXML("basicRenderTestTwoColors.xml");
         // enter XML file name and parse from XML file into scene object
         // using the code you added in appropriate packages
         // ...
@@ -93,6 +98,6 @@ public class RenderTests {
                 .setRayTracer(new RayTracerBasic(scene));
         camera.renderImage();
         camera.printGrid(100, new Color(YELLOW));
-        camera.writeToImage();*/
+        camera.writeToImage();
     }
 }

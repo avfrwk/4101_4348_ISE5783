@@ -7,7 +7,7 @@ public class Point {
     public static final Point ZERO=new Point(Double3.ZERO);
     /** Constructor to initialize Point based on Double3 object
      * @param b the Double3 object that containing the point coordinates*/
-    Point(Double3 b){
+    public Point(Double3 b){
         this.xyz=b;
     }
     /** Constructor to initialize Vector based on three number values
