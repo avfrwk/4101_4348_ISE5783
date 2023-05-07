@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 /** This class represent a plane*/
-public class Plane implements Geometry {
+public class Plane extends Geometry {
     final private Vector normal;
     final private Point p0;
     /** Constructor to initialize Plane based on the normal to the plane and point on the plane
