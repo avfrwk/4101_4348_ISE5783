@@ -6,7 +6,7 @@ import primitives.Ray;
 import java.util.List;
 import java.util.LinkedList;
 
-public class Geometries implements Intersectable{
+public class Geometries extends Intersectable{
     List<Intersectable> Intersectables;
     /** Constructor to initialize empty Geometries object
      */
@@ -34,12 +34,11 @@ public class Geometries implements Intersectable{
      * @param ray the ray
      * @return list of intersections
      * */
-    @Override
-    public List<Point> findIntersections(Ray ray) {
-        List<Point> insects=null;
-        List<Point> localInsects;
+    public List<GeoPoint>findGeoIntersectionsHelper(Ray ray){
+        List<GeoPoint> insects=null;
+        List<GeoPoint> localInsects;
         for (Intersectable i:this.Intersectables) {
-            localInsects=i.findIntersections(ray);
+            localInsects=i.findGeoIntersectionsHelper(ray);
             if(localInsects!=null){
                 if(insects!=null)
                     insects.addAll(localInsects);//-------------------------------------
@@ -48,4 +47,5 @@ public class Geometries implements Intersectable{
         }
         return insects;
     }
+
 }

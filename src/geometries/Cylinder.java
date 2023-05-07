@@ -62,27 +62,31 @@ public class Cylinder extends Tube{
         }
         return null;
     }
+
     /** get list of intersection between ray and Cylinder
      * @param ray the ray
      * @return list of intersections
      * */
     @Override
-    public List<Point> findIntersections(Ray ray){
-        List<Point> infinityPoints=super.findIntersections(ray);
+    public List<GeoPoint>findGeoIntersectionsHelper(Ray ray) {
+        List<GeoPoint> infinityPoints=super.findGeoIntersectionsHelper(ray);
         Point heightP0=this.ray.getPoint(this.height);
         Point P00=this.ray.getP0();
         Vector dir=this.ray.getDir();
         boolean flag1=false,flag2=false;
         if(infinityPoints!=null){
             int size=infinityPoints.size();
-            if(size==2)
-                if (Util.alignZero(dir.dotProduct(infinityPoints.get(1).subtract(P00))) > 0 && Util.alignZero(dir.dotProduct(infinityPoints.get(1).subtract(heightP0))) < 0) {
+            Point pt;
+            if(size==2){
+                if (Util.alignZero(dir.dotProduct(infinityPoints.get(1).point.subtract(P00))) > 0 && Util.alignZero(dir.dotProduct(infinityPoints.get(1).point.subtract(heightP0))) < 0) {
                     flag2=true;
                 }
-            if(size>=1)
-                if (Util.alignZero(dir.dotProduct(infinityPoints.get(0).subtract(P00)))>0&&Util.alignZero(dir.dotProduct(infinityPoints.get(0).subtract(heightP0)))<0) {
-                    flag1=true;
+            }
+            if(size>=1) {
+                if (Util.alignZero(dir.dotProduct(infinityPoints.get(0).point.subtract(P00))) > 0 && Util.alignZero(dir.dotProduct(infinityPoints.get(0).point.subtract(heightP0))) < 0) {
+                    flag1 = true;
                 }
+            }
         } if(flag1&&flag2){
             return infinityPoints;
         }
@@ -90,30 +94,34 @@ public class Cylinder extends Tube{
         Point insect4=this.findIntersectionsHelper(ray,heightP0,dir,this.radius);
         if (flag1){
             if(insect3!=null){
-                return List.of(infinityPoints.get(0),insect3);
+                return List.of(new GeoPoint(this,infinityPoints.get(0).point),
+                        new GeoPoint(this,insect3));
             }
             if(insect4!=null){
-                return List.of(infinityPoints.get(0),insect4);
+                return List.of(new GeoPoint(this,infinityPoints.get(0).point),
+                        new GeoPoint(this,insect4));
             }
-            return List.of(infinityPoints.get(0));
+            return List.of(new GeoPoint(this,infinityPoints.get(0).point));
         }if(flag2){
             if(insect3!=null){
-                return List.of(infinityPoints.get(1),insect3);
+                return List.of(new GeoPoint(this,infinityPoints.get(1).point),
+                        new GeoPoint(this,insect3));
             }
             if(insect4!=null){
-                return List.of(infinityPoints.get(1),insect4);
+                return List.of(new GeoPoint(this,infinityPoints.get(1).point)
+                        ,new GeoPoint(this,insect4));
             }
-            return List.of(infinityPoints.get(1));
+            return List.of(new GeoPoint(this,infinityPoints.get(1).point));
         }if(insect3!=null&&insect4!=null){
-            return List.of(insect4,insect3);
+            return List.of(new GeoPoint(this,insect4),
+                    new GeoPoint(this,insect3));
         }if(insect3!=null){
-            return List.of(insect3);
+            return List.of(new GeoPoint(this,insect3));
         }if(insect4!=null){
-            return List.of(insect4);
+            return List.of(new GeoPoint(this,insect4));
         }
         return null;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

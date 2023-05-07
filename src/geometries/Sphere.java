@@ -35,7 +35,7 @@ public class Sphere extends RadialGeometry{
      * @return list of intersections
      * */
     @Override
-    public List<Point> findIntersections(Ray ray){
+    public List<GeoPoint>findGeoIntersectionsHelper(Ray ray) {
         Point  rayp0=ray.getP0();
         Vector raydir=ray.getDir();
         Vector u;
@@ -45,7 +45,7 @@ public class Sphere extends RadialGeometry{
         if(this.center.equals(rayp0)){
             //tm=0;
             //dsquare=-tm*tm;
-            return List.of(ray.getPoint(this.radius));
+            return List.of(new GeoPoint(this,ray.getPoint(this.radius)));
         }else{
             u=this.center.subtract(rayp0);
             tm=raydir.dotProduct(u);
@@ -57,16 +57,17 @@ public class Sphere extends RadialGeometry{
         double th=Math.sqrt(rsquare-dsquare);
         if(Util.alignZero(tm+th)>0){
             if(Util.alignZero(tm-th)>0){
-                return List.of(ray.getPoint(tm+th),ray.getPoint(tm-th));
+                return List.of(new GeoPoint(this,ray.getPoint(tm+th)),
+                        new GeoPoint(this,ray.getPoint(tm-th)));
             }
-            return List.of(ray.getPoint(tm+th));
+            return List.of(new GeoPoint(this,ray.getPoint(tm+th)));
         }
         if(Util.alignZero(tm-th)>0){
-            return List.of(ray.getPoint(tm-th));
+            return List.of(new GeoPoint(this,ray.getPoint(tm-th)));
         }
         return null;
-        //return List.of((tm+th!=0?rayp0.add(raydir.scale(tm+th)):null),rayp0.add(raydir.scale(tm-th)));
-    }    @Override
+    }
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

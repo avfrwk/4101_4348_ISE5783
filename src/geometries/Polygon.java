@@ -85,7 +85,7 @@ public class Polygon extends Geometry {
     * @return list of intersections
     * */
    @Override
-   public List<Point> findIntersections(Ray ray){
+   public List<GeoPoint>findGeoIntersectionsHelper(Ray ray) {
       List<Point> planeInsect=this.plane.findIntersections(ray);
       if(planeInsect!=null){
          Point p0=planeInsect.get(0);
@@ -100,8 +100,9 @@ public class Polygon extends Geometry {
                return null;
             }
          }
-         return List.of(p0);
+         return List.of(new GeoPoint(this,p0));
       }
       return null;
    }
-}
+
+   }

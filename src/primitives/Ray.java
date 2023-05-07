@@ -1,5 +1,5 @@
 package primitives;
-
+import geometries.Intersectable.GeoPoint;
 import java.util.List;
 
 /** This class represents a ray*/
@@ -29,15 +29,23 @@ public class Ray {
     /** get the closet point of a list to the start of the ray
      * @param list list of points on the ray
      * @return the closet point from the points of the list*/
-    public Point findClosestPoint(List<Point> list){
+    public Point findClosestPoint(List<Point> points) {
+        return points == null || points.isEmpty() ? null
+                : findClosestGeoPoint(points.stream().map(p -> new GeoPoint(null, p)).toList()).point;
+    }
+
+    /** get the closet point of GeoPoint in a list to the start of the ray
+     * @param list list of GeoPoints on the ray
+     * @return the closet point of GeoPoint from the GeoPoints of the list*/
+    public GeoPoint findClosestGeoPoint(List<GeoPoint> list){
         if(list==null){
             return null;
         }
         double closetDistance=Double.POSITIVE_INFINITY;
-        Point closetPoint=null;
+        GeoPoint closetPoint=null;
         double distacne;
-        for (Point i:list){
-            distacne=i.distanceSquared(this.p0);
+        for (GeoPoint i:list){
+            distacne=i.point.distanceSquared(this.p0);
             if(distacne<closetDistance){
                 closetPoint=i;
                 closetDistance=distacne;
@@ -45,7 +53,6 @@ public class Ray {
         }
         return closetPoint;
     }
-
 
     @Override
     public boolean equals(Object obj) {

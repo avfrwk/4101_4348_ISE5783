@@ -1,9 +1,10 @@
 package renderer;
 
-import primitives.Color;
-import primitives.Point;
-import primitives.Ray;
+import geometries.Geometry;
+import lighting.LightSource;
+import primitives.*;
 import scene.Scene;
+import geometries.Intersectable.GeoPoint;
 
 public class RayTracerBasic extends RayTracerBase{
     /** constructing the RayTracerBasic from {@link scene.Scene}.
@@ -16,17 +17,35 @@ public class RayTracerBasic extends RayTracerBase{
      * @return the Color of the closet intersection*/
     @Override
     public Color traceRay(Ray ray){
-        Point point=ray.findClosestPoint(this.scene.geometries.findIntersections(ray));
-        if(point==null){
+        GeoPoint geoPoint=ray.findClosestGeoPoint(this.scene.geometries.findGeoIntersections(ray));
+        if(geoPoint==null){
             return this.scene.background;
         }
-        return this.calcColor(point);
+        return this.calcColor(geoPoint,ray);
     }
     /** calculate the color of point in the scene
-     * @param point the point that calculates its value
+     * @param geoPoint the point that calculates its value
      * @return the Color of the point*/
-    public Color calcColor(Point point){
-        return this.scene.ambientLight.getIntensity();
+    public Color calcColor(GeoPoint geoPoint,Ray ray){
+        Geometry geometry=geoPoint.geometry;
+        Point point=geoPoint.point;
+        Double3 kD=geometry.getMaterial().kD;
+        Double3 kS=geometry.getMaterial().kS;
+        int Nsh=geometry.getMaterial().nShininess;
+        Color color=this.scene.ambientLight.getIntensity().add(geometry.getEmission());
+        for (LightSource i:this.scene.lights){
+            Vector l=i.getL(point);
+            Vector n=geometry.getNormal(point);
+            Vector r=l.subtract(n.scale(l.dotProduct(n)*2));
+
+            color=color.add(
+                kD.scale(Math.abs(
+                   l.dotProduct(n)))
+                .add(
+                        kS.scale(Math.max(0, ray.getDir().scale(-1).dotProduct(r))))
+            );
+        }
+        return color;
     }
 
 }

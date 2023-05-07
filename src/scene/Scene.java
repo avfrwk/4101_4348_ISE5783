@@ -2,6 +2,7 @@ package scene;
 
 import geometries.*;
 import lighting.AmbientLight;
+import lighting.LightSource;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -12,6 +13,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.LinkedList;
+import java.util.List;
 
 import static java.lang.Double.parseDouble;
 
@@ -20,6 +22,7 @@ public class Scene {
     public Color background;
     public AmbientLight ambientLight;
     public Geometries geometries;
+    public List<LightSource> lights=new LinkedList<>();
     /** Constructor to initialize empty scene
      * @param name the name of the scene */
     public Scene(String name){
@@ -47,6 +50,13 @@ public class Scene {
      * @return this Scene*/
     public Scene setGeometries(Geometries geometries) {
         this.geometries = geometries;
+        return this;
+    }
+    /** set the lights of the scene
+     * @param lights the lights to set
+     * @return this Scene*/
+    public Scene setLights(List<LightSource> lights) {
+        this.lights = lights;
         return this;
     }
     /** return Geometries inside Geometries Element

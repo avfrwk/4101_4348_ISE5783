@@ -37,7 +37,7 @@ public class Tube extends RadialGeometry{
      * @return list of intersections
      * */
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<GeoPoint>findGeoIntersectionsHelper(Ray ray) {
         Point rayp0=ray.getP0();
         Point tubep0=this.ray.getP0();
         if(rayp0.equals(tubep0)){
@@ -79,12 +79,13 @@ public class Tube extends RadialGeometry{
         double p1 = (-B - root) / 2 * A;
         if(Util.alignZero(p0)>0){
             if(Util.alignZero(p1)>0){
-                return List.of(ray.getPoint(p0), ray.getPoint(p1));
+                return List.of(new GeoPoint(this,ray.getPoint(p0)),
+                        new GeoPoint(this,ray.getPoint(p1)));
             }
-            return List.of(ray.getPoint(p0));
+            return List.of(new GeoPoint(this,ray.getPoint(p0)));
         }
         if(Util.alignZero(p1)>0) {
-            return List.of(ray.getPoint(p1));
+            return List.of(new GeoPoint(this,ray.getPoint(p1)));
         }
         return null;
     }

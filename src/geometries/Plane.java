@@ -39,16 +39,15 @@ public class Plane extends Geometry {
      * @return list of intersections
      * */
     @Override
-    public List<Point> findIntersections(Ray ray){
+    public List<GeoPoint>findGeoIntersectionsHelper(Ray ray) {
         double t=this.normal.dotProduct(ray.getDir());
         if(!Util.isZero(t)&&!ray.getP0().equals(this.p0)){
             t=this.normal.dotProduct(this.p0.subtract(ray.getP0()))/t;
             if(Util.alignZero(t)>0)
-                return List.of(ray.getPoint(t));
+                return List.of(new GeoPoint(this,ray.getPoint(t)));
         }
         return null;
     }
-
     /** get the normal
      * @return normal to the plane*/
     public Vector getNormal() {

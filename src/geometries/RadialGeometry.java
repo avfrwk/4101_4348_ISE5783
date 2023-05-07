@@ -6,7 +6,7 @@ import primitives.Vector;
 import java.util.Objects;
 
 /**This class will serve as the basis for all the radial geometries shapes*/
-abstract class RadialGeometry implements Geometry {
+abstract class RadialGeometry extends Geometry {
     /**the radius of the RadialGeometry*/
     protected final double radius;
 

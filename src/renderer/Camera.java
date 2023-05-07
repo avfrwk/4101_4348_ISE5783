@@ -78,7 +78,7 @@ public class Camera {
         return this;
     }
     /**render the Image*/
-    public void renderImage(){
+    public Camera renderImage(){
         if(this.Pc==null){
             throw new MissingResourceException("Camera's VPDistance or VPHeight or VPWidth are missing","Point","Pc");
         }if(this.imageWriter==null){
@@ -96,6 +96,7 @@ public class Camera {
                 );
             }
         }
+        return this;
     }
     /**draw a grid on the image
      * @param interval the interval of the grid
@@ -105,13 +106,14 @@ public class Camera {
             throw new MissingResourceException("Camera's imageWriter is missing","ImageWriter","imageWriter");
         }
         int Pwidth=this.imageWriter.getNx(),Pheight=this.imageWriter.getNy();
-        for(int i=0;i<Pwidth;i++){
-            for(int j=0;j<Pheight;j++){
-                if(i%interval==0||j%interval==0){
-                    this.imageWriter.writePixel(i,j,color);
-                }
+        for(int i=0;i<Pwidth;i++)
+            for(int j=0;j<Pheight;j+=interval){
+                this.imageWriter.writePixel(i,j,color);
             }
-        }
+        for(int i=0;i<Pheight;i++)
+            for(int j=0;j<Pwidth;j+=interval){
+                this.imageWriter.writePixel(j,i,color);
+            }
     }
     /**
      * Function writeToImage produces unoptimized png file of the image according to
