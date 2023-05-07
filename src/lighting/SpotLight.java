@@ -6,6 +6,7 @@ import primitives.Vector;
 
 public class SpotLight extends PointLight{
     private Vector dir;
+    private double narrowBeam=0;
     /**construct the PointLight from intensity, position and direction
      * @param intensity the intensity of the SpotLight
      * @param position the position of the SpotLight
@@ -15,10 +16,16 @@ public class SpotLight extends PointLight{
         this.dir=direction.normalize();
     }
     public Color getIntensity(Point p){
-        return super.getIntensity(p).scale(Math.max(0,this.dir.dotProduct(this.getL(p))));
+        double z=this.dir.dotProduct(this.getL(p));
+        z=z-(1-z)*narrowBeam;
+        return super.getIntensity(p).scale(
+                Math.max(0,z)/*this.dir.dotProduct(this.getL(p)))*/);
     }
     public Vector getL(Point p){
-        return this.p0.subtract(p);
+        return p.subtract(this.p0).normalize();
     }
-
+    public SpotLight setNarrowBeam(double narrowBeam){
+        this.narrowBeam=narrowBeam;
+        return this;
+    }
 }

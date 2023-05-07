@@ -3,12 +3,10 @@ package lighting;
 import static java.awt.Color.*;
 
 import geometries.*;
-import lighting.*;
 import primitives.*;
 import renderer.*;
 import scene.Scene;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 /** Test rendering a basic image
  * @author Dan */
 public class LightsTests {
@@ -149,7 +147,7 @@ public class LightsTests {
       scene1.geometries.add(sphere);
       scene1.lights
          .add(new SpotLight(sphereLightColor, sphereLightPosition, new Vector(1, 1, -0.5))
-                 /*.setNarrowBeam(10)*/.setKl(0.001).setKq(0.00004));
+                 .setNarrowBeam(10).setKl(0.001).setKq(0.00004));
 
       ImageWriter imageWriter = new ImageWriter("lightSphereSpotSharp", 500, 500);
       camera1.setImageWriter(imageWriter) //
@@ -163,7 +161,7 @@ public class LightsTests {
    public void trianglesSpotSharp() {
       scene2.geometries.add(triangle1, triangle2);
       scene2.lights.add(new SpotLight(trianglesLightColor, trianglesLightPosition, trianglesLightDirection)
-              /*.setNarrowBeam(10)*/.setKl(0.001).setKq(0.00004));
+              .setNarrowBeam(10).setKl(0.001).setKq(0.00004));
 
       ImageWriter imageWriter = new ImageWriter("lightTrianglesSpotSharp", 500, 500);
       camera2.setImageWriter(imageWriter) //
