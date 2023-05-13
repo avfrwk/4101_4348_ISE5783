@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="targil 6 finished including bonuses">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/PointLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/PointLight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lighting/SpotLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/SpotLight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/targil_1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/targil_1.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unittests/lighting/LightsTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/lighting/LightsTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +102,7 @@
       <recent name="primitives" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in targil_1">
+  <component name="RunManager" selected="JUnit.LightsTests.trianglesSpotSharp">
     <configuration name="All in targil_1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="targil_1" />
       <option name="PACKAGE_NAME" value="" />
@@ -128,22 +127,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LightsTests.trianglesPoint" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="targil_1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="lighting.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="lighting" />
-      <option name="MAIN_CLASS_NAME" value="lighting.LightsTests" />
-      <option name="METHOD_NAME" value="trianglesPoint" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="LightsTests.trianglesSpot" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="targil_1" />
       <extension name="coverage">
@@ -155,6 +138,22 @@
       <option name="PACKAGE_NAME" value="lighting" />
       <option name="MAIN_CLASS_NAME" value="lighting.LightsTests" />
       <option name="METHOD_NAME" value="trianglesSpot" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LightsTests.trianglesSpotPointDirectional" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="targil_1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lighting.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lighting" />
+      <option name="MAIN_CLASS_NAME" value="lighting.LightsTests" />
+      <option name="METHOD_NAME" value="trianglesSpotPointDirectional" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -178,11 +177,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in targil_1" />
-        <item itemvalue="JUnit.LightsTests.sphereSpotSharp" />
         <item itemvalue="JUnit.LightsTests.trianglesSpotSharp" />
+        <item itemvalue="JUnit.LightsTests.sphereSpotSharp" />
+        <item itemvalue="JUnit.LightsTests.trianglesSpotPointDirectional" />
+        <item itemvalue="JUnit.All in targil_1" />
         <item itemvalue="JUnit.LightsTests.trianglesSpot" />
-        <item itemvalue="JUnit.LightsTests.trianglesPoint" />
       </list>
     </recent_temporary>
   </component>

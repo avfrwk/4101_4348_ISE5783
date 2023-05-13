@@ -17,7 +17,10 @@ public class SpotLight extends PointLight{
     }
     public Color getIntensity(Point p){
         double z=this.dir.dotProduct(this.getL(p));
-        z=z-(1-z)*narrowBeam;
+        double minOfangle=this.dir.length()*this.getL(p).length()*narrowBeam;
+        if(z<minOfangle){
+            z=0;
+        }
         return super.getIntensity(p).scale(
                 Math.max(0,z)/*this.dir.dotProduct(this.getL(p)))*/);
     }
@@ -25,7 +28,9 @@ public class SpotLight extends PointLight{
         return p.subtract(this.p0).normalize();
     }
     public SpotLight setNarrowBeam(double narrowBeam){
-        this.narrowBeam=narrowBeam;
+        narrowBeam*=2;
+        narrowBeam=narrowBeam/180*Math.PI; //from degrees to radians
+        this.narrowBeam=Math.cos(narrowBeam);
         return this;
     }
 }
