@@ -78,50 +78,50 @@ public class Scene {
                     case "Sphere":
                         intersectable=new Sphere(
                                 parseDouble(IElement.getAttribute("radius")),
-                                new Point(new Double3(IElement.getAttribute("center")))
+                                new Point(IElement.getAttribute("center"))
                         );
                         break;
                     case "Triangle":
                         intersectable=new Triangle(
-                                new Point(new Double3(IElement.getAttribute("p0"))),
-                                new Point(new Double3(IElement.getAttribute("p1"))),
-                                new Point(new Double3(IElement.getAttribute("p2")))
+                                new Point(IElement.getAttribute("p0")),
+                                new Point(IElement.getAttribute("p1")),
+                                new Point(IElement.getAttribute("p2"))
                         );
                         break;
                     case "Polygon":
                         String[] sd= IElement.getAttribute("vertices").split(",");
-                        LinkedList<Point> points=new LinkedList<>();
+                        Point[] points=new Point[sd.length];
                         for (int j=0;j<sd.length;++j){
-                            points.add(new Point(new Double3(sd[i])));
+                            points[j]=new Point(sd[j]);
                         }
-                        intersectable=new Polygon((Point[])points.toArray());
+                        intersectable=new Polygon(points);
                         break;
                     case "Plane":
                         if(IElement.hasAttribute("vector")){
                             intersectable=new Plane(
-                                    new Point(new Double3(IElement.getAttribute("p0"))),
-                                    new Vector(new Double3(IElement.getAttribute("vector")))
+                                    new Point(IElement.getAttribute("p0")),
+                                    new Vector(IElement.getAttribute("vector"))
                             );
                         }else{
                             intersectable=new Plane(
-                                    new Point(new Double3(IElement.getAttribute("p0"))),
-                                    new Point(new Double3(IElement.getAttribute("p1"))),
-                                    new Point(new Double3(IElement.getAttribute("p2")))
+                                    new Point(IElement.getAttribute("p0")),
+                                    new Point(IElement.getAttribute("p1")),
+                                    new Point(IElement.getAttribute("p2"))
                             );
                         }
                         break;
                     case "Tube":
                         intersectable=new Tube(
                                 parseDouble(IElement.getAttribute("radius")),
-                                new Ray(new Point(new Double3(IElement.getAttribute("point"))),
-                                        new Vector(new Double3(IElement.getAttribute("vector"))))
+                                new Ray(new Point(IElement.getAttribute("point")),
+                                        new Vector(IElement.getAttribute("vector")))
                                 );
                         break;
                     case "Cylinder":
                         intersectable=new Cylinder(
                                 parseDouble(IElement.getAttribute("radius")),
-                                new Ray(new Point(new Double3(IElement.getAttribute("point"))),
-                                        new Vector(new Double3(IElement.getAttribute("vector")))),
+                                new Ray(new Point(IElement.getAttribute("point")),
+                                        new Vector(IElement.getAttribute("vector"))),
                                 parseDouble(IElement.getAttribute("height")));
                         break;
                     default:
@@ -158,9 +158,9 @@ public class Scene {
         return this;
     }
     /** build the scene from XML file inside the current directory
-     * @param imageName the name of the XML file
+     * @param fileName the name of the XML file
      * @return this Scene*/
-    public Scene setFromXML(String imageName){
-        return this.setFromXML(imageName,System.getProperty("user.dir"));
+    public Scene setFromXML(String fileName){
+        return this.setFromXML(fileName,System.getProperty("user.dir"));
     }
 }

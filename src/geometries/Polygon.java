@@ -91,16 +91,20 @@ public class Polygon extends Geometry {
          Point p0=planeInsect.get(0);
          Vector v0=this.vertices.get(0).subtract(p0);
          Vector v1=this.vertices.get(1).subtract(p0);
-         boolean tt=(v0.crossProduct(v1).dotProduct(this.plane.getNormal())>0);
-
+         Vector n=this.plane.getNormal();
+         boolean tt=(v0.crossProduct(v1).dotProduct(n)>0);
          for(int i=1;i<size-1;++i){
             v0=this.vertices.get(i).subtract(p0);
             v1=this.vertices.get(i+1).subtract(p0);
-            if((v0.crossProduct(v1).dotProduct(this.plane.getNormal())>0)!=tt){
+            if((v0.crossProduct(v1).dotProduct(n)>0)!=tt){
                return null;
             }
          }
-         return List.of(new GeoPoint(this,p0));
+         v0=this.vertices.get(size-1).subtract(p0);
+         v1=this.vertices.get(0).subtract(p0);
+         if((v0.crossProduct(v1).dotProduct(n)>0)==tt){
+            return List.of(new GeoPoint(this,p0));
+         }
       }
       return null;
    }

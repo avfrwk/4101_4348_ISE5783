@@ -1,11 +1,13 @@
 package primitives;
 
+import static java.lang.Double.parseDouble;
+
 /** This class represent a vector*/
 public class Vector extends Point{
     /** Constructor to initialize Vector based on Double3 object
      * @param b the Double3 object that containing the Vector coordinates
      * @throws IllegalArgumentException when a zero vector is inserted*/
-    public Vector(Double3 b){
+    Vector(Double3 b){
         super(b);
         if(this.xyz.equals(Double3.ZERO))
             throw new IllegalArgumentException("cannot assign 0 to vector");
@@ -17,6 +19,13 @@ public class Vector extends Point{
      * @throws IllegalArgumentException when a zero vector is inserted*/
     public Vector(double x,double y,double z){
         super(x,y,z);
+        if(this.xyz.equals(Double3.ZERO))
+            throw new IllegalArgumentException("cannot assign 0 to vector");
+    }
+    /** Constructor to initialize Vector based on String of 3 double, separated by spaces
+     * @param str String of 3 double, separated by spaces*/
+    public Vector (String str){
+        super(str);
         if(this.xyz.equals(Double3.ZERO))
             throw new IllegalArgumentException("cannot assign 0 to vector");
     }

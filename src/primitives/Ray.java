@@ -27,7 +27,7 @@ public class Ray {
         return dir;
     }
     /** get the closet point of a list to the start of the ray
-     * @param list list of points on the ray
+     * @param points list of points on the ray
      * @return the closet point from the points of the list*/
     public Point findClosestPoint(List<Point> points) {
         return points == null || points.isEmpty() ? null
@@ -35,16 +35,16 @@ public class Ray {
     }
 
     /** get the closet point of GeoPoint in a list to the start of the ray
-     * @param list list of GeoPoints on the ray
-     * @return the closet point of GeoPoint from the GeoPoints of the list*/
-    public GeoPoint findClosestGeoPoint(List<GeoPoint> list){
-        if(list==null){
+     * @param points list of GeoPoints on the ray
+     * @return the GeoPoint from the GeoPoints list that his point is the closet to the start of the ray*/
+    public GeoPoint findClosestGeoPoint(List<GeoPoint> points){
+        if(points==null){
             return null;
         }
         double closetDistance=Double.POSITIVE_INFINITY;
         GeoPoint closetPoint=null;
         double distacne;
-        for (GeoPoint i:list){
+        for (GeoPoint i:points){
             distacne=i.point.distanceSquared(this.p0);
             if(distacne<closetDistance){
                 closetPoint=i;

@@ -24,9 +24,6 @@ public class SpotLight extends PointLight{
         return super.getIntensity(p).scale(
                 Math.max(0,z)/*this.dir.dotProduct(this.getL(p)))*/);
     }
-    public Vector getL(Point p){
-        return p.subtract(this.p0).normalize();
-    }
     public SpotLight setNarrowBeam(double narrowBeam){
         narrowBeam*=2;
         narrowBeam=narrowBeam/180*Math.PI; //from degrees to radians
