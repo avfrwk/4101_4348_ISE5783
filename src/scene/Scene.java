@@ -134,13 +134,13 @@ public class Scene {
     }
     /** build the scene from XML file
      * @param fileName the name of the XML file
-     * @param floderPath the path to the folder of the XML file
+     * @param folderPath the path to the folder of the XML file
      * @return this Scene*/
-    public Scene setFromXML(String fileName,String floderPath){
+    public Scene setFromXML(String fileName,String folderPath){
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(new File(floderPath+'/'+fileName));
+            Document document = builder.parse(new File(folderPath+'/'+fileName));
 
             Element sceneElement = (Element) document.getElementsByTagName("Scene").item(0);
             Element IElement;

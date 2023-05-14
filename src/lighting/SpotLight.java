@@ -18,7 +18,7 @@ public class SpotLight extends PointLight{
     public Color getIntensity(Point p){
         double z=this.dir.dotProduct(this.getL(p));
         return super.getIntensity(p).scale(
-                Math.max(0,Math.pow(z,narrowBeam))/*this.dir.dotProduct(this.getL(p)))*/);
+                Math.max(0,Math.pow(z,narrowBeam)));
     }
     public SpotLight setNarrowBeam(double narrowBeam){
         this.narrowBeam=narrowBeam;

@@ -86,18 +86,24 @@ public class Camera {
         }if(this.rayTracer==null){
             throw new MissingResourceException("Camera's rayTracer is missing","RayTracerBase","rayTracer");
         }
-        int Pwidth=this.imageWriter.getNx(),Pheight=this.imageWriter.getNy();
-        for(int i=0;i<Pwidth;++i){
-            for(int j=0;j<Pheight;++j){
-                this.imageWriter.writePixel(i,j,
-                    this.rayTracer.traceRay(
-                        constructRay(Pwidth,Pheight,i,j)
-                    )
-                );
+        int nX=this.imageWriter.getNx();
+        int nY=this.imageWriter.getNy();
+
+        for(int i=0;i<nX;++i){
+            for(int j=0;j<nY;++j){
+                Ray ray = constructRay(nX, nY, i, j);
+                Color color = castRay(ray);
+                this.imageWriter.writePixel(i,j,color);
             }
         }
         return this;
     }
+
+    private Color castRay(Ray ray) {
+        Color color = this.rayTracer.traceRay(ray);
+        return color;
+    }
+
     /**draw a grid on the image
      * @param interval the interval of the grid
      * @param color the color of the grid*/
