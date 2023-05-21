@@ -80,6 +80,32 @@ public class Polygon extends Geometry {
 
    @Override
    public Vector getNormal(Point point) { return plane.getNormal(); }
+
+   @Override
+   protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance){
+      List<GeoPoint> planeInsect=this.plane.findGeoIntersections(ray,maxDistance);
+      if(planeInsect!=null){
+         Point p0=planeInsect.get(0).point;
+         Vector v0=this.vertices.get(0).subtract(p0);
+         Vector v1=this.vertices.get(1).subtract(p0);
+         Vector n=this.plane.getNormal();
+         boolean tt=(v0.crossProduct(v1).dotProduct(n)>0);
+         for(int i=1;i<size-1;++i){
+            v0=this.vertices.get(i).subtract(p0);
+            v1=this.vertices.get(i+1).subtract(p0);
+            if((v0.crossProduct(v1).dotProduct(n)>0)!=tt){
+               return null;
+            }
+         }
+         v0=this.vertices.get(size-1).subtract(p0);
+         v1=this.vertices.get(0).subtract(p0);
+         if((v0.crossProduct(v1).dotProduct(n)>0)==tt){
+            return List.of(new GeoPoint(this,p0));
+         }
+      }
+      return null;
+   }
+
    /** get list of intersection between ray and Polygon
     * @param ray the ray
     * @return list of intersections
@@ -109,4 +135,4 @@ public class Polygon extends Geometry {
       return null;
    }
 
-   }
+}

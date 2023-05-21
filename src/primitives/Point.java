@@ -20,7 +20,7 @@ public class Point {
     /** Constructor to initialize Point based on String of 3 double, separated by spaces
      * @param str String of 3 double, separated by spaces*/
     public Point (String str){
-        this.xyz=new Double3(str);
+        this.xyz=Util.parseDouble3(str);
     }
     public double getX(){
         return xyz.d1;

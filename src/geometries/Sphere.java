@@ -30,6 +30,43 @@ public class Sphere extends RadialGeometry{
     public Vector getNormal(Point point){
         return point.subtract(this.center).normalize();
     }
+
+    @Override
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance){
+        Point  rayp0=ray.getP0();
+        Vector raydir=ray.getDir();
+        Vector u;
+        double tm;
+        double dsquare;
+        double rsquare=this.radius*this.radius;
+        if(this.center.equals(rayp0)){
+            //tm=0;
+            //dsquare=-tm*tm;
+            if(Util.alignZero(this.radius-maxDistance)<=0){
+                return List.of(new GeoPoint(this,ray.getPoint(this.radius)));
+            }
+            return null;
+        }else{
+            u=this.center.subtract(rayp0);
+            tm=raydir.dotProduct(u);
+            dsquare=u.dotProduct(u)-tm*tm;
+        }
+        if(dsquare>=rsquare){
+            return null;
+        }
+        double th=Math.sqrt(rsquare-dsquare);
+        if(Util.alignZero(tm+th)>0&&Util.alignZero(tm+th-maxDistance)<=0){
+            if(Util.alignZero(tm-th)>0&&Util.alignZero(tm-th-maxDistance)<=0){
+                return List.of(new GeoPoint(this,ray.getPoint(tm+th)),
+                        new GeoPoint(this,ray.getPoint(tm-th)));
+            }
+            return List.of(new GeoPoint(this,ray.getPoint(tm+th)));
+        }
+        if(Util.alignZero(tm-th)>0&&Util.alignZero(tm-th-maxDistance)<=0){
+            return List.of(new GeoPoint(this,ray.getPoint(tm-th)));
+        }
+        return null;
+    }
     /** get list of intersection between ray and Sphere
      * @param ray the ray
      * @return list of intersections

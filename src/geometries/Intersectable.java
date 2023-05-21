@@ -18,18 +18,29 @@ public abstract class Intersectable {
         var geoList = this.findGeoIntersections(ray);
         return geoList == null ? null : geoList.stream().map(gp -> gp.point).toList();
     }
-
-    /**
-     * get list of intersection between ray and geometry
+    /**get list of intersection between ray and geometry
      * @param ray the ray
      * @return list of intersections with the geometry
      */
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
-        return this.findGeoIntersectionsHelper(ray);
+    public final List<GeoPoint> findGeoIntersections(Ray ray) {
+        return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
     }
+    /**get list of intersection between ray and geometry
+     * @param ray the ray
+     * @param maxDistance the maximum allowed distance to return the geopoint
+     * @return list of intersections with the geometry
+     */
+    public final List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+        return findGeoIntersectionsHelper(ray, maxDistance);
+    }
+    /**get list of intersection between ray and geometry
+     * @param ray the ray
+     * @param maxDistance the maximum allowed distance to return the geopoint
+     * @return list of intersections with the geometry
+     */
+    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
 
-    /**
-     * get list of intersection between ray and geometry
+    /**get list of intersection between ray and geometry
      * @param ray the ray
      * @return list of intersections with the geometry
      */

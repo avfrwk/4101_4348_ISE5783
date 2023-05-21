@@ -34,6 +34,19 @@ public class Plane extends Geometry {
     public Vector getNormal(Point point){
         return normal;
     }
+
+    @Override
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance)
+    {
+        double t=this.normal.dotProduct(ray.getDir());
+        if(!Util.isZero(t)&&!ray.getP0().equals(this.p0)){
+            t=this.normal.dotProduct(this.p0.subtract(ray.getP0()))/t;
+            if(Util.alignZero(t)>0&&Util.alignZero(t-maxDistance)<=0)
+                return List.of(new GeoPoint(this,ray.getPoint(t)));
+        }
+        return null;
+    }
+
     /** get list of intersection between ray and Plane
      * @param ray the ray
      * @return list of intersections

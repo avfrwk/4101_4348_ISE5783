@@ -8,8 +8,8 @@ import geometries.Sphere;
 import geometries.Triangle;
 import lighting.AmbientLight;
 import primitives.*;
-import renderer.*;
 import scene.Scene;
+import scene.XmlManager;
 
 /** Test rendering a basic image
  * @author Dan */
@@ -33,7 +33,7 @@ public class RenderTests {
                            new Triangle(new Point(100, 0, -100), new Point(0, -100, -100), new Point(100, -100, -100))); // down
       // right
       Camera camera = new Camera(Point.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
-         .setVPDistance(100) //
+         .setVpDistance(100) //
          .setVPSize(500, 500) //
          .setImageWriter(new ImageWriter("base render test", 1000, 1000))
          .setRayTracer(new RayTracerBasic(scene));
@@ -64,7 +64,7 @@ public class RenderTests {
                               .setEmission(new Color(BLUE)));
 
       Camera camera = new Camera(Point.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
-         .setVPDistance(100) //
+         .setVpDistance(100) //
          .setVPSize(500, 500) //
          .setImageWriter(new ImageWriter("color render test", 1000, 1000))
          .setRayTracer(new RayTracerBasic(scene));
@@ -77,15 +77,14 @@ public class RenderTests {
    /** Test for XML based scene - for bonus */
    @Test
    public void basicRenderXml() {
-      Scene  scene  = new Scene("XML Test scene");
-      scene.setFromXML("basicRenderTestTwoColors.xml");
+      Scene  scene  =XmlManager.setFromXML("XML Test scene","basicRenderTestTwoColors.xml");
       // enter XML file name and parse from XML file into scene object
       // using the code you added in appropriate packages
       // ...
       // NB: unit tests is not the correct place to put XML parsing code
 
       Camera camera = new Camera(Point.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0))     //
-         .setVPDistance(100)                                                                //
+         .setVpDistance(100)                                                                //
          .setVPSize(500, 500).setImageWriter(new ImageWriter("xml render test", 1000, 1000))
          .setRayTracer(new RayTracerBasic(scene));
       camera.renderImage();

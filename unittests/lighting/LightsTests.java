@@ -20,10 +20,10 @@ public class LightsTests {
 
     private final Camera camera1 = new Camera(new Point(0, 0, 1000),
             new Vector(0, 0, -1), new Vector(0, 1, 0))
-            .setVPSize(150, 150).setVPDistance(1000);
+            .setVPSize(150, 150).setVpDistance(1000);
     private final Camera camera2 = new Camera(new Point(0, 0, 1000),
             new Vector(0, 0, -1), new Vector(0, 1, 0))
-            .setVPSize(200, 200).setVPDistance(1000);
+            .setVPSize(200, 200).setVpDistance(1000);
 
     private static final int SHININESS = 301;
     private static final double KD = 0.5;

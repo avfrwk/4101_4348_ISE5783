@@ -6,7 +6,12 @@ import primitives.*;
 import scene.Scene;
 import geometries.Intersectable.GeoPoint;
 
+import java.util.List;
+
 public class RayTracerBasic extends RayTracerBase{
+    /**the distance to move the point before checking if there are geometries
+     *  between the geometry and a light source at specific point*/
+    private static final double DELTA = 0.1;
     /** constructing the RayTracerBasic from {@link scene.Scene}.
      * @param scene the scene*/
     public RayTracerBasic(Scene scene){
@@ -46,13 +51,31 @@ public class RayTracerBasic extends RayTracerBase{
         for (LightSource lightSource : scene.lights) {
             l = lightSource.getL(point);
             double nl = Util.alignZero(n.dotProduct(l));
-            if (nl * nv > 0) {
-                Color iL = lightSource.getIntensity(point);
-                color = color.add(iL.scale(calcDiffusive(material, nl)),
-                        iL.scale(calcSpecular(material, n, l, nl, v)));
+            if (nl * nv > 0){
+                if(unshaded(geoPoint,l,n,nl,lightSource))
+                {
+                    Color iL = lightSource.getIntensity(point);
+                    color = color.add(iL.scale(calcDiffusive(material, nl)),
+                            iL.scale(calcSpecular(material, n, l, nl, v)));
+                }
             }
         }
         return color;
+    }
+    /** check if there are geometries between the geometry and a light source at specific point
+     @param gp the geopoint to check
+     @param l vector from the light source to the geopoint
+     @param n the normal to the geopint
+     @param nl
+     @return true if there are geometries between the geometry and a light source at specific point*/
+    private boolean unshaded(GeoPoint gp, Vector l, Vector n, double nl,LightSource lightSource){
+        Vector lightDirection = l.scale(-1);
+        Vector epsVector = n.scale(nl < 0 ? this.DELTA : -this.DELTA);
+        Point point = gp.point.add(epsVector);
+        Ray lightRay = new Ray(point, lightDirection);
+        List<GeoPoint> intersections = scene.geometries.
+                findGeoIntersections(lightRay,lightSource.getDistance(gp.point));
+        return intersections==null;
     }
     private Double3 calcDiffusive(Material material,double nl){
         return material.kD.scale(Math.abs(nl));

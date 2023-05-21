@@ -1,5 +1,7 @@
 package primitives;
 
+import static java.lang.Double.parseDouble;
+
 /**
  * Util class is used for some internal utilities, e.g. controlling accuracy
  * 
@@ -68,5 +70,14 @@ public abstract class Util {
 	public static double random(double min, double max) {
 		return Math.random() * (max - min) + min;
 	}
-
+	/** initializing Double3 based on String of 3 double, separated by spaces
+	 * @param str String of 3 double, separated by spaces
+	 * @return the Double3 value represented by the string argument*/
+	public static Double3 parseDouble3(String str){
+		String[] ls=str.split(" ");
+		return new Double3(
+				parseDouble(ls[0]),
+				parseDouble(ls[1]),
+				parseDouble(ls[2]));
+	}
 }
