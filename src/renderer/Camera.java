@@ -10,6 +10,7 @@ public class Camera {
     private double vpDistance, vpHeight, vpWidth;
     private Point pc;
     private ImageWriter imageWriter;
+    private VideoWriter videoWriter;
     private RayTracerBase rayTracer;
     /** construct Camera from location, and forward and up directions
      * @param location the location of the Camera
@@ -33,8 +34,119 @@ public class Camera {
             throw new IllegalArgumentException("Vto and Vup are not orthogonal");
         }
     }
-
-     /**set the size of the view plane
+    /** construct Camera from location and target
+     * @param location the location of the Camera
+     * @param target the forward direction of the Camera
+     * @throws IllegalArgumentException when {@param location} and {@param target} are at the same point*/
+    public Camera(Point location,Point target){
+        this.location=location;
+        this.vTo=target.subtract(location).normalize();
+        if(vTo.equals(Vector.vectorY)){
+            this.vUp=Vector.vectorZ;
+        }else{
+            this.vUp= this.vTo.crossProduct(
+                    this.vTo.crossProduct(Vector.vectorY)
+            ).normalize();
+        }
+        this.vRight= vTo.crossProduct(vUp).normalize();
+        this.vpDistance =this.vpHeight =this.vpWidth =-1;
+        this.pc =null;
+        this.imageWriter=null;
+        this.rayTracer=null;
+    }
+    /** rotating the camera
+     * @param angle the angles of the rotation
+     * @return this camera*/
+    public Camera rotateCamera(double angle){
+        this.vUp=Util.rotateAroundVector(this.vTo,this.vUp,angle).normalize();
+        this.vRight= vTo.crossProduct(vUp).normalize();
+        this.pc =this.location.add(this.vTo.scale(this.vpDistance));
+        return this;
+    }
+    /** rotating the camera around vUp
+     * @param angle the angles of the rotation
+     * @return this camera*/
+    public Camera rotateCameraAroundVup(double angle){
+        this.vTo=Util.rotateAroundVector(this.vUp,this.vTo,angle).normalize();
+        this.vRight= vTo.crossProduct(vUp).normalize();
+        this.pc =this.location.add(this.vTo.scale(this.vpDistance));
+        return this;
+    }
+    /** rotating the camera around vTo
+     * @param angle the angles of the rotation
+     * @return this camera*/
+    public Camera rotateCameraArundVright(double angle){
+        this.vUp=Util.rotateAroundVector(this.vRight,this.vUp,angle).normalize();
+        this.vTo= vUp.crossProduct(vRight).normalize();
+        this.pc =this.location.add(this.vTo.scale(this.vpDistance));
+        return this;
+    }
+    /** rotating the camera around vUp Vto
+     * @param angle the angles of the rotation
+     * @return this camera*/
+    public Camera rotateCameraAroundVto(double angle){
+        return this.rotateCamera(angle);
+    }
+     /** rotate the camera around target point
+     * @param target the target of the camera
+     * @param angle the angle to rotate
+     * @return this camera*/
+    public Camera rotateCameraAroundPointVup(Point target,double angle){
+        this.location=Util.rotatePointAroundVector(vUp,target,location,angle);
+        this.vTo=Util.rotateAroundVector(vUp,vTo,angle).normalize();
+        this.vRight= vTo.crossProduct(vUp).normalize();
+        this.pc =this.location.add(this.vTo.scale(this.vpDistance));
+        return this;
+    }
+    /** rotate the camera around target point
+     * @param target the target of the camera
+     * @param angle the angle to rotate
+     * @return this camera*/
+    public Camera rotateCameraAroundPointVright(Point target,double angle){
+        this.location=Util.rotatePointAroundVector(vRight,target,location,angle);
+        this.vTo=Util.rotateAroundVector(vRight,vTo,angle);
+        this.vUp= vRight.crossProduct(vTo).normalize();
+        this.pc =this.location.add(this.vTo.scale(this.vpDistance));
+        return this;
+    }
+    /** rotate the camera around target point
+     * @param target the target of the camera
+     * @param rotator the rotator vector of the camera
+     * @param angle the angle to rotate
+     * @return this camera*/
+    public Camera rotateCameraAroundPointVector(Point target,Vector rotator,double angle){
+        this.location=Util.rotatePointAroundVector(rotator,target,location,angle);
+        this.vTo=Util.rotateAroundVector(rotator,vTo,angle);
+        this.vUp=Util.rotateAroundVector(rotator,vUp,angle);
+        this.vRight= vTo.crossProduct(vUp).normalize();
+        this.pc =this.location.add(this.vTo.scale(this.vpDistance));
+        return this;
+    }
+    /** moving the camera forward
+     * @param distance the distance to move
+     * @return this camera*/
+    public Camera moveForward(double distance){
+        this.location=this.location.add(this.vTo.scale(distance));
+        this.pc =this.location.add(this.vTo.scale(this.vpDistance));
+        return this;
+    }
+    /** moving the camera right
+     * @param distance the distance to move
+     * @return this camera*/
+    public Camera moveRight(double distance){
+        this.location=this.location.add(this.vRight.scale(distance));
+        this.pc =this.location.add(this.vTo.scale(this.vpDistance));
+        return this;
+    }
+    /** moving the camera up
+     * @param distance the distance to move
+     * @return this camera*/
+    public Camera moveUp(double distance){
+        this.location=this.location.add(this.vUp.scale(distance));
+        this.pc =this.location.add(this.vTo.scale(this.vpDistance));
+        return this;
+    }
+    /**set the size of the view plane
      * @param width the width of the view plane
      * @param height the height of the view plane
      * @return the caller Camera*/
@@ -70,6 +182,14 @@ public class Camera {
         this.imageWriter = imageWriter;
         return this;
     }
+    /**set the VideoWriter of the camera
+     * @param videoWriter the imageWriter of the camera
+     * @return the caller Camera*/
+    public Camera setVideoWriter(VideoWriter videoWriter) {
+        this.videoWriter = videoWriter;
+        return this;
+    }
+
     /**set the rayTracerBase of the camera
      * @param rayTracer the ray tracer of the camera
      * @return the caller Camera*/
@@ -100,8 +220,7 @@ public class Camera {
     }
 
     private Color castRay(Ray ray) {
-        Color color = this.rayTracer.traceRay(ray);
-        return color;
+        return this.rayTracer.traceRay(ray);
     }
 
     /**draw a grid on the image
@@ -121,11 +240,26 @@ public class Camera {
                 this.imageWriter.writePixel(j,i,color);
             }
     }
+
+    /**Function writeToVideo produces unoptimized mp4 file of the frames according to
+     * previous written frames*/
+    public void writeToVideo(){
+        this.videoWriter.writeVideo();
+    }
+    /**clear the frame list ot the VideoWriter*/
+    public Camera clearVideo(){
+        this.videoWriter.clear();
+        return this;
+    }
     /**
      * Function writeToImage produces unoptimized png file of the image according to
      * pixel color matrix in the directory of the project*/
     public void writeToImage(){
         this.imageWriter.writeToImage();
+    }
+    /**write to frame of videoWriter*/
+    public void writeToFrame(){
+        this.imageWriter.writeToFrame(this.videoWriter);
     }
 
     /** construct {@link primitives.Ray} from the camera to specific pixel

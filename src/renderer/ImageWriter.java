@@ -21,9 +21,9 @@ public class ImageWriter {
 	private int nX;
 	private int nY;
 
-	private static final String FOLDER_PATH = System.getProperty("user.dir") + "/images";
+	private String FOLDER_PATH = System.getProperty("user.dir") + "/images";
 
-	private BufferedImage image;
+	BufferedImage image;
 	private String imageName;
 	
 	private Logger logger = Logger.getLogger("ImageWriter");
@@ -39,10 +39,37 @@ public class ImageWriter {
 		this.imageName = imageName;
 		this.nX = nX;
 		this.nY = nY;
-
 		image = new BufferedImage(nX, nY, BufferedImage.TYPE_INT_RGB);
 	}
+	/**
+	 * Image Writer constructor accepting image name and View Plane parameters,
+	 * @param imageName the name of jpeg file
+	 * @param path the path to the image
+	 * @param nX        amount of pixels by Width
+	 * @param nY        amount of pixels by height
+	 */
+	public ImageWriter(String imageName,String path, int nX, int nY) {
+		this.imageName = imageName;
+		this.FOLDER_PATH=path;
+		this.nX = nX;
+		this.nY = nY;
+		image = new BufferedImage(nX, nY, BufferedImage.TYPE_INT_RGB);
+	}
+	/**set the path to the file of the image
+	 * @param path the path to the image
+	 * @return this ImageWriter */
+	public ImageWriter setPath(String path){
+		this.FOLDER_PATH=path;
+		return this;
+	}
 
+	/**set the name of the image
+	 * @param imageName the name of the image
+	 * @return this ImageWriter */
+	public ImageWriter setImageName(String imageName){
+		this.imageName=imageName;
+		return this;
+	}
 	// ***************** Getters/Setters ********************** //
 	/**
 	 * View Plane Y axis resolution
@@ -77,7 +104,11 @@ public class ImageWriter {
 			throw new IllegalStateException("I/O error - may be missing directory " + FOLDER_PATH, e);
 		}
 	}
-
+	/**write to frame of videoWriter
+	 * @param videoWriter the VideoWriter to add frame*/
+	public void writeToFrame(VideoWriter videoWriter){
+		videoWriter.addFrame(this);
+	}
 	/**
 	 * The function writePixel writes a color of a specific pixel into pixel color
 	 * matrix

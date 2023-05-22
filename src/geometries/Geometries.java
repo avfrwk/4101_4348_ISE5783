@@ -37,6 +37,11 @@ public class Geometries extends Intersectable {
             this.geometries.add(i);
         }
     }
+    /**get list of intersection between ray and the Intersectables inside the Geometries object
+     * @param ray the ray
+     * @param maxDistance the maximum allowed distance to return the geopoint
+     * @return list of intersections
+     */
     @Override
     protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance){
         List<GeoPoint> insects = null;
@@ -51,22 +56,4 @@ public class Geometries extends Intersectable {
         }
         return insects;
     }
-    /**get list of intersection between ray and the Intersectables inside the Geometries object
-     * @param ray the ray
-     * @return list of intersections
-     */
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        List<GeoPoint> insects = null;
-        List<GeoPoint> localInsects;
-        for (Intersectable geometry : this.geometries) {
-            localInsects = geometry.findGeoIntersectionsHelper(ray);
-            if (localInsects != null) {
-                if (insects != null)
-                    insects.addAll(localInsects);//-------------------------------------
-                else insects = new LinkedList<>(localInsects);
-            }
-        }
-        return insects;
-    }
-
 }

@@ -21,16 +21,20 @@ public class Sphere extends RadialGeometry{
     /** get the center of the sphere
      * @return the central point of the sphere*/
     public Point getCenter() {
-        return center;
+        return this.center;
     }
     /** get the normal to the sphere at specific point
-    *  @param point the point of normal's head
+     * @param point the point of normal's head
      * @return normal to the sphere at specific point*/
     @Override
     public Vector getNormal(Point point){
         return point.subtract(this.center).normalize();
     }
-
+    /** get list of intersection between ray and Sphere
+     * @param ray the ray
+     * @param maxDistance the maximum allowed distance to return the geopoint
+     * @return list of intersections
+     * */
     @Override
     protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance){
         Point  rayp0=ray.getP0();
@@ -67,43 +71,7 @@ public class Sphere extends RadialGeometry{
         }
         return null;
     }
-    /** get list of intersection between ray and Sphere
-     * @param ray the ray
-     * @return list of intersections
-     * */
-    @Override
-    public List<GeoPoint>findGeoIntersectionsHelper(Ray ray) {
-        Point  rayp0=ray.getP0();
-        Vector raydir=ray.getDir();
-        Vector u;
-        double tm;
-        double dsquare;
-        double rsquare=this.radius*this.radius;
-        if(this.center.equals(rayp0)){
-            //tm=0;
-            //dsquare=-tm*tm;
-            return List.of(new GeoPoint(this,ray.getPoint(this.radius)));
-        }else{
-            u=this.center.subtract(rayp0);
-            tm=raydir.dotProduct(u);
-            dsquare=u.dotProduct(u)-tm*tm;
-        }
-        if(dsquare>=rsquare){
-            return null;
-        }
-        double th=Math.sqrt(rsquare-dsquare);
-        if(Util.alignZero(tm+th)>0){
-            if(Util.alignZero(tm-th)>0){
-                return List.of(new GeoPoint(this,ray.getPoint(tm+th)),
-                        new GeoPoint(this,ray.getPoint(tm-th)));
-            }
-            return List.of(new GeoPoint(this,ray.getPoint(tm+th)));
-        }
-        if(Util.alignZero(tm-th)>0){
-            return List.of(new GeoPoint(this,ray.getPoint(tm-th)));
-        }
-        return null;
-    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

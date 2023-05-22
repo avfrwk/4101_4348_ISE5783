@@ -48,7 +48,15 @@ public abstract class Util {
 	public static double alignZero(double number) {
 		return getExp(number) < ACCURACY ? 0.0 : number;
 	}
-
+	/**
+	 * Aligns the numberes of Double 3 to zero if it is almost zero
+	 *
+	 * @param double3 the number to align
+	 * @return 0.0 if the number is very close to zero, the number itself otherwise
+	 */
+	public static Double3 alignZero(Double3 double3) {
+		return new Double3(alignZero(double3.d1),alignZero(double3.d2),alignZero(double3.d3));
+	}
 	/**
 	 * Check whether two numbers have the same sign
 	 * 
@@ -79,5 +87,84 @@ public abstract class Util {
 				parseDouble(ls[0]),
 				parseDouble(ls[1]),
 				parseDouble(ls[2]));
+	}
+	/**rotates vector around vector
+	 * @param v the rotator vector
+	 * @param vectorToRotate the rotated vector
+	 * @param angle the angle
+	 *@return the vector, rotated*/
+	public static Vector rotateAroundVector(Vector v, Vector vectorToRotate, double angle){
+		double radAngle=angle*Math.PI/180;
+		double cos=Math.cos(radAngle);
+		double sin=Math.sin(radAngle);
+		double vvr=v.dotProduct(vectorToRotate);
+		Vector vectorToRotateRet;
+
+		if(Util.alignZero(cos)!=0){
+			vectorToRotateRet=vectorToRotate.scale(cos);
+			if(Util.alignZero(sin)!=0){
+				try{
+					vectorToRotateRet=vectorToRotateRet.add(v.crossProduct(vectorToRotate).scale(sin));
+				}catch(Exception e){}
+			}
+			if(Util.alignZero(cos-1)!=0&&alignZero(vvr)!=0){
+				vectorToRotateRet=vectorToRotateRet.add(v.scale(vvr*(1-cos)));
+			}
+		}
+		else{
+			vectorToRotateRet=v.crossProduct(vectorToRotate).scale(sin);
+			if(Util.alignZero(cos-1)!=0&&alignZero(vvr)!=0){
+				vectorToRotateRet=vectorToRotateRet.add(v.scale(vvr*(1-cos)));
+			}
+		}
+		return new Vector(alignZero(vectorToRotateRet.xyz));
+	}
+	/**rotates point around point in plane that orthogonal to vector
+	 * @param v the rotator vector
+	 * @param p0 the point to rotate around
+	 * @param point the rotated point
+	 * @param angle the angle
+	 *@return the new rotated point*/
+	public static Point rotatePointAroundVector(Vector v, Point p0, Point point, double angle){
+		return new Point(alignZero(p0.add(rotateAroundVector(v,point.subtract(p0),angle)).xyz));
+	}
+	public static Point rotateAroundX(Point point,Point p0,double angle){
+		double x=point.getX()-p0.getX();
+		double y=point.getY()-p0.getY();
+		double z=point.getZ()-p0.getZ();
+		double radAngle=angle*Math.PI/180;
+		double cos=Math.cos(radAngle);
+		double sin=Math.sin(radAngle);
+		return new Point(
+				p0.getX()+x,
+				p0.getY()+y*cos-z*sin,
+				p0.getZ()+y*sin+z*cos
+		);
+	}
+	public static Point rotateAroundY(Point point,Point p0,double angle){
+		double x=point.getX()-p0.getX();
+		double y=point.getY()-p0.getY();
+		double z=point.getZ()-p0.getZ();
+		double radAngle=angle*Math.PI/180;
+		double cos=Math.cos(radAngle);
+		double sin=Math.sin(radAngle);
+		return new Point(
+				p0.getX()+x*cos+z*sin,
+				p0.getY()+y,
+				p0.getZ()+-x*sin+z*cos
+		);
+	}
+	public static Point rotateAroundZ(Point point,Point p0,double angle){
+		double x=point.getX()-p0.getX();
+		double y=point.getY()-p0.getY();
+		double z=point.getZ()-p0.getZ();
+		double radAngle=angle*Math.PI/180;
+		double cos=Math.cos(radAngle);
+		double sin=Math.sin(radAngle);
+		return new Point(
+				p0.getX()+x*cos-y*sin,
+				p0.getY()+x*sin+y*cos,
+				p0.getZ()+z
+		);
 	}
 }

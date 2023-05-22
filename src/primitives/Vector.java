@@ -1,9 +1,11 @@
 package primitives;
 
-import static java.lang.Double.parseDouble;
 
 /** This class represent a vector*/
 public class Vector extends Point{
+    public static Vector vectorX=new Vector(1,0,0);
+    public static Vector vectorY=new Vector(0,1,0);
+    public static Vector vectorZ=new Vector(0,0,1);
     /** Constructor to initialize Vector based on Double3 object
      * @param b the Double3 object that containing the Vector coordinates
      * @throws IllegalArgumentException when a zero vector is inserted*/

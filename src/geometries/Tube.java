@@ -32,6 +32,11 @@ public class Tube extends RadialGeometry{
         Vector n=point.subtract(O);
         return n.normalize();
     }
+    /** get list of intersection between ray and Tube
+     * @param ray the ray
+     * @param maxDistance the maximum allowed distance to return the geopoint
+     * @return list of intersections
+     * */
     @Override
     protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance){
         Point rayp0=ray.getP0();
@@ -81,63 +86,6 @@ public class Tube extends RadialGeometry{
             return List.of(new GeoPoint(this,ray.getPoint(p0)));
         }
         if(Util.alignZero(p1)>0&&Util.alignZero(p1-maxDistance)<=0) {
-            return List.of(new GeoPoint(this,ray.getPoint(p1)));
-        }
-        return null;
-    }
-    /** get list of intersection between ray and Tube
-     * @param ray the ray
-     * @return list of intersections
-     * */
-    @Override
-    public List<GeoPoint>findGeoIntersectionsHelper(Ray ray) {
-        Point rayp0=ray.getP0();
-        Point tubep0=this.ray.getP0();
-        if(rayp0.equals(tubep0)){
-            rayp0=ray.getPoint(0.000000001);
-        }
-        Vector Dp = rayp0.subtract(tubep0);
-        Vector v = ray.getDir();
-        Vector va = this.ray.getDir();
-        double temp = v.dotProduct(va);
-        Vector vtemp = v;
-        if (!Util.isZero(temp)) {
-            vtemp = va.scale(temp);
-            if (vtemp.equals(v)) {
-                return null;
-            }
-            vtemp = v.subtract(vtemp);
-        }
-
-        double A = vtemp.dotProduct(vtemp);
-        temp = Dp.dotProduct(va);
-        Vector vtemp2 = Dp;
-        if (!Util.isZero(temp)) {
-            vtemp2 = va.scale(temp);
-            vtemp2 = Dp.subtract(vtemp2);
-        }
-        double B = 2 * vtemp.dotProduct(vtemp2);
-        temp = Dp.dotProduct(va);
-        vtemp = Dp;
-        if (!Util.isZero(temp)) {
-            vtemp = va.scale(temp);
-            vtemp = Dp.subtract(vtemp);
-        }
-        double C = vtemp.dotProduct(vtemp) - this.radius * this.radius;
-        double root = B * B - 4 * A * C;
-        if (root < 0)
-            return null;
-        root = Math.sqrt(root);
-        double p0 = (-B + root) / 2 * A;
-        double p1 = (-B - root) / 2 * A;
-        if(Util.alignZero(p0)>0){
-            if(Util.alignZero(p1)>0){
-                return List.of(new GeoPoint(this,ray.getPoint(p0)),
-                        new GeoPoint(this,ray.getPoint(p1)));
-            }
-            return List.of(new GeoPoint(this,ray.getPoint(p0)));
-        }
-        if(Util.alignZero(p1)>0) {
             return List.of(new GeoPoint(this,ray.getPoint(p1)));
         }
         return null;

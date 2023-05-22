@@ -35,6 +35,11 @@ public class Plane extends Geometry {
         return normal;
     }
 
+    /** get list of intersection between ray and Plane
+     * @param ray the ray
+     * @param maxDistance the maximum allowed distance to return the geopoint
+     * @return list of intersections
+     * */
     @Override
     protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance)
     {
@@ -47,20 +52,6 @@ public class Plane extends Geometry {
         return null;
     }
 
-    /** get list of intersection between ray and Plane
-     * @param ray the ray
-     * @return list of intersections
-     * */
-    @Override
-    public List<GeoPoint>findGeoIntersectionsHelper(Ray ray) {
-        double t=this.normal.dotProduct(ray.getDir());
-        if(!Util.isZero(t)&&!ray.getP0().equals(this.p0)){
-            t=this.normal.dotProduct(this.p0.subtract(ray.getP0()))/t;
-            if(Util.alignZero(t)>0)
-                return List.of(new GeoPoint(this,ray.getPoint(t)));
-        }
-        return null;
-    }
     /** get the normal
      * @return normal to the plane*/
     public Vector getNormal() {

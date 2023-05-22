@@ -40,11 +40,6 @@ public abstract class Intersectable {
      */
     protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
 
-    /**get list of intersection between ray and geometry
-     * @param ray the ray
-     * @return list of intersections with the geometry
-     */
-    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
 
     /**
      * this class represent geometry and point
