@@ -219,7 +219,7 @@ class CameraTest {
 		Camera camera = new Camera(new Point(0, 0, 1000),((Sphere)sphere).getCenter())
 				.setVpDistance(1000).setVPSize(150, 150).setRayTracer(new RayTracerBasic(scene1))
 				.setVideoWriter(new VideoWriter("Rotating sphere").setFps(25));
-		for(int i=0;i<36;++i){
+		for(int i=0;i<35;++i){
 			camera.rotateCamera(10)
 					.setImageWriter(new ImageWriter("SphereRotates", 500, 500)) //
 					.renderImage() //
