@@ -11,6 +11,7 @@ import java.util.Objects;
 
 public class Cylinder extends Tube{
     final private double height;
+    final private double heightRadiusSquared;
     /** Constructor to initialize Cylinder based on radius, the center axis and height
      * @param Radius first number value
      * @param ray second number value
@@ -18,6 +19,7 @@ public class Cylinder extends Tube{
     public Cylinder(double Radius, Ray ray, double Height){
         super(Radius, ray);
         this.height=Height;
+        this.heightRadiusSquared=this.height*this.height+this.radius*this.radius;
     }
 
     /** get the height of the cylinder
@@ -53,8 +55,8 @@ public class Cylinder extends Tube{
     private Point findIntersectionsHelper(Ray ray,Point p0,Vector normal,double radius, double maxDistance){
         double t=normal.dotProduct(ray.getDir());
         if(!Util.isZero(t)&&!ray.getP0().equals(p0)){
-            t=normal.dotProduct(p0.subtract(ray.getP0()))/t;
-            if(Util.alignZero(t)>0&&Util.alignZero(t-maxDistance)<=0){
+            t=Util.alignZero(normal.dotProduct(p0.subtract(ray.getP0()))/t);
+            if(t>0&&Util.alignZero(t-maxDistance)<=0){
                 Point ret=ray.getPoint(t);
                 if(Util.alignZero(ret.distanceSquared(p0)-radius*radius)<=0){
                     return ret;
@@ -77,16 +79,17 @@ public class Cylinder extends Tube{
         boolean flag1=false,flag2=false;
         if(infinityPoints!=null){
             int size=infinityPoints.size();
-            Point pt;
             if(size==2){
-                if (Util.alignZero(dir.dotProduct(infinityPoints.get(1).point.subtract(P00))) > 0 && Util.alignZero(dir.dotProduct(infinityPoints.get(1).point.subtract(heightP0))) < 0) {
+                Point tp=infinityPoints.get(1).point;
+                if(tp.distanceSquared(P00)<heightRadiusSquared
+                &&tp.distanceSquared(heightP0)<heightRadiusSquared)
                     flag2=true;
-                }
             }
             if(size>=1) {
-                if (Util.alignZero(dir.dotProduct(infinityPoints.get(0).point.subtract(P00))) > 0 && Util.alignZero(dir.dotProduct(infinityPoints.get(0).point.subtract(heightP0))) < 0) {
-                    flag1 = true;
-                }
+                Point tp=infinityPoints.get(0).point;
+                if(tp.distanceSquared(P00)<heightRadiusSquared
+                &&tp.distanceSquared(heightP0)<heightRadiusSquared)
+                    flag1=true;
             }
         } if(flag1&&flag2){
             return infinityPoints;

@@ -23,7 +23,7 @@ public class ImageWriter {
 
 	private String FOLDER_PATH = System.getProperty("user.dir") + "/images";
 
-	BufferedImage image;
+	private BufferedImage image;
 	private String imageName;
 	
 	private Logger logger = Logger.getLogger("ImageWriter");
@@ -107,7 +107,7 @@ public class ImageWriter {
 	/**write to frame of videoWriter
 	 * @param videoWriter the VideoWriter to add frame*/
 	public void writeToFrame(VideoWriter videoWriter){
-		videoWriter.addFrame(this);
+		videoWriter.addFrame(this.image);
 	}
 	/**
 	 * The function writePixel writes a color of a specific pixel into pixel color

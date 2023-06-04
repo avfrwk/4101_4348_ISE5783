@@ -89,7 +89,6 @@ public class LightsTests {
                 .renderImage() //
                 .writeToImage(); //
     }
-
     /**
      * Produce a picture of a sphere lighted by a point light
      */

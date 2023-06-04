@@ -1,8 +1,9 @@
 package renderer;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
-
 import org.jcodec.api.SequenceEncoder;
 import org.jcodec.common.Codec;
 import org.jcodec.common.Format;
@@ -16,7 +17,6 @@ import java.awt.image.DataBufferByte;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.LinkedList;
-
 import org.jcodec.codecs.png.PNGDecoder;
 import org.jcodec.codecs.png.PNGEncoder;
 import org.jcodec.common.Preconditions;
@@ -60,13 +60,6 @@ public class VideoWriter {
         return this;
     }
     /**add new frame to the video
-     * @param img the image that the frame will contain
-     * @return this VideoWriter*/
-    public VideoWriter addFrame(ImageWriter img){
-        this.frameList.add(AWTUtil.fromBufferedImage(img.image,ColorSpace.RGB));
-        return this;
-    }
-    /**add new frame to the video
      * @param bufferedImage bufferedImage that the frame will contain
      * @return this VideoWriter*/
     public VideoWriter addFrame(BufferedImage bufferedImage){
@@ -96,7 +89,12 @@ public class VideoWriter {
         try{
             File inputDir = new File(inputFolderPath);
             //sort the files by names
-            File[] inputDirFiles= inputDir.listFiles();
+            File[] inputDirFiles= inputDir.listFiles(new FilenameFilter() {
+                @Override
+                public boolean accept(File dir, String name) {
+                    return name.toLowerCase().endsWith(".png")&&name.contains(fileNames);
+                }
+            });
             Arrays.sort(inputDirFiles, (file1, file2) ->{
                 Double f1=Double.parseDouble(file1.getName().replaceAll(fileNames,"")
                         .replaceAll(".png",""));
