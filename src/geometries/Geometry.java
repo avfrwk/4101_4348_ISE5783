@@ -1,13 +1,13 @@
 package geometries;
-import org.jocl.cl_context;
-import org.jocl.cl_device_id;
-import org.jocl.cl_kernel;
-import org.jocl.cl_program;
+//import org.jocl.cl_context;
+//import org.jocl.cl_device_id;
+//import org.jocl.cl_kernel;
+//import org.jocl.cl_program;
 import primitives.*;
 
 import java.lang.invoke.MethodHandles;
 
-import static org.jocl.CL.*;
+//import static org.jocl.CL.*;
 
 /**This interface will serve as the basis for all the geometric shapes*/
 public abstract class Geometry extends Intersectable{

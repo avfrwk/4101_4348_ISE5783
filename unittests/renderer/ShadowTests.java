@@ -8,6 +8,7 @@ import geometries.*;
 import lighting.*;
 import primitives.*;
 import scene.Scene;
+
 /** Testing basic shadows
  * @author Dan */
 public class ShadowTests {
@@ -112,9 +113,11 @@ public class ShadowTests {
               .writeToImage();
    }
 
-
+   /** Produce a picture of ten shapes lighted by many variations of light sources
+    * producing a shading */
    /*@Test
    public void raceCar(){
+      // TODO: implement test
       Point a=new Point(0,0.5,0.2);
       Point b=new Point(0,-0.5,0.2);
       Point c=new Point(3,0.5,1);
@@ -160,77 +163,317 @@ public class ShadowTests {
 
    @Test
    public void buildCar() {
-      Scene carScene= new Scene("car")
-      .setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
-      Camera carCamera=new Camera(new Point(0, 1, 0),
-              new Vector(0, -1, 0),
-              new Vector(-1, 0, 0))
-              .setVPSize(200, 200).setVpDistance(1)                                                                       //
-              .setRayTracer(new RayTracerBasic(carScene));
-      // Car Body (Polygon)
-      Polygon carBody = new Polygon(
-              new Point(0, 0, 0),
-              new Point(0, 2, 0),
-              new Point(2, 2, 0),
-              new Point(3, 1, 0),
-              new Point(3, 0, 0)
+      scene.setAmbientLight(new AmbientLight(new Color(GREEN), new Double3(0.15)));
+      scene.lights.add(
+              new PointLight(new Color(RED),new Point(50,50,0))
+      );
+// Car Body (Polygon)
+         Polygon carBody1 = new Polygon(
+                 new Point(50, 40, 0),
+                 new Point(50, 0, 0),
+                 new Point(80, 18, 30),
+                 new Point(80, 22, 30)
+         );
+         Polygon carBody2 = new Polygon(
+                 new Point(50, 40, 80),
+                 new Point(50, 0, 80),
+                 new Point(80, 18, 50),
+                 new Point(80, 22, 50)
+         );
+
+         Polygon carBody3 = new Polygon(
+                 new Point(50, 40, 0),
+                 new Point(50, 0, 0),
+                 new Point(50, 0, 80),
+                 new Point(50, 40, 80)
+         );
+         Polygon carBody4 = new Polygon(
+                 new Point(50, 0, 0),
+                 new Point(80, 18, 30),
+                 new Point(80, 18, 50),
+                 new Point(50, 0, 80)
+         );
+
+         Polygon carBody5 = new Polygon(
+                 new Point(80, 18, 30),
+                 new Point(80, 22, 30),
+                 new Point(80, 22, 50),
+                 new Point(80, 18, 50)
+         );
+         Polygon carBody6 = new Polygon(
+                 new Point(80, 22, 30),
+                 new Point(50, 40, 0),
+                 new Point(50, 40, 80),
+                 new Point(80, 22, 50)
+
+         );
+
+
+         // Car Body (Polygon)
+         Polygon car1 = new Polygon(
+                 new Point(-80, 0, 0),
+                 new Point(-80, 40, 0),
+                 new Point(50, 40, 0),
+                 new Point(50, 0, 0)
+         );
+         Polygon car2 = new Polygon(
+                 new Point(-80, 0, 80),
+                 new Point(-80, 40, 80),
+                 new Point(50, 40, 80),
+                 new Point(50, 0, 80)
+         );
+
+         Polygon car3 = new Polygon(
+                 new Point(-80, 0, 0),
+                 new Point(-80, 40, 0),
+                 new Point(-80, 40, 80),
+                 new Point(-80, 0, 80)
+         );
+         Polygon car4 = new Polygon(
+                 new Point(-80, 40, 0),
+                 new Point(50, 40, 0),
+                 new Point(50, 40, 80),
+                 new Point(-80, 40, 80)
+         );
+
+         Polygon car5 = new Polygon(
+                 new Point(50, 40, 0),
+                 new Point(50, 0, 0),
+                 new Point(50, 0, 80),
+                 new Point(50, 40, 80)
+         );
+         Polygon car6 = new Polygon(
+                 new Point(-80, 0, 80),
+                 new Point(50, 0, 80),
+                 new Point(50, 0, 0),
+                 new Point(-80, 0, 0)
+
+         );
+
+
+
+
+         Polygon window = new Polygon(
+                 new Point(0, 15, 1),
+                 new Point(0, 30, 1),
+                 new Point(30, 30, 1),
+                 new Point(30, 15, 1)
+         );
+
+         // Car Roof (Polygon)
+         Polygon carRoof = new Polygon(
+                 new Point(-70, 40, 30),
+                 new Point(-70, 40, 70),
+                 new Point(50, 40, 70),
+                 new Point(50, 40, 30)
+         );
+
+         // Car Front Windshield (Triangle)
+         Triangle carWindshield = new Triangle(
+                 new Point(50, 40, 0),
+                 new Point(50, 40, 30),
+                 new Point(80, 0, 0)
+         );
+
+         // Car Rear Windshield (Triangle)
+         Triangle carRearWindshield = new Triangle(
+                 new Point(-80, 0, 0),
+                 new Point(-80, 0, 30),
+                 new Point(-70, 40, 0)
+         );
+
+         // Car Front Wheels (Spheres)
+         Cylinder carFrontWheel1 = new Cylinder(10, new Ray(new Point(-40, -10, -15),new Vector(0,0,1)),5);
+         Cylinder carFrontWheel2 = new Cylinder(10, new Ray(new Point(-40, -10, 15),new Vector(0,0,1)),5);
+
+         // Car Rear Wheels (Spheres)
+         Cylinder carRearWheel1 = new Cylinder(10, new Ray(new Point(30, -10, -15),new Vector(0,0,1)),5);
+         Cylinder carRearWheel2 = new Cylinder(10, new Ray(new Point(30, -10, 15),new Vector(0,0,1)),5);
+
+
+         // Car Axle (Cylinder)
+         //Cylinder carAxle = new Cylinder(4, new Ray(new Point(-40, -20, -17), new Vector(0, 0, 1)), 30);
+
+         // Racing Car Tail (Polygon)
+         Polygon carTail1 = new Polygon(
+                 new Point(-70, 45, 0),
+                 new Point(-60, 45, 0),
+                 new Point(-60, 45, 30),
+                 new Point(-70, 45, 30)
+         );
+         Polygon carTail2 = new Polygon(
+                 new Point(-70, 40, 0),
+                 new Point(-60, 40, 0),
+                 new Point(-60, 55, 0),
+                 new Point(-70, 55, 0)
+         );
+         Polygon carTail3 = new Polygon(
+                 new Point(-70, 40, 30),
+                 new Point(-60, 40, 30),
+                 new Point(-60, 55, 30),
+                 new Point(-70, 55, 30)
+         );
+
+
+
+         // Add the car components to the scene
+         scene.geometries.add(
+                 carBody1.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(BLUE)),
+                 carBody2.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(BLUE)),
+                 carBody3.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE)),
+                 carBody4.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE)),
+                 carBody5.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE)),
+                 carBody6.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE)),
+
+                 car1.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(BLUE)),
+                 car2.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(BLUE)),
+                 car3.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE)),
+                 car4.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE)),
+                 car5.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE)),
+                 car6.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE)),
+
+
+                 carRoof.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(GREEN)),
+                 carWindshield.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(YELLOW)),
+                 carRearWindshield.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(RED)),
+                 carFrontWheel1.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(PINK)),
+                 carFrontWheel2.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(WHITE)),
+                 carRearWheel1.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(PINK)),
+                 carRearWheel2.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(GRAY)),
+                 //carAxle.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(200, 255, 0)),
+                 carTail1.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE)),
+                 window.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(BLACK)),
+                 carTail2.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE)),
+                 carTail3.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE))
+
+         );
+      camera.rotateCameraAroundPointVright(new Point(0,0,0),30);
+
+      scene.lights.add( //
+                 new SpotLight(new Color(700, 400, 400), new Point(40, 40, 115), new Vector(-1, -1, -4)) //
+                         .setKl(4E-4).setKq(2E-5));
+
+         camera.setImageWriter(new ImageWriter("carImage", 600, 600)) //
+                 .renderImage() //
+                 .writeToImage();
+   }
+}
+
+
+/*
+
+// Car Body (Polygon)
+      Polygon carBody1 = new Polygon(
+              new Point(-80, 0, 0),
+              new Point(-80, 40, 30),
+              new Point(50, 40, 30),
+              new Point(80, 0, 0)
+      );
+
+      Polygon carBody2 = new Polygon(
+              new Point(-80, 0, 80),
+              new Point(-80, 40, 50),
+              new Point(50, 40, 50),
+              new Point(80, 0, 80)
+      );
+
+      Polygon carBody3 = new Polygon(
+              new Point(-80, 0, 50),
+              new Point(-80, 0, 30),
+              new Point(-80, 40, 30),
+              new Point(-80, 0, 70)
+      );
+      Polygon carBody4 = new Polygon(
+              new Point(50, 0, 80),
+              new Point(50, 0, 50),
+              new Point(80, 0, 70),
+              new Point(80, 0, 80)
+      );
+
+      Polygon window = new Polygon(
+              new Point(0, 15, 1),
+              new Point(0, 30, 1),
+              new Point(30, 30, 1),
+              new Point(30, 15, 1)
       );
 
       // Car Roof (Polygon)
       Polygon carRoof = new Polygon(
-              new Point(0, 2, 0),
-              new Point(0, 2, 1),
-              new Point(2, 2, 1),
-              new Point(2, 2, 0)
+              new Point(-70, 40, 30),
+              new Point(-70, 40, 70),
+              new Point(50, 40, 70),
+              new Point(50, 40, 30)
       );
 
       // Car Front Windshield (Triangle)
       Triangle carWindshield = new Triangle(
-              new Point(2, 2, 0),
-              new Point(2, 2, 1),
-              new Point(3, 1, 0)
+              new Point(50, 40, 0),
+              new Point(50, 40, 30),
+              new Point(80, 0, 0)
       );
 
       // Car Rear Windshield (Triangle)
       Triangle carRearWindshield = new Triangle(
-              new Point(0, 0, 0),
-              new Point(0, 0, 1),
-              new Point(3, 0, 0)
+              new Point(-80, 0, 0),
+              new Point(-80, 0, 30),
+              new Point(-70, 40, 0)
       );
 
-      // Car Front Wheel (Sphere)
-      Sphere carFrontWheel = new Sphere(0.5, new Point(1, 0, 0));
+      // Car Front Wheels (Spheres)
+      Cylinder carFrontWheel1 = new Cylinder(10, new Ray(new Point(-40, -10, -15),new Vector(0,0,1)),5);
+      Cylinder carFrontWheel2 = new Cylinder(10, new Ray(new Point(-40, -10, 15),new Vector(0,0,1)),5);
 
-      // Car Rear Wheel (Sphere)
-      Sphere carRearWheel = new Sphere(0.5, new Point(1, 2, 0));
+      // Car Rear Wheels (Spheres)
+      Cylinder carRearWheel1 = new Cylinder(10, new Ray(new Point(30, -10, -15),new Vector(0,0,1)),5);
+      Cylinder carRearWheel2 = new Cylinder(10, new Ray(new Point(30, -10, 15),new Vector(0,0,1)),5);
+
 
       // Car Axle (Cylinder)
-      Cylinder carAxle = new Cylinder(0.1, new Ray(new Point(1, 0, -0.5), new Vector(0, 0, 1)), 1);
-      // Add the car components to the scene
-      Material material=new Material().setKs(0.8).setShininess(60);
-      Color color=new Color(11,61,41);
-      carScene.geometries.add(
-              carBody.setMaterial(material).setEmission(color),
-              carRoof.setMaterial(material).setEmission(color),
-              carWindshield.setMaterial(material).setEmission(color),
-              carRearWindshield.setMaterial(material).setEmission(color),
-              carFrontWheel.setMaterial(material).setEmission(color),
-              carRearWheel.setMaterial(material).setEmission(color),
-              carAxle.setMaterial(material).setEmission(color)
+      //Cylinder carAxle = new Cylinder(4, new Ray(new Point(-40, -20, -17), new Vector(0, 0, 1)), 30);
+
+      // Racing Car Tail (Polygon)
+      Polygon carTail1 = new Polygon(
+              new Point(-70, 45, 0),
+              new Point(-60, 45, 0),
+              new Point(-60, 45, 30),
+              new Point(-70, 45, 30)
+      );
+      Polygon carTail2 = new Polygon(
+              new Point(-70, 40, 0),
+              new Point(-60, 40, 0),
+              new Point(-60, 55, 0),
+              new Point(-70, 55, 0)
+      );
+      Polygon carTail3 = new Polygon(
+              new Point(-70, 40, 30),
+              new Point(-60, 40, 30),
+              new Point(-60, 55, 30),
+              new Point(-70, 55, 30)
       );
 
-      // Set up lights and camera
-      carScene.lights.add(
-             // new DirectionalLight(new Color(700, 400, 400)
-              //,new Vector(0,0,-1))
-              new SpotLight(new Color(700, 400, 400),
-                      new Point(40, 40, 115),
-                      new Vector(-1, -1, -4))
-                     .setKl(4E-4).setKq(2E-5)
-      );
-      carCamera.setImageWriter(new ImageWriter("carImage", 600, 600))
-      // Render the image
-      .renderImage()
-      .writeToImage();//
-   }
-}
+
+
+      // Add the car components to the scene
+      scene.geometries.add(
+              carBody1.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(BLUE)),
+              carBody2.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(BLUE)),
+              carBody3.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE)),
+              carBody4.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE)),
+
+
+              carRoof.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(GREEN)),
+              carWindshield.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(YELLOW)),
+              carRearWindshield.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(RED)),
+              carFrontWheel1.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(PINK)),
+              carFrontWheel2.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(WHITE)),
+              carRearWheel1.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(PINK)),
+              carRearWheel2.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(GRAY)),
+              //carAxle.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(200, 255, 0)),
+              carTail1.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE)),
+              window.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(BLACK)),
+              carTail2.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE)),
+              carTail3.setMaterial(new Material().setKs(0.8).setShininess(60)).setEmission(new Color(ORANGE))
+
+              );
+
+ */
