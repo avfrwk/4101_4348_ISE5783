@@ -95,11 +95,20 @@ public class Polygon extends Geometry {
          Vector n=this.plane.getNormal();
          boolean tt=(v0.crossProduct(v1).dotProduct(n)>0);
          for(int i=1;i<size-1;++i){
-            v0=this.vertices.get(i).subtract(p0);
-            v1=this.vertices.get(i+1).subtract(p0);
-            if((v0.crossProduct(v1).dotProduct(n)>0)!=tt){
+            Point pp0=this.vertices.get(i),pp1=this.vertices.get(i+1);
+            if(pp0.equals(p0)||pp1.equals(p0))
+               return  null;
+            v0=pp0.subtract(p0);
+            v1=pp1.subtract(p0);
+            try{
+               if((v0.crossProduct(v1).dotProduct(n)>0)!=tt){
+                  return null;
+               }
+            }catch(Exception e){
                return null;
             }
+
+
          }
          v0=this.vertices.get(size-1).subtract(p0);
          v1=this.vertices.get(0).subtract(p0);

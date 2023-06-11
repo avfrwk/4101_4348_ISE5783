@@ -15,6 +15,19 @@ public class Double3 {
    final double                d2;
    /** Third number */
    final double                d3;
+
+   public double getD1() {
+      return d1;
+   }
+
+   public double getD2() {
+      return d2;
+   }
+
+   public double getD3() {
+      return d3;
+   }
+
    /** Zero triad (0,0,0) */
    public static final Double3 ZERO = new Double3(0, 0, 0);
 
@@ -101,7 +114,6 @@ public class Double3 {
    public boolean lowerThan(double k) {
       return d1 < k && d2 < k && d3 < k;
    }
-
    /** Checks whether all the numbers are lower than three numbers in another triad
     * @param  other other triad
     * @return       true if all the numbers are less that appropriate numbers in

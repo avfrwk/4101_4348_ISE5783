@@ -8,7 +8,6 @@ import geometries.*;
 import lighting.*;
 import primitives.*;
 import scene.Scene;
-
 /** Testing basic shadows
  * @author Dan */
 public class ShadowTests {
@@ -113,11 +112,9 @@ public class ShadowTests {
               .writeToImage();
    }
 
-   /** Produce a picture of ten shapes lighted by many variations of light sources
-    * producing a shading */
+
    /*@Test
    public void raceCar(){
-      // TODO: implement test
       Point a=new Point(0,0.5,0.2);
       Point b=new Point(0,-0.5,0.2);
       Point c=new Point(3,0.5,1);
@@ -163,8 +160,13 @@ public class ShadowTests {
 
    @Test
    public void buildCar() {
-      scene.setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
-
+      Scene carScene= new Scene("car")
+      .setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
+      Camera carCamera=new Camera(new Point(0, 1, 0),
+              new Vector(0, -1, 0),
+              new Vector(-1, 0, 0))
+              .setVPSize(200, 200).setVpDistance(1)                                                                       //
+              .setRayTracer(new RayTracerBasic(carScene));
       // Car Body (Polygon)
       Polygon carBody = new Polygon(
               new Point(0, 0, 0),
@@ -205,21 +207,30 @@ public class ShadowTests {
       // Car Axle (Cylinder)
       Cylinder carAxle = new Cylinder(0.1, new Ray(new Point(1, 0, -0.5), new Vector(0, 0, 1)), 1);
       // Add the car components to the scene
-      scene.geometries.add(
-              carBody.setMaterial(new Material().setKs(0.8).setShininess(60)), carRoof.setMaterial(new Material().setKs(0.8).setShininess(60)), carWindshield.setMaterial(new Material().setKs(0.8).setShininess(60)), carRearWindshield.setMaterial(new Material().setKs(0.8).setShininess(60)), carFrontWheel.setMaterial(new Material().setKs(0.8).setShininess(60))
-              , carRearWheel.setMaterial(new Material().setKs(0.8).setShininess(60)), carAxle.setMaterial(new Material().setKs(0.8).setShininess(60))
+      Material material=new Material().setKs(0.8).setShininess(60);
+      Color color=new Color(11,61,41);
+      carScene.geometries.add(
+              carBody.setMaterial(material).setEmission(color),
+              carRoof.setMaterial(material).setEmission(color),
+              carWindshield.setMaterial(material).setEmission(color),
+              carRearWindshield.setMaterial(material).setEmission(color),
+              carFrontWheel.setMaterial(material).setEmission(color),
+              carRearWheel.setMaterial(material).setEmission(color),
+              carAxle.setMaterial(material).setEmission(color)
       );
 
       // Set up lights and camera
-      scene.lights.add(
-              new SpotLight(new Color(700, 400, 400), new Point(40, 40, 115), new Vector(-1, -1, -4))
-                      .setKl(4E-4).setKq(2E-5)
+      carScene.lights.add(
+             // new DirectionalLight(new Color(700, 400, 400)
+              //,new Vector(0,0,-1))
+              new SpotLight(new Color(700, 400, 400),
+                      new Point(40, 40, 115),
+                      new Vector(-1, -1, -4))
+                     .setKl(4E-4).setKq(2E-5)
       );
-      camera.setImageWriter(new ImageWriter("carImage", 600, 600));
-
+      carCamera.setImageWriter(new ImageWriter("carImage", 600, 600))
       // Render the image
-      camera.setImageWriter(new ImageWriter("shadowTrianglesSphere", 600, 600));
-      //camera.renderImage();
-      //camera.writeToImage();//
+      .renderImage()
+      .writeToImage();//
    }
 }

@@ -1,8 +1,13 @@
 package geometries;
-import primitives.Color;
-import primitives.Material;
-import primitives.Point;
-import primitives.Vector;
+import org.jocl.cl_context;
+import org.jocl.cl_device_id;
+import org.jocl.cl_kernel;
+import org.jocl.cl_program;
+import primitives.*;
+
+import java.lang.invoke.MethodHandles;
+
+import static org.jocl.CL.*;
 
 /**This interface will serve as the basis for all the geometric shapes*/
 public abstract class Geometry extends Intersectable{
@@ -37,4 +42,5 @@ public abstract class Geometry extends Intersectable{
         this.material = material;
         return this;
     }
+
 }
