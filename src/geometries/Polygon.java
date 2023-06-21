@@ -93,7 +93,13 @@ public class Polygon extends Geometry {
          Vector v0=this.vertices.get(0).subtract(p0);
          Vector v1=this.vertices.get(1).subtract(p0);
          Vector n=this.plane.getNormal();
-         boolean tt=(v0.crossProduct(v1).dotProduct(n)>0);
+
+         boolean tt;
+         try {//be carefull here
+            tt = (v0.crossProduct(v1).dotProduct(n) > 0);
+         }catch(Exception e){
+            return null;
+         }
          for(int i=1;i<size-1;++i){
             Point pp0=this.vertices.get(i),pp1=this.vertices.get(i+1);
             if(pp0.equals(p0)||pp1.equals(p0))
