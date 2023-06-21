@@ -6,6 +6,7 @@ package geometries;
 import primitives.*;
 
 import java.lang.invoke.MethodHandles;
+import java.util.List;
 
 //import static org.jocl.CL.*;
 
@@ -42,5 +43,7 @@ public abstract class Geometry extends Intersectable{
         this.material = material;
         return this;
     }
+
+
 
 }

@@ -4,6 +4,7 @@ import primitives.Ray;
 import primitives.Util;
 import primitives.Vector;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -83,5 +84,17 @@ public class Sphere extends RadialGeometry{
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), center);
+    }
+
+    @Override
+    public List<Double> minMaxPoints(){
+        List<Double> a=new LinkedList<>();
+        a.add(center.getX()+radius);//the max of x
+        a.add(center.getY()+radius);//the max of y
+        a.add(center.getZ()+radius);//the max of z
+        a.add(center.getX()-radius);//the min of x
+        a.add(center.getY()-radius);//the min of y
+        a.add(center.getZ()-radius);//the min of z
+        return a;
     }
 }

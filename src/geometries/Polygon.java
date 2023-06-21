@@ -2,6 +2,7 @@ package geometries;
 
 import static primitives.Util.isZero;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import primitives.Point;
@@ -125,5 +126,50 @@ public class Polygon extends Geometry {
       return null;
    }
 
+   @Override
+   public List<Double> minMaxPoints(){
+      List<Double> a=new LinkedList<>();
+      Double []b=new Double[6];
+      for(Point i:vertices){
+         if(b[0]==null)
+            b[0]=i.getX();
+         if(i.getX()>b[0])
+            b[0]=i.getX();
+      }
+      for(Point i:vertices){
+         if(b[1]==null)
+            b[1]=i.getY();
+         if(i.getY()>b[1])
+            b[1]=i.getY();
+      }
+      for(Point i:vertices){
+         if(b[2]==null)
+            b[2]=i.getZ();
+         if(i.getZ()>b[2])
+            b[2]=i.getZ();
+      }
+      for(Point i:vertices){
+         if(b[3]==null)
+            b[3]=i.getX();
+         if(i.getX()<b[3])
+            b[3]=i.getX();
+      }
+      for(Point i:vertices){
+         if(b[4]==null)
+            b[4]=i.getY();
+         if(i.getY()<b[4])
+            b[4]=i.getY();
+      }
+      for(Point i:vertices){
+         if(b[5]==null)
+            b[5]=i.getZ();
+         if(i.getZ()<b[5])
+            b[5]=i.getZ();
+      }
+      for(int i=0;i<6;i++){
+         a.add(b[i]);
+      }
+      return a;
+   }
 
 }

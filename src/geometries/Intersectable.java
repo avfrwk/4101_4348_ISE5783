@@ -69,4 +69,11 @@ public abstract class Intersectable {
         }
     }
 
+    /**return the bounds
+     * @return list of Doubles
+     */
+    public List<Double> minMaxPoints(){
+        return null;
+    }
+
 }
