@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="the bound exept findGeo">
+    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="the boundray">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/geometries/CBR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/CBR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unittests/renderer/ShadowTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/renderer/ShadowTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,11 +102,19 @@
       <recent name="primitives" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ShadowTests.buildCar">
-    <configuration name="All in targil_1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ShadowTests.boundrayTest">
+    <configuration name="ShadowTests.boundrayTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="targil_1" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="renderer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.ShadowTests" />
+      <option name="METHOD_NAME" value="boundrayTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -176,11 +185,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ShadowTests.boundrayTest" />
         <item itemvalue="JUnit.ShadowTests.buildCar" />
         <item itemvalue="JUnit.ShadowTests.carModelInitial" />
         <item itemvalue="JUnit.ShadowTests.trianglesSphere" />
         <item itemvalue="JUnit.ShadowTests.sphereTriangleSpot2" />
-        <item itemvalue="JUnit.All in targil_1" />
       </list>
     </recent_temporary>
   </component>
@@ -326,7 +335,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1687382120615</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL‎-00020" summary="the boundray">
+      <created>1687426257119</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL‎-00020" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687426257119</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -363,7 +379,8 @@
     <MESSAGE value="trying for car" />
     <MESSAGE value="car, we can change the colors" />
     <MESSAGE value="the bound exept findGeo" />
-    <option name="LAST_COMMIT_MESSAGE" value="the bound exept findGeo" />
+    <MESSAGE value="the boundray" />
+    <option name="LAST_COMMIT_MESSAGE" value="the boundray" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

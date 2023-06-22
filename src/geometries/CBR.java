@@ -23,9 +23,12 @@ public class CBR extends Geometries{
     public List<Double> minMaxPoints(){
         Double[] points1=new Double[6];
         int k=0;
-        for(Double j : points){
-            points1[k++]=j;
+        if(points!=null){
+            for(Double j : points){
+                points1[k++]=j;
+            }
         }
+
         for (Intersectable i : geometries) {
             if(i.minMaxPoints()==null){
                 return null;
@@ -183,9 +186,11 @@ public class CBR extends Geometries{
         for(int i=0;i<num-1;i++){
             if(cbr[i].minMaxPoints()!=null&&isUsing[i]==true) {
                 for(int k=i+1;k<num;k++){
-                    if(cbr[j].minMaxPoints()!=null&&isUsing[j]==true&&cbr[i].distanceBetweenBounds(cbr[j])<maxDistance){
-                        cbr[i].add((Intersectable) cbr[j].geometries);
-                        isUsing[j]=false;
+                    if(cbr[k].minMaxPoints()!=null&&isUsing[k]==true&&cbr[i].distanceBetweenBounds(cbr[k])<maxDistance){
+                        for(Intersectable temp: cbr[k].geometries){
+                            cbr[i].add(temp);
+                        }
+                        isUsing[k]=false;
                     }
                 }
 
@@ -196,7 +201,7 @@ public class CBR extends Geometries{
             if(isUsing[i])
                 ++j;
         }
-        if(j==0)//Prevents an infinite loop
+        if(j<2)//Prevents an infinite loop
             return;
         List<Intersectable> result=new LinkedList<>();
         for(int i=0;i<num;i++){
