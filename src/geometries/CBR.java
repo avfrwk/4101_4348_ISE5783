@@ -1,5 +1,6 @@
 package geometries;
 
+import primitives.Point;
 import primitives.Ray;
 
 import java.util.LinkedList;
@@ -50,6 +51,10 @@ public class CBR extends Geometries{
         return a;
     }
 
+    public List<Double> getPoints() {
+        return points;
+    }
+
     @Override
     public void add(Intersectable... geometries) {
         for (Intersectable i : geometries) {
@@ -88,7 +93,27 @@ public class CBR extends Geometries{
 
     @Override
     protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance){
-        //if()//to check if the ray in the bound
+        //check first if the ray have intersection with the bounds
+        Polygon[] polygons=new Polygon[6];
+        int i=0;
+        Double []a=new Double[6];
+        for(Double j:points){
+            a[i++]=j;
+        }
+        polygons[0]=new Polygon(new Point(a[0],a[1],a[2]),new Point(a[0],a[4],a[2]),new Point(a[0],a[4],a[5]),new Point(a[0],a[1],a[5]));
+        polygons[1]=new Polygon(new Point(a[0],a[1],a[2]),new Point(a[0],a[4],a[2]),new Point(a[3],a[4],a[2]),new Point(a[3],a[1],a[2]));
+        polygons[2]=new Polygon(new Point(a[0],a[1],a[2]),new Point(a[3],a[1],a[2]),new Point(a[3],a[1],a[5]),new Point(a[0],a[1],a[5]));
+        polygons[3]=new Polygon(new Point(a[3],a[4],a[5]),new Point(a[3],a[1],a[5]),new Point(a[3],a[1],a[2]),new Point(a[3],a[4],a[2]));
+        polygons[4]=new Polygon(new Point(a[3],a[4],a[5]),new Point(a[0],a[4],a[5]),new Point(a[0],a[4],a[2]),new Point(a[3],a[4],a[2]));
+        polygons[5]=new Polygon(new Point(a[3],a[4],a[5]),new Point(a[0],a[4],a[5]),new Point(a[0],a[1],a[5]),new Point(a[3],a[1],a[5]));
+        for(int j=0;j<6;j++){
+            if(polygons[j].findGeoIntersectionsHelper(ray,maxDistance)!=null)
+                break;
+            if(j==5)
+                return null;
+        }
+
+        //super?
         List<GeoPoint> insects = null;
         List<GeoPoint> localInsects;
         for (Intersectable geometry : this.geometries) {
@@ -102,4 +127,84 @@ public class CBR extends Geometries{
         return insects;
     }
 
+    /**return the distance between two bounds by pow
+     * @return Double
+     */
+    Double distanceBetweenBounds(CBR cbr){
+        Double[] a=new Double[6];
+        int j=0;
+        for(Double i:points){
+            a[j++]=i;
+        }
+        j=0;
+        for(Double i:points){
+            a[j]=Math.abs(a[j]-i);
+            j++;
+        }
+        double result=0;
+        for(int k=0;k<3;k++){
+            if(a[k]>a[k+3])
+                a[k]=a[k+3];
+            result+=a[k]*a[k];
+        }
+        return result;
+    }
+
+    /**return the size of the boundary by pow
+     * @return Double
+     */
+    Double size(){
+        Double[] a=new Double[6];
+        int j=0;
+        for(Double i:points){
+            a[j++]=i;
+        }
+        double result=0;
+        for(int k=0;k<3;k++){
+            result+=(a[k]-a[k+3])*(a[k]-a[k+3]);
+        }
+        return result;
+    }
+
+    /**parts the bounds automatically
+     */
+    public void partToBounds(){
+        int num=geometries.size();
+        if(num==1)//check if there is only one
+            return;
+        Double maxDistance=size()/num/num;
+        CBR[] cbr=new CBR[num];
+        boolean[] isUsing=new boolean[num];
+        int j=0;
+        for(Intersectable i:geometries){
+            isUsing[j]=true;
+            cbr[j++]=new CBR(i);
+        }
+        for(int i=0;i<num-1;i++){
+            if(cbr[i].minMaxPoints()!=null&&isUsing[i]==true) {
+                for(int k=i+1;k<num;k++){
+                    if(cbr[j].minMaxPoints()!=null&&isUsing[j]==true&&cbr[i].distanceBetweenBounds(cbr[j])<maxDistance){
+                        cbr[i].add((Intersectable) cbr[j].geometries);
+                        isUsing[j]=false;
+                    }
+                }
+
+            }
+        }
+        j=0;
+        for(int i=0;i<num;i++){
+            if(isUsing[i])
+                ++j;
+        }
+        if(j==0)//Prevents an infinite loop
+            return;
+        List<Intersectable> result=new LinkedList<>();
+        for(int i=0;i<num;i++){
+            if(isUsing[i]) {
+                cbr[i].partToBounds();
+                result.add(cbr[i]);
+            }
+        }
+        geometries=result;
+    }
 }
