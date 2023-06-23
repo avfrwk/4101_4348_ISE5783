@@ -346,7 +346,7 @@ public class ShadowTests {
                          .setKl(4E-4).setKq(2E-5));
       scene.lights.add(new PointLight(new Color(153,255,153),new Point(0,30,-40)));
 
-         camera1.setImageWriter(new ImageWriter("carImage", 600, 600)) //
+         camera1.setImageWriter(new ImageWriter("carImageAliasing", 600, 600)) //
                  .renderImage()
                  .writeToImage();
                  ;
@@ -356,7 +356,7 @@ public class ShadowTests {
    public void boundrayTest() {
       Camera       camera1     = new Camera(new Point(1500, 1500, -2000), new Vector(-1.5, -1.5, 2), new Vector(-1.5, 1.5, 0))
               .setVPSize(200, 200).setVpDistance(1500)                                                                       //
-              .setRayTracer(new RayTracerBasic(scene));
+              .setRayTracer(new RayTracerBasicSoftShadows(scene)).turnOnAntiAliasing(3);
       scene.setAmbientLight(new AmbientLight(new Color(GREEN), new Double3(0.15)));
       scene.lights.add(
               new PointLight(new Color(RED),new Point(50,50,0))
@@ -764,7 +764,7 @@ public class ShadowTests {
                       .setKl(4E-4).setKq(2E-5));
       scene.lights.add(new PointLight(new Color(153,255,153),new Point(0,30,-40)));
 
-      camera1.setImageWriter(new ImageWriter("boundrayAoto", 600, 600)) //
+      camera1.setImageWriter(new ImageWriter("boundaryAuto", 600, 600)) //
               .renderImage()
               .writeToImage();
       ;

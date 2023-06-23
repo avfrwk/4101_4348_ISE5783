@@ -46,4 +46,7 @@ public class PointLight extends Light implements LightSource{
     public double getDistance(Point point){
         return this.p0.distance(point);
     }
+    public Point getCenter() {
+        return p0;
+    }
 }

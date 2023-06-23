@@ -90,7 +90,7 @@ public class RayTracerBasic extends RayTracerBase{
             GeoPoint reflectedPoint = findClosestIntersection(reflectedRay);
             if (reflectedPoint!=null)
                 color =  color.add(calcColor(reflectedPoint, reflectedRay, level-1, kkr).scale(kr));
-       }
+        }
         Double3 kt =  gp.geometry.getMaterial().kT, kkt = kt.product(k);
         if (!kkt.lowerThan(MIN_CALC_COLOR_K)){
             Ray refractedRay = constructRefractedRay(gp.point, ray.getDir());
@@ -101,6 +101,20 @@ public class RayTracerBasic extends RayTracerBase{
         return color;
 
     }
+    /**this method calc the ktr coefficient between point and light source
+     * @param geoPoint the point
+     * @param lightSource the light source
+     * @param n the normal to the point
+     * @param nv the dot product between n and the incoming ray
+     * @return the ktr coefficient*/
+    protected Double3 calcLocalShadowEffectsKtr(GeoPoint geoPoint,LightSource lightSource,Vector l,Vector n,double nv,double nl){
+        //double nl = Util.alignZero(n.dotProduct(l));
+       // if (nl * nv > 0){
+            return transparency(geoPoint,l, n,nl,lightSource);
+       // }
+       // else return Double3.ZERO;
+    }
+
     /** calculate the local effects color of point in the scene
      * @param geoPoint the point that calculates its value
      * @param ray the ray from the camera to the point
@@ -117,7 +131,8 @@ public class RayTracerBasic extends RayTracerBase{
             l = lightSource.getL(point);
             double nl = Util.alignZero(n.dotProduct(l));
             if (nl * nv > 0){
-                Double3 ktr = transparency(geoPoint,l, n,nl,lightSource);
+                Double3 ktr=calcLocalShadowEffectsKtr(geoPoint,lightSource,l,n,nv,nl);
+                //Double3 ktr = transparency(geoPoint,l, n,nl,lightSource);
                 if (!ktr.product(k).lowerThan(MIN_CALC_COLOR_K))
                 //if(unshaded(geoPoint,l,n,nl,lightSource))
                 {
@@ -135,7 +150,7 @@ public class RayTracerBasic extends RayTracerBase{
      @param n the normal to the geopoint
      @param nl the dot product between n and l
      @return the opacity*/
-    private Double3 transparency(GeoPoint gp, Vector l, Vector n, double nl, LightSource lightSource){
+    protected Double3 transparency(GeoPoint gp, Vector l, Vector n, double nl, LightSource lightSource){
         Vector lightDirection = l.scale(-1);
         Vector epsVector = n.scale(nl < 0 ? DELTA : -DELTA);
         Point point = gp.point.add(epsVector);

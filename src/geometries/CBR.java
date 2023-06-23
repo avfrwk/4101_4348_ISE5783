@@ -208,9 +208,9 @@ public class CBR extends Geometries{
             if(isUsing[i])
                 ++j;
         }
-        System.out.println(j);
-        System.out.println(maxDistance);
-        System.out.println(num);
+       // System.out.println(j);
+       // System.out.println(maxDistance);
+       // System.out.println(num);
 
 
         if(j<2)//Prevents an infinite loop

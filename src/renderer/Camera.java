@@ -2,8 +2,9 @@ package renderer;
 
 import primitives.*;
 
+import java.util.LinkedList;
 import java.util.MissingResourceException;
-
+import java.util.stream.*;
 public class Camera {
     private Point location;
     private Vector vTo, vUp, vRight;
@@ -12,6 +13,9 @@ public class Camera {
     private ImageWriter imageWriter;
     private VideoWriter videoWriter;
     private RayTracerBase rayTracer;
+    private PixelManager pixelManager;
+    private boolean antiAliasingOn =false;
+    private int antiAliasingRaysAmountSq=-1;
     /** construct Camera from location, and forward and up directions
      * @param location the location of the Camera
      * @param vTo the forward direction of the Camera
@@ -189,7 +193,26 @@ public class Camera {
         this.videoWriter = videoWriter;
         return this;
     }
-
+    public boolean isAntiAliasingOn(){
+        return this.antiAliasingOn;
+    }
+    /**turn on the anti aliasing and set the amount of rays
+     * @param antiAliasingRaysAmountSq the square root of amount of rays
+     * @throws IllegalArgumentException when amount is not 2^k+1 number
+     * @return this camera*/
+    public Camera turnOnAntiAliasing(int antiAliasingRaysAmountSq){
+        if((Math.log(antiAliasingRaysAmountSq-1)/Math.log(2))%1!=0){
+            throw new IllegalArgumentException("the amount is not 2^k+1 number");
+        }
+        this.antiAliasingOn =true;
+        this.antiAliasingRaysAmountSq=antiAliasingRaysAmountSq;
+        return this;
+    }
+    public Camera turnOffAntiAliasing(){
+        this.antiAliasingOn =false;
+        antiAliasingRaysAmountSq=-1;
+        return this;
+    }
     /**set the rayTracerBase of the camera
      * @param rayTracer the ray tracer of the camera
      * @return the caller Camera*/
@@ -209,18 +232,109 @@ public class Camera {
         int nX=this.imageWriter.getNx();
         int nY=this.imageWriter.getNy();
 
-        for(int i=0;i<nX;++i){
-            for(int j=0;j<nY;++j){
-                Ray ray = constructRay(nX, nY, i, j);
-                Color color = castRay(ray);
-                this.imageWriter.writePixel(i,j,color);
+        pixelManager = new PixelManager(nY, nX, 0.1);
+        int threadsCount =Runtime.getRuntime().availableProcessors();
+
+        if(threadsCount==0){
+            for(int i=0;i<nX;++i){
+                for(int j=0;j<nY;++j){
+                    Color color;
+                    if(this.antiAliasingOn){
+                        RayBeam rayBeam=constructRays(nX, nY, i, j);
+                        color = castRays(rayBeam);
+                    }else{
+                        Ray ray=constructRay(nX, nY, i, j);
+                        color = castRay(ray);
+                    }
+                    this.imageWriter.writePixel(i,j,color);
+                }
             }
+        }else {
+            var threads = new LinkedList<Thread>(); // list of threads
+            while (threadsCount-- > 0) // add appropriate number of threads
+                threads.add(new Thread(() -> { // add a thread with its code
+                    PixelManager.Pixel pixel; // current pixel(row,col)
+                    // allocate pixel(row,col) in loop until there are no more pixels
+                    while ((pixel = pixelManager.nextPixel()) != null){
+                        Color color;
+                        if(this.antiAliasingOn){
+                            RayBeam rayBeam=constructRays(nX, nY, pixel.col(), pixel.row());
+                            color = castRays(rayBeam);
+                        }else{
+                            Ray ray=constructRay(nX, nY, pixel.col(), pixel.row());
+                            color = castRay(ray);
+                        }
+                        this.imageWriter.writePixel(pixel.col(),pixel.row(),color);
+                    }
+                }));
+            // start all the threads
+            for (var thread : threads) thread.start();
+            // wait until all the threads have finished
+            try { for (var thread : threads) thread.join(); } catch (InterruptedException ignore) {}
         }
         return this;
     }
 
+    /** construct {@link primitives.Point} from the camera to center of specific pixel
+     * @param nX amount of pixels on x-axis of the view plane
+     * @param nY amount of pixels on y-axis of the view plane
+     * @param j the index of the pixel on x-axis that the ray will construct into
+     * @param i the index of the pixel on y-axis that the ray will construct into
+     * @return the {@link primitives.Point} that constructed*/
+    public Point constructPixelPoint(int nX, int nY, int j, int i){
+        double Rx= this.vpWidth /nX;
+        double Ry= this.vpHeight /nY;
+        double Yi=-(i-((double)nY-1)/2)*Ry;
+        double Xj=(j-((double)nX-1)/2)*Rx;
+        Point Pij=this.pc;
+        if(!Util.isZero(Xj)) {
+            Pij=Pij.add(this.vRight.scale(Xj));
+        }if(!Util.isZero(Yi)) {
+            Pij=Pij.add(this.vUp.scale(Yi));
+        }
+        return Pij;
+    }
+    /** construct {@link primitives.Ray} from the camera to specific pixel
+     * @param nX amount of pixels on x-axis of the view plane
+     * @param nY amount of pixels on y-axis of the view plane
+     * @param j the index of the pixel on x-axis that the ray will construct into
+     * @param i the index of the pixel on y-axis that the ray will construct into
+     * @return the {@link primitives.Ray} that constructed*/
+    public Ray constructRay(int nX, int nY, int j, int i){
+        Point Pij=constructPixelPoint(nX, nY, j, i);
+        return new Ray(this.location,Pij.subtract(this.location));
+    }
+    /** construct {@link primitives.RayBeam} from the camera to specific pixel
+     * @param nX amount of pixels on x-axis of the view plane
+     * @param nY amount of pixels on y-axis of the view plane
+     * @param j the index of the pixel on x-axis that the ray will construct into
+     * @param i the index of the pixel on y-axis that the ray will construct into
+     * @return the {@link primitives.RayBeam} that constructed*/
+    public RayBeam constructRays(int nX, int nY, int j, int i){
+        Point Pij=constructPixelPoint(nX, nY, j, i);
+        Ray ray=new Ray(this.location,Pij.subtract(this.location));
+        RayBeam raybeam=new RayBeam(ray,this.antiAliasingRaysAmountSq)
+                .generateRays(Pij
+                        ,this.vpWidth/this.imageWriter.getNx()
+                        ,this.vpHeight/this.imageWriter.getNy());
+        return raybeam;
+    }
     private Color castRay(Ray ray) {
-        return this.rayTracer.traceRay(ray);
+        Color color=this.rayTracer.traceRay(ray);
+        pixelManager.pixelDone();
+        return color;
+    }
+    private Color castRays(RayBeam rayBeam){
+        Color color=Color.BLACK;
+        Ray[][] rays=rayBeam.getRays();
+        for(Ray[] i:rays){
+            for(Ray j:i){
+                color=color.add(this.rayTracer.traceRay(j));
+            }
+        }
+        color=color.reduce(this.antiAliasingRaysAmountSq*this.antiAliasingRaysAmountSq);
+        pixelManager.pixelDone();
+        return color;
     }
 
     /**draw a grid on the image
@@ -262,24 +376,5 @@ public class Camera {
         this.imageWriter.writeToFrame(this.videoWriter);
     }
 
-    /** construct {@link primitives.Ray} from the camera to specific pixel
-     * @param nX amount of pixels on x-axis of the view plane
-     * @param nY amount of pixels on y-axis of the view plane
-     * @param j the index of the pixel on x-axis that the ray will construct into
-     * @param i the index of the pixel on y-axis that the ray will construct into
-     * @return the {@link primitives.Ray} that constructed*/
-    public Ray constructRay(int nX, int nY, int j, int i){
-        double Rx= this.vpWidth /nX;
-        double Ry= this.vpHeight /nY;
-        double Yi=-(i-((double)nY-1)/2)*Ry;
-        double Xj=(j-((double)nX-1)/2)*Rx;
-        Point Pij=this.pc;
-        if(!Util.isZero(Xj)) {
-            Pij=Pij.add(this.vRight.scale(Xj));
-        }if(!Util.isZero(Yi)) {
-            Pij=Pij.add(this.vUp.scale(Yi));
-        }
-        return new Ray(this.location,Pij.subtract(this.location));
-    }
 
 }
