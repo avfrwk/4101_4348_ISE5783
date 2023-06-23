@@ -127,8 +127,8 @@ public class Polygon extends Geometry {
    }
 
    @Override
-   public List<Double> minMaxPoints(){
-      List<Double> a=new LinkedList<>();
+   public Double[] minMaxPoints(){
+      //List<Double> a=new LinkedList<>();
       Double []b=new Double[6];
       for(Point i:vertices){
          if(b[0]==null)
@@ -166,10 +166,10 @@ public class Polygon extends Geometry {
          if(i.getZ()<b[5])
             b[5]=i.getZ();
       }
-      for(int i=0;i<6;i++){
+      /*for(int i=0;i<6;i++){
          a.add(b[i]);
-      }
-      return a;
+      }*/
+      return b;
    }
 
 }

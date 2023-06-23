@@ -142,36 +142,41 @@ public class Cylinder extends Tube{
     }
 
     @Override
-    public List<Double> minMaxPoints(){
-        List<Double> a=new LinkedList<>();
-        double x1=ray.getP0().getX()+ray.getDir().getX();
-        double x2=ray.getP0().getX()-ray.getDir().getX();
-        double y1=ray.getP0().getY()+ray.getDir().getY();
-        double y2=ray.getP0().getY()-ray.getDir().getY();
-        double z1=ray.getP0().getZ()+ray.getDir().getZ();
-        double z2=ray.getP0().getZ()-ray.getDir().getZ();
+    public Double[] minMaxPoints(){
+        //List<Double> a=new LinkedList<>();
+        //Vector vector=ray.getDir().crossProduct(new Vector(ray.getDir().getX(),ray.getDir().getY(),ray.getDir().getZ()+5)).normalize();
+        double x1=ray.getP0().getX()+ray.getDir().getX()*height;
+        double x2=ray.getP0().getX();
+        double y1=ray.getP0().getY()+ray.getDir().getY()*height;
+        double y2=ray.getP0().getY();
+        double z1=ray.getP0().getZ()+ray.getDir().getZ()*height;
+        double z2=ray.getP0().getZ();
         double temp;
-        if(ray.getDir().getX()<0){
+        if(x1<x2){
             temp=x1;
             x1=x2;
             x2=x1;
         }
-        if(ray.getDir().getY()<0){
+        if(y1<y2){
             temp=y1;
             y1=y2;
             y2=y1;
         }
-        if(ray.getDir().getX()<0){
+        if(z1<z2){
             temp=z1;
             z1=z2;
             z2=z1;
         }
-        a.add(x1);//the max of x
+        /*a.add(x1);//the max of x
         a.add(y1);//the max of y
         a.add(z1);//the max of z
         a.add(x2);//the min of x
         a.add(y2);//the min of y
         a.add(z2);//the min of z
+        return a;
+         */
+        Double[] a=new Double[6];
+        a[0]=x1+radius;a[1]=y1+radius;a[2]=z1+radius;a[3]=x2-radius;a[4]=y2-radius;a[5]=z2-radius;
         return a;
     }
 }

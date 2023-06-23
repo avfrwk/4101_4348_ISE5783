@@ -87,14 +87,21 @@ public class Sphere extends RadialGeometry{
     }
 
     @Override
-    public List<Double> minMaxPoints(){
-        List<Double> a=new LinkedList<>();
+    public Double[] minMaxPoints(){
+        /*List<Double> a=new LinkedList<>();
         a.add(center.getX()+radius);//the max of x
         a.add(center.getY()+radius);//the max of y
         a.add(center.getZ()+radius);//the max of z
         a.add(center.getX()-radius);//the min of x
         a.add(center.getY()-radius);//the min of y
-        a.add(center.getZ()-radius);//the min of z
+        a.add(center.getZ()-radius);//the min of z*/
+        Double[] a=new Double[6];
+        a[0]=(center.getX()+radius);//the max of x
+        a[1]=(center.getY()+radius);//the max of y
+        a[2]=(center.getZ()+radius);//the max of z
+        a[3]=(center.getX()-radius);//the min of x
+        a[4]=(center.getY()-radius);//the min of y
+        a[5]=(center.getZ()-radius);//the min of z*
         return a;
     }
 }
