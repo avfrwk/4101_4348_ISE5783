@@ -1,5 +1,6 @@
 import geometries.*;
 import lighting.AmbientLight;
+import lighting.DirectionalLight;
 import lighting.PointLight;
 import lighting.SpotLight;
 import org.junit.jupiter.api.Test;
@@ -43,11 +44,11 @@ public class carScene {
         roadSidesColor=new Color(185,185,185).scale(darkScale),
         roadColor=new Color(32,32,32).scale(darkScale);
     Material asphalt=new Material().setKs(0.5).setKd(1).setShininess(5),
-            metal=new Material().setKs(0.1).setShininess(60),
-            rubber= new Material().setKs(0.3).setShininess(70),
-            GLASS1=new Material().setKs(0.9).setShininess(30),
+            metal=new Material().setKs(0.1).setShininess(60).setKd(0.8),
+            rubber= new Material().setKs(0.3).setShininess(70).setKd(0.01),
+            GLASS1=new Material().setKs(0.9).setShininess(30).setKd(0),
             GLASS=new Material().setKs(0.9).setKd(0).setKt(0.9).setKr(0.1).setShininess(100),
-    plastic=new Material().setKs(0.5).setShininess(40);
+    plastic=new Material().setKs(0.5).setShininess(40).setKd(0.7);
     @Test
     public void buildCar() {
         double fixDownFront=-17;
@@ -259,13 +260,15 @@ public class carScene {
 
         cbr.partToBounds();
         scene.geometries.add(cbr);
-       // scene.setAmbientLight(new AmbientLight(new Color(GREEN), new Double3(0.15)));
+        scene.setAmbientLight(new AmbientLight(new Color(GREEN), new Double3(0.01)));
 
-       // scene.lights.add( //
-       //         new SpotLight(new Color(700, 400, 400), new Point(50, 20, 30), new Vector(-5, -2, -3)) //
-       //                 .setKl(4E-4).setKq(2E-5));
-        //scene.lights.add(new PointLight(new Color(153,255,153),new Point(0,30,-40)));
-       // scene.setBackground(new Color(255,204,255));
+       scene.lights.add(  new SpotLight(new Color(10, 50, 80), new Point(200, 100, 30), new Vector(-20, -10, -3))
+               .setKl(4E-4).setKq(2E-5));
+        scene.lights.add(new PointLight(new Color(153,255,153),new Point(0,200,40)).setKq(0.0001));
+        scene.lights.add(new DirectionalLight(new Color(107,51,83),new Vector(-1,-1,-1).scale(0.2)));
+        scene.lights.add(new PointLight(new Color(200,50,50),new Point(-100,50,40)).setKq(0.0001));
+
+        //scene.setBackground(new Color(255,204,255));
 
         Point CarCenterPoint=new Point(26,30,30);
         Camera camera1=new Camera(CarCenterPoint.add(new Vector(3000,0,0))

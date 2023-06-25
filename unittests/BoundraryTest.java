@@ -238,7 +238,8 @@ public class BoundraryTest {
         scene.lights.add( //
                 new SpotLight(new Color(700, 400, 400), new Point(100, 50, 60), new Vector(-5, -2, -3)) //
                         .setKl(4E-4).setKq(2E-5));
-        scene.lights.add(new PointLight(new Color(153,255,153),new Point(0,100,40)));
+        //scene.lights.add(new PointLight(new Color(153,255,153),new Point(0,100,40)));
+        scene.lights.add(new PointLight(new Color(GREEN),new Point(0,100,40)));
         //scene.lights.add(new DirectionalLight(new Color(0,200,0),new Vector(-1,-1,-1)));
 
         camera1.setImageWriter(new ImageWriter("boundray", 600, 600)) //

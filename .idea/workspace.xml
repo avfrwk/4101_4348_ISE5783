@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="its working&#10;we just have to decide about what I sent you on WhatsApp">
+    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="is it look better?">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/CBR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/CBR.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unittests/BoundraryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/BoundraryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unittests/renderer/ShadowTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/renderer/ShadowTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unittests/carScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/carScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +102,7 @@
       <recent name="primitives" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.BoundraryTest.boundrayTest">
+  <component name="RunManager" selected="JUnit.carScene.buildCar">
     <configuration name="BoundraryTest.boundrayAoutomatyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="targil_1" />
       <option name="PACKAGE_NAME" value="" />
@@ -140,22 +139,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShadowTests.boundrayTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="targil_1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="renderer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.ShadowTests" />
-      <option name="METHOD_NAME" value="boundrayTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ShadowTests.buildCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="targil_1" />
       <extension name="coverage">
@@ -172,13 +155,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="carScene.buildCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="targil_1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="carScene" />
+      <option name="METHOD_NAME" value="buildCar" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.carScene.buildCar" />
         <item itemvalue="JUnit.BoundraryTest.boundrayTest" />
+        <item itemvalue="JUnit.ShadowTests.buildCar" />
         <item itemvalue="JUnit.BoundraryTest.boundrayAoutomatyTest" />
         <item itemvalue="JUnit.ShadowTests.boundrayAoutomatyTest" />
-        <item itemvalue="JUnit.ShadowTests.buildCar" />
-        <item itemvalue="JUnit.ShadowTests.boundrayTest" />
       </list>
     </recent_temporary>
   </component>
@@ -338,7 +331,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1687427421173</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL‎-00022" summary="is it look better?">
+      <created>1687679647243</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL‎-00022" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687679647243</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -377,7 +377,8 @@
     <MESSAGE value="the bound exept findGeo" />
     <MESSAGE value="the boundray" />
     <MESSAGE value="its working&#10;we just have to decide about what I sent you on WhatsApp" />
-    <option name="LAST_COMMIT_MESSAGE" value="its working&#10;we just have to decide about what I sent you on WhatsApp" />
+    <MESSAGE value="is it look better?" />
+    <option name="LAST_COMMIT_MESSAGE" value="is it look better?" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
