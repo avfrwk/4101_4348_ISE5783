@@ -179,6 +179,23 @@ public class Camera {
         }
         return this;
     }
+    /**set the the camera to a new location, the given point-vector*distance, and the vto will be v
+     * @param point the guide point
+     * @param v the guide vector
+     * @param distance the distance to multiply v
+     * @return the caller Camera*/
+    public Camera setLocation(Point point,Vector v,double distance){
+        this.location=point.add(v.scale(-distance));
+        this.vTo=v.normalize();
+        try{
+            this.vRight=vTo.crossProduct(Vector.vectorZ).normalize();
+        }catch (Exception e){
+            this.vRight=vTo.crossProduct(Vector.vectorX).normalize();
+        }
+        this.vUp= vRight.crossProduct(vTo).normalize();
+        this.pc =this.location.add(this.vTo.scale(this.vpDistance));
+        return this;
+    }
     /**set the imageWriter of the camera
      * @param imageWriter the imageWriter of the camera
      * @return the caller Camera*/
@@ -372,8 +389,9 @@ public class Camera {
         this.imageWriter.writeToImage();
     }
     /**write to frame of videoWriter*/
-    public void writeToFrame(){
+    public Camera writeToFrame(){
         this.imageWriter.writeToFrame(this.videoWriter);
+        return this;
     }
 
 

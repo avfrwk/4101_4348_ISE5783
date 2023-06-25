@@ -107,7 +107,7 @@ public abstract class Util {
 					vectorToRotateRet=vectorToRotateRet.add(v.crossProduct(vectorToRotate).scale(sin));
 				}catch(Exception e){}
 			}
-			if(Util.alignZero(cos-1)!=0&&alignZero(vvr)!=0){
+			if(Util.alignZero(vvr*(1-cos))!=0){
 				vectorToRotateRet=vectorToRotateRet.add(v.scale(vvr*(1-cos)));
 			}
 		}

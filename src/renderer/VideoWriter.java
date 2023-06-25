@@ -83,7 +83,7 @@ public class VideoWriter {
         }
         return this;
     }
-    /**write the frames to the video*/
+    /**load the frames from images*/
     public VideoWriter loadFromeImages(String inputFolderPath,String fileNames){
 
         try{

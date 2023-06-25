@@ -114,13 +114,15 @@ public class Polygon extends Geometry {
             }catch(Exception e){
                return null;
             }
-
-
          }
-         v0=this.vertices.get(size-1).subtract(p0);
-         v1=this.vertices.get(0).subtract(p0);
-         if((v0.crossProduct(v1).dotProduct(n)>0)==tt){
-            return List.of(new GeoPoint(this,p0));
+         try{
+            v0=this.vertices.get(size-1).subtract(p0);
+            v1=this.vertices.get(0).subtract(p0);
+            if((v0.crossProduct(v1).dotProduct(n)>0)==tt){
+               return List.of(new GeoPoint(this,p0));
+            }
+         }catch(Exception e){
+            return null;
          }
       }
       return null;

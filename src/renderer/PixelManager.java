@@ -51,7 +51,8 @@ class PixelManager {
       this.maxCols  = maxCols;
       totalPixels   = (long) maxRows * maxCols;
       printInterval = (int) (interval * 10);
-      if (print = printInterval != 0) System.out.printf(PRINT_FORMAT, 0d);
+      if (print = (printInterval != 0))
+         System.out.printf(PRINT_FORMAT, 0d);
    }
 
    /** Function for thread-safe manipulating of main follow up Pixel object - this
@@ -88,7 +89,8 @@ class PixelManager {
                flag        = true;
             }
          }
-         if (flag) System.out.printf(PRINT_FORMAT, percentage / 10d);
+         if (flag)
+            System.out.printf(PRINT_FORMAT, percentage / 10d);
       }
    }
 }

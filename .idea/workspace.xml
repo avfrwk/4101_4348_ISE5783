@@ -4,16 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="little fixing in the car(now working yet)">
-      <change afterPath="$PROJECT_DIR$/src/primitives/RayBeam.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/PixelManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasicSoftShadows.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unittests/carScene.java" afterDir="false" />
+    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="anti aliasing&#10;soft shadows&#10;threads">
+      <change afterPath="$PROJECT_DIR$/unittests/BoundraryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/CBR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/CBR.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/PointLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/PointLight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Polygon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Polygon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Util.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/PixelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/PixelManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/VideoWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/VideoWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unittests/carScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/carScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unittests/renderer/ShadowTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/renderer/ShadowTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,16 +109,33 @@
       <recent name="primitives" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ShadowTests.boundrayTest">
-    <configuration name="RayBeam" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="primitives.RayBeam" />
+  <component name="RunManager">
+    <configuration name="BoundraryTest.boundrayAoutomatyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="targil_1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="primitives.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BoundraryTest" />
+      <option name="METHOD_NAME" value="boundrayAoutomatyTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BoundraryTest.boundrayTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="targil_1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BoundraryTest" />
+      <option name="METHOD_NAME" value="boundrayTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BoundraryTest.buildCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="targil_1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BoundraryTest" />
+      <option name="METHOD_NAME" value="buildCar" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -156,45 +172,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShadowTests.buildCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="targil_1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="primitives.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.ShadowTests" />
-      <option name="METHOD_NAME" value="buildCar" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ShadowTests.trianglesSphere" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="targil_1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="primitives.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.ShadowTests" />
-      <option name="METHOD_NAME" value="trianglesSphere" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ShadowTests.boundrayTest" />
-        <item itemvalue="JUnit.ShadowTests.buildCar" />
+        <item itemvalue="JUnit.BoundraryTest.boundrayAoutomatyTest" />
+        <item itemvalue="JUnit.BoundraryTest.boundrayTest" />
+        <item itemvalue="JUnit.BoundraryTest.buildCar" />
         <item itemvalue="JUnit.ShadowTests.boundrayAoutomatyTest" />
-        <item itemvalue="JUnit.ShadowTests.trianglesSphere" />
-        <item itemvalue="Application.RayBeam" />
+        <item itemvalue="JUnit.ShadowTests.boundrayTest" />
       </list>
     </recent_temporary>
   </component>
@@ -326,7 +310,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1686469097384</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL‎-00018" summary="anti aliasing&#10;soft shadows&#10;threads">
+      <created>1687536484022</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL‎-00018" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687536484022</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -361,7 +352,8 @@
     <MESSAGE value="end of targil 7(except some tests)&#10;camera movements &#10;video records" />
     <MESSAGE value="fixing Tube(and by that, cylinder too)" />
     <MESSAGE value="little fixing in the car(now working yet)" />
-    <option name="LAST_COMMIT_MESSAGE" value="little fixing in the car(now working yet)" />
+    <MESSAGE value="anti aliasing&#10;soft shadows&#10;threads" />
+    <option name="LAST_COMMIT_MESSAGE" value="anti aliasing&#10;soft shadows&#10;threads" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
