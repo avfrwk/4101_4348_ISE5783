@@ -178,10 +178,10 @@ public class CBR extends Geometries{
 
     /**parts the bounds automatically
      */
-    public void partToBounds(){
+    public CBR partToBounds(){
         int num=geometries.size();
         if(num==1)//check if there is only one
-            return;
+            return this;
         Double maxDistance=size()/num;
         CBR[] cbr=new CBR[num];
         boolean[] isUsing=new boolean[num];
@@ -208,13 +208,10 @@ public class CBR extends Geometries{
             if(isUsing[i])
                 ++j;
         }
-       // System.out.println(j);
-       // System.out.println(maxDistance);
-       // System.out.println(num);
 
 
         if(j<2)//Prevents an infinite loop
-            return;
+            return this;
         List<Intersectable> result=new LinkedList<>();
         for(int i=0;i<num;i++){
             if(isUsing[i]) {
@@ -223,5 +220,6 @@ public class CBR extends Geometries{
             }
         }
         geometries=result;
+        return this;
     }
 }

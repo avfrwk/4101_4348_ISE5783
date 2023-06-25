@@ -167,14 +167,6 @@ public class Cylinder extends Tube{
             z1=z2;
             z2=z1;
         }
-        /*a.add(x1);//the max of x
-        a.add(y1);//the max of y
-        a.add(z1);//the max of z
-        a.add(x2);//the min of x
-        a.add(y2);//the min of y
-        a.add(z2);//the min of z
-        return a;
-         */
         Double[] a=new Double[6];
         a[0]=x1+radius;a[1]=y1+radius;a[2]=z1+radius;a[3]=x2-radius;a[4]=y2-radius;a[5]=z2-radius;
         return a;

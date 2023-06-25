@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="anti aliasing&#10;soft shadows&#10;threads">
-      <change afterPath="$PROJECT_DIR$/unittests/BoundraryTest.java" afterDir="false" />
+    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="its working&#10;we just have to decide about what I sent you on WhatsApp">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Polygon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Polygon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/PixelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/PixelManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/VideoWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/VideoWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unittests/carScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/carScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/CBR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/CBR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unittests/BoundraryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/BoundraryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unittests/renderer/ShadowTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/renderer/ShadowTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +94,6 @@
       <recent name="C:\Users\user\Documents\קורסים\יב\סמס ב\מלת פרוייקט\targil_1" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="primitives" />
       <recent name="renderer" />
       <recent name="" />
       <recent name="lighting" />
@@ -109,7 +103,7 @@
       <recent name="primitives" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.BoundraryTest.boundrayTest">
     <configuration name="BoundraryTest.boundrayAoutomatyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="targil_1" />
       <option name="PACKAGE_NAME" value="" />
@@ -125,16 +119,6 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="BoundraryTest" />
       <option name="METHOD_NAME" value="boundrayTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BoundraryTest.buildCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="targil_1" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BoundraryTest" />
-      <option name="METHOD_NAME" value="buildCar" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -172,12 +156,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ShadowTests.buildCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="targil_1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="renderer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.ShadowTests" />
+      <option name="METHOD_NAME" value="buildCar" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BoundraryTest.boundrayAoutomatyTest" />
         <item itemvalue="JUnit.BoundraryTest.boundrayTest" />
-        <item itemvalue="JUnit.BoundraryTest.buildCar" />
+        <item itemvalue="JUnit.BoundraryTest.boundrayAoutomatyTest" />
         <item itemvalue="JUnit.ShadowTests.boundrayAoutomatyTest" />
+        <item itemvalue="JUnit.ShadowTests.buildCar" />
         <item itemvalue="JUnit.ShadowTests.boundrayTest" />
       </list>
     </recent_temporary>
@@ -303,21 +303,42 @@
       <option name="project" value="LOCAL‎" />
       <updated>1685908118698</updated>
     </task>
-    <task id="LOCAL‎-00017" summary="little fixing in the car(now working yet)">
-      <created>1686469097384</created>
+    <task id="LOCAL‎-00017" summary="trying for car">
+      <created>1686495874646</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL‎-00017" />
       <option name="project" value="LOCAL‎" />
-      <updated>1686469097384</updated>
+      <updated>1686495874646</updated>
     </task>
-    <task id="LOCAL‎-00018" summary="anti aliasing&#10;soft shadows&#10;threads">
-      <created>1687536484022</created>
+    <task id="LOCAL‎-00018" summary="car, we can change the colors">
+      <created>1687343113873</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL‎-00018" />
       <option name="project" value="LOCAL‎" />
-      <updated>1687536484022</updated>
+      <updated>1687343113873</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL‎-00019" summary="the bound exept findGeo">
+      <created>1687382120615</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL‎-00019" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687382120615</updated>
+    </task>
+    <task id="LOCAL‎-00020" summary="the boundray">
+      <created>1687426257119</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL‎-00020" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687426257119</updated>
+    </task>
+    <task id="LOCAL‎-00021" summary="its working&#10;we just have to decide about what I sent you on WhatsApp">
+      <created>1687427421173</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL‎-00021" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687427421173</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -351,9 +372,12 @@
     <MESSAGE value="start of targil 7" />
     <MESSAGE value="end of targil 7(except some tests)&#10;camera movements &#10;video records" />
     <MESSAGE value="fixing Tube(and by that, cylinder too)" />
-    <MESSAGE value="little fixing in the car(now working yet)" />
-    <MESSAGE value="anti aliasing&#10;soft shadows&#10;threads" />
-    <option name="LAST_COMMIT_MESSAGE" value="anti aliasing&#10;soft shadows&#10;threads" />
+    <MESSAGE value="trying for car" />
+    <MESSAGE value="car, we can change the colors" />
+    <MESSAGE value="the bound exept findGeo" />
+    <MESSAGE value="the boundray" />
+    <MESSAGE value="its working&#10;we just have to decide about what I sent you on WhatsApp" />
+    <option name="LAST_COMMIT_MESSAGE" value="its working&#10;we just have to decide about what I sent you on WhatsApp" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,5 +1,6 @@
 import geometries.*;
 import lighting.AmbientLight;
+import lighting.DirectionalLight;
 import lighting.PointLight;
 import lighting.SpotLight;
 import org.junit.jupiter.api.Test;
@@ -37,10 +38,7 @@ public class BoundraryTest {
         Camera       camera1     = new Camera(new Point(1500, 1500, -2000), new Vector(-1.5, -1.5, 2), new Vector(-1.5, 1.5, 0))
                 .setVPSize(200, 200).setVpDistance(1500)                                                                       //
                 .setRayTracer(new RayTracerBasic(scene)).rotateCameraAroundPointVup(Point.ZERO,-40);
-        scene.setAmbientLight(new AmbientLight(new Color(GREEN), new Double3(0.15)));
-        scene.lights.add(
-                new PointLight(new Color(RED),new Point(50,50,0))
-        );
+
 // Car Body (Polygon)
         Polygon[]carBody = box(
                 new Point(160, 22, 25),
@@ -54,10 +52,10 @@ public class BoundraryTest {
         CBR cbr=new CBR();
         CBR cbr1=new CBR(),cbr2=new CBR(),cbr3=new CBR(),cbr4=new CBR(),cbr5=new CBR(),cbr6=new CBR(),cbr7=new CBR();
         Color PURPIL=new Color(127,0,255);
-        Material metal=new Material().setKs(0.1).setShininess(60),
-                rubber= new Material().setKs(0.3).setShininess(70),
-                glass=new Material().setKs(0.9).setShininess(30),
-                plastic=new Material().setKs(0.5).setShininess(40);
+        Material metal=new Material().setKs(0.2).setShininess(60).setKd(0.8),
+                rubber= new Material().setKs(0.4).setShininess(70).setKd(0.01),
+                glass=new Material().setKs(0.9).setShininess(30).setKd(0.5),
+                plastic=new Material().setKs(0.5).setShininess(40).setKd(0.7);
         for(int i=0;i<6;i++){
             cbr1.add(carBody[i].setMaterial(metal).setEmission(PURPIL));
         }
@@ -229,15 +227,19 @@ public class BoundraryTest {
         }
 
         Plane plane=new Plane(new Point(0,0,0),new Point(5,0,2),new Point(1,0,2));
-        scene.geometries.add(plane.setMaterial(new Material().setKs(1).setShininess(20)).setEmission(new Color(153,255,255)));
+        scene.geometries.add(plane.setMaterial(new Material().setKs(0.99).setShininess(20).setKd(0.002)).setEmission(new Color(107,103,133)));
         cbr.add(cbr1,cbr2,cbr3,cbr4,cbr5,cbr6,cbr7);
         scene.geometries.add(cbr);
 
-
+        scene.setAmbientLight(new AmbientLight(new Color(GREEN), new Double3(0.15)));
+        scene.lights.add(
+                new PointLight(new Color(RED),new Point(50,50,-50))
+        );
         scene.lights.add( //
-                new SpotLight(new Color(700, 400, 400), new Point(50, 20, 30), new Vector(-5, -2, -3)) //
+                new SpotLight(new Color(700, 400, 400), new Point(100, 50, 60), new Vector(-5, -2, -3)) //
                         .setKl(4E-4).setKq(2E-5));
-        scene.lights.add(new PointLight(new Color(153,255,153),new Point(0,30,-40)));
+        scene.lights.add(new PointLight(new Color(153,255,153),new Point(0,100,40)));
+        //scene.lights.add(new DirectionalLight(new Color(0,200,0),new Vector(-1,-1,-1)));
 
         camera1.setImageWriter(new ImageWriter("boundray", 600, 600)) //
                 .renderImage()
