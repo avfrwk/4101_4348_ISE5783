@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="is it look better?">
+    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="fixing order&#10;redesigning car">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unittests/BoundraryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/BoundraryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unittests/carScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/carScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unittests/renderer/ShadowTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/renderer/ShadowTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +93,7 @@
       <recent name="C:\Users\user\Documents\קורסים\יב\סמס ב\מלת פרוייקט\targil_1" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="primitives" />
       <recent name="renderer" />
       <recent name="" />
       <recent name="lighting" />
@@ -102,7 +103,15 @@
       <recent name="primitives" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.carScene.buildCar">
+  <component name="RunManager">
+    <configuration name="All in targil_1" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="targil_1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BoundraryTest.boundrayAoutomatyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="targil_1" />
       <option name="PACKAGE_NAME" value="" />
@@ -118,6 +127,16 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="BoundraryTest" />
       <option name="METHOD_NAME" value="boundrayTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BoundraryTest.buildCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="targil_1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BoundraryTest" />
+      <option name="METHOD_NAME" value="buildCar" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -139,38 +158,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShadowTests.buildCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="targil_1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="renderer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.ShadowTests" />
-      <option name="METHOD_NAME" value="buildCar" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="carScene.buildCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="targil_1" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="carScene" />
-      <option name="METHOD_NAME" value="buildCar" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.carScene.buildCar" />
-        <item itemvalue="JUnit.BoundraryTest.boundrayTest" />
-        <item itemvalue="JUnit.ShadowTests.buildCar" />
         <item itemvalue="JUnit.BoundraryTest.boundrayAoutomatyTest" />
+        <item itemvalue="JUnit.BoundraryTest.boundrayTest" />
+        <item itemvalue="JUnit.BoundraryTest.buildCar" />
         <item itemvalue="JUnit.ShadowTests.boundrayAoutomatyTest" />
       </list>
     </recent_temporary>
@@ -296,49 +288,28 @@
       <option name="project" value="LOCAL‎" />
       <updated>1685908118698</updated>
     </task>
-    <task id="LOCAL‎-00017" summary="trying for car">
-      <created>1686495874646</created>
+    <task id="LOCAL‎-00017" summary="little fixing in the car(now working yet)">
+      <created>1686469097384</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL‎-00017" />
       <option name="project" value="LOCAL‎" />
-      <updated>1686495874646</updated>
+      <updated>1686469097384</updated>
     </task>
-    <task id="LOCAL‎-00018" summary="car, we can change the colors">
-      <created>1687343113873</created>
+    <task id="LOCAL‎-00018" summary="anti aliasing&#10;soft shadows&#10;threads">
+      <created>1687536484022</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL‎-00018" />
       <option name="project" value="LOCAL‎" />
-      <updated>1687343113873</updated>
+      <updated>1687536484022</updated>
     </task>
-    <task id="LOCAL‎-00019" summary="the bound exept findGeo">
-      <created>1687382120615</created>
+    <task id="LOCAL‎-00019" summary="fixing order&#10;redesigning car">
+      <created>1687673823753</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL‎-00019" />
       <option name="project" value="LOCAL‎" />
-      <updated>1687382120615</updated>
+      <updated>1687673823753</updated>
     </task>
-    <task id="LOCAL‎-00020" summary="the boundray">
-      <created>1687426257119</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL‎-00020" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1687426257119</updated>
-    </task>
-    <task id="LOCAL‎-00021" summary="its working&#10;we just have to decide about what I sent you on WhatsApp">
-      <created>1687427421173</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL‎-00021" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1687427421173</updated>
-    </task>
-    <task id="LOCAL‎-00022" summary="is it look better?">
-      <created>1687679647243</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL‎-00022" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1687679647243</updated>
-    </task>
-    <option name="localTasksCounter" value="23" />
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -372,13 +343,10 @@
     <MESSAGE value="start of targil 7" />
     <MESSAGE value="end of targil 7(except some tests)&#10;camera movements &#10;video records" />
     <MESSAGE value="fixing Tube(and by that, cylinder too)" />
-    <MESSAGE value="trying for car" />
-    <MESSAGE value="car, we can change the colors" />
-    <MESSAGE value="the bound exept findGeo" />
-    <MESSAGE value="the boundray" />
-    <MESSAGE value="its working&#10;we just have to decide about what I sent you on WhatsApp" />
-    <MESSAGE value="is it look better?" />
-    <option name="LAST_COMMIT_MESSAGE" value="is it look better?" />
+    <MESSAGE value="little fixing in the car(now working yet)" />
+    <MESSAGE value="anti aliasing&#10;soft shadows&#10;threads" />
+    <MESSAGE value="fixing order&#10;redesigning car" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing order&#10;redesigning car" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
