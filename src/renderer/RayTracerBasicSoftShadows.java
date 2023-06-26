@@ -31,10 +31,9 @@ public class RayTracerBasicSoftShadows extends RayTracerBasic{
     @Override
     protected Double3 calcLocalShadowEffectsKtr(Intersectable.GeoPoint geoPoint, LightSource lightSource,Vector l, Vector n, double nv,double nl){
         if(lightSource instanceof PointLight){
-            RayBeam rayBeam =new RayBeam(new Ray(geoPoint.point,l.scale(-1)),shadowRayesAmountSq)
-                    .generateRays(
-                            ((PointLight)lightSource).getCenter(),
-                            2,2);
+            RayBeam rayBeam =new RayBeam(new Ray(geoPoint.point,l.scale(-1)),shadowRayesAmountSq
+                    ,((PointLight)lightSource).getCenter(),
+                    2,2);
             Ray[][] rays=rayBeam.getRays();
             Double3 ktr=Double3.ZERO;
             for (Ray[] i:rays){

@@ -4,7 +4,6 @@ import primitives.*;
 
 import java.util.LinkedList;
 import java.util.MissingResourceException;
-import java.util.stream.*;
 public class Camera {
     private Point location;
     private Vector vTo, vUp, vRight;
@@ -330,11 +329,9 @@ public class Camera {
     public RayBeam constructRays(int nX, int nY, int j, int i){
         Point Pij=constructPixelPoint(nX, nY, j, i);
         Ray ray=new Ray(this.location,Pij.subtract(this.location));
-        RayBeam raybeam=new RayBeam(ray,this.antiAliasingRaysAmountSq)
-                .generateRays(Pij
-                        ,this.vpWidth/this.imageWriter.getNx()
-                        ,this.vpHeight/this.imageWriter.getNy());
-        return raybeam;
+        return new RayBeam(ray,this.antiAliasingRaysAmountSq,Pij
+                ,this.vpWidth/this.imageWriter.getNx()
+                ,this.vpHeight/this.imageWriter.getNy());
     }
     private Color castRay(Ray ray) {
         Color color=this.rayTracer.traceRay(ray);

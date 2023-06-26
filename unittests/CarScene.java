@@ -11,7 +11,7 @@ import scene.Scene;
 import static java.awt.Color.*;
 import static java.awt.Color.GREEN;
 
-public class carScene {
+public class CarScene {
     public Polygon[] box(Point p1, Point p2, Point p3, Point p4, Point p5, Point p6, Point p7, Point p8){
         Polygon[] polygons=new Polygon[6];
         Polygon r1 = new Polygon(p1,p2,p3,p4);
@@ -43,7 +43,7 @@ public class carScene {
      trafficLightsColor=new Color(2, 2, 2).scale(darkScale);
 
     Material trafficLightsBodyMaterial=new Material().setKr(0.0).setShininess(0),
-    trafficLightsMaterial=new Material().setKs(0.9).setKd(0).setKt(1).setKr(0.1).setShininess(100),
+    trafficLightsMaterial=new Material().setKs(0.9).setKd(0).setKt(0.4).setKr(0.1).setShininess(100),
     asphalt=new Material().setKs(0.5).setKd(1).setShininess(5),
             metal=new Material().setKs(0.1).setShininess(60).setKd(0.8),
             rubber= new Material().setKs(0.3).setShininess(70).setKd(0.01),
@@ -261,6 +261,7 @@ public class carScene {
         double trafficLightsBoxHight=50;
         double trafficLightsBoxwidth=15;
         double ligtherCylinderHeight=120;
+        CBR LighterCbr=new CBR();
         Polygon[] lightBox=box(
                 ligherStart.add(new Vector(trafficLightsBoxwidth,ligtherCylinderHeight+trafficLightsBoxHight,-trafficLightsBoxwidth)),
                 ligherStart.add(new Vector(-trafficLightsBoxwidth,ligtherCylinderHeight+trafficLightsBoxHight,-trafficLightsBoxwidth)),
@@ -272,8 +273,8 @@ public class carScene {
                 ligherStart.add(new Vector(trafficLightsBoxwidth,ligtherCylinderHeight,trafficLightsBoxwidth))
         );
         for (Polygon i:lightBox){i.setEmission(trafficLightsColor).setMaterial(trafficLightsBodyMaterial);}
-        cbr.add(lightBox);
-        cbr.add(
+        LighterCbr.add(lightBox);
+        LighterCbr.add(
                 new Sphere(20,ligherStart).setEmission(trafficLightsColor),
                 new Cylinder(10,new Ray(ligherStart,new Vector(0,1,0)),ligtherCylinderHeight).setMaterial(trafficLightsBodyMaterial)
                         .setEmission(trafficLightsColor).setMaterial(trafficLightsBodyMaterial),
@@ -290,12 +291,14 @@ public class carScene {
                         .setEmission(new Color(255,0,0)
                         .scale(darkScale).scale(0.5))
         );
-        // scene.lights.add(new SpotLight(// trying to light the green of the truffic light
+        // scene.lights.add(new SpotLight(
        //         new Color(256,256,256).scale(0.1),
        //         ligherStart.add(new Vector(0,ligtherCylinderHeight+16/3+5,0))
        //         new Vector(-1,0,0)
        // ));
+        LighterCbr.partToBounds();
         cbr.partToBounds();
+        cbr.add(LighterCbr);
         scene.geometries.add(cbr);
         scene.setAmbientLight(new AmbientLight(new Color(GREEN), new Double3(0.01)));
 
@@ -315,35 +318,34 @@ public class carScene {
                 .rotateCameraAroundPointVup(CarCenterPoint,135)
                 .rotateCameraAroundPointVright(CarCenterPoint,-35)
         .setRayTracer(new RayTracerBasic(scene))
-                .setRayTracer(new RayTracerBasicSoftShadows(scene))
-                .turnOnAntiAliasing(3)
-         .setImageWriter(new ImageWriter("carImage", 1800, 1800))
-                //.setVideoWriter(new VideoWriter("carUpSide").setFps(12))
+                //.setRayTracer(new RayTracerBasicSoftShadows(scene))
+                //.turnOnAntiAliasing(3)
+         .setImageWriter(new ImageWriter("carImage", 600, 600))
+               // .setVideoWriter(new VideoWriter("finalVideo").setFps(36))
                 .renderImage().writeToImage()
         ;
 
-       // for(int i=0;i<29;++i){
+        //for(int i=0;i<29;++i){
        //          camera1.rotateCamera(-(13)*Math.sin(35*2*Math.PI/360))
-        //                .rotateCameraAroundPointVup(CarCenterPoint,10).renderImage().writeToFrame()
-       //         ;
+       //                 .rotateCameraAroundPointVup(CarCenterPoint,10).renderImage().writeToFrame()
+        //        ;
        // }camera1.writeToVideo();
-       // for(int i=0;i<29*3+5;++i){
+      //  for(int i=0;i<29*3;++i){
        //     camera1.rotateCamera(-(13/3)*Math.sin(35*2*Math.PI/360))
-        //            .rotateCameraAroundPointVup(CarCenterPoint,10/3)
-        //    ;
+       //             .rotateCameraAroundPointVup(CarCenterPoint,10/3).renderImage().writeToFrame()
+       //     ;
+       // }camera1.writeToVideo();
+       // for(int i=0;i<29;++i){
+          //  camera1
+          //          .rotateCamera(-(13)*Math.sin(35*2*Math.PI/360))
+          //          .rotateCameraAroundPointVup(CarCenterPoint,10)
+          //          .setImageWriter(new ImageWriter("finalVideo"+String.valueOf(i), 600, 600)
+          //                  .setPath("C:\\Users\\user\\Documents\\קורסים\\יב\\סמס ב\\מלת פרוייקט\\targil_1\\images\\mov\\final mov"))
+          //          .renderImage().writeToImage();//.writeToFrame()
+            ;
+        //    System.out.println(((double)i)/(29));
        // }
-        //for(int i=29*3+5;i<29*3+10;++i){
-         //   camera1
-        //            .setImageWriter(new ImageWriter("carImage"+String.valueOf(i), 1800, 1800)
-        //                    .setPath("C:\\Users\\user\\Documents\\קורסים\\יב\\סמס ב\\מלת פרוייקט\\targil_1\\images\\mov\\final mov"))
-        //            .renderImage().writeToImage();//.writeToFrame()
-        //    camera1.rotateCamera(-(13/3)*Math.sin(35*2*Math.PI/360))
-        //            .rotateCameraAroundPointVup(CarCenterPoint,10/3)
-        //    ;
-        //    System.out.println((double)i/(29*3));
-       // }
-       // new VideoWriter("carUpSide").setFps(36).loadFromeImages("C:\\Users\\user\\Documents\\קורסים\\יב\\סמס ב\\מלת פרוייקט\\targil_1\\images\\mov\\final mov","boundaryAuto").writeVideo();
-        //camera1.writeToVideo();
+       // new VideoWriter("finalVideo").setFps(12).loadFromeImages("C:\\Users\\user\\Documents\\קורסים\\יב\\סמס ב\\מלת פרוייקט\\targil_1\\images\\mov\\final mov","finalVideo").writeVideo();
 
     }
 }

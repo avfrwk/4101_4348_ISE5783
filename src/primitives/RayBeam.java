@@ -1,14 +1,11 @@
 package primitives;
 
-
-import java.util.MissingResourceException;
-
 public class RayBeam {
     /**the rays of the RayBeam*/
     private Ray[][] rays=null;
-    private Ray centralRay;
-    private static Vector randomVector=new Vector(1,0,0);
-    private static Vector randomVector2=new Vector(0,0,1);
+    private final Ray centralRay;
+    private final static Vector randomVector=new Vector(1,0,0);
+    private final static Vector randomVector2=new Vector(0,0,1);
     int amountSq;
 
     public int getAmountSq() {
@@ -19,18 +16,19 @@ public class RayBeam {
      * @param ray the ray
      * @param amountSq the squared root amount of rays
      * @throws IllegalArgumentException when amountSq is not positive*/
-    public RayBeam(Ray ray,int amountSq){
+    public RayBeam(Ray ray,int amountSq,Point center, double width,double height){
         this.centralRay=ray;
         if(amountSq<=0)
             throw new IllegalArgumentException("amountSq is not positive");
         this.amountSq=amountSq;
+        this.generateRays(center,width,height);
     }
     public Ray[][] getRays() {
         return this.rays;
     }
 
     /** generate the rays*/
-    public RayBeam generateRays(Point center, double width,double height){
+    private void generateRays(Point center, double width,double height){
         //create orthogonal vector to represent "up"
         Vector up;
         double checkIfParallel=this.centralRay.getDir().dotProduct(randomVector);
@@ -55,11 +53,10 @@ public class RayBeam {
                 this.rays[i][j]=new Ray(p0,pj.subtract(p0));
             }
         }
-        return this;
     }
     public static void main(String args[]){
-        RayBeam rayBeam=new RayBeam(new Ray(Point.ZERO,new Vector(0,0,1)),1)
-                .generateRays(new Point(0,0,2),7,7);
+        RayBeam rayBeam=new RayBeam(new Ray(Point.ZERO,new Vector(0,0,1)),1,
+                new Point(0,0,2),7,7);
         Ray[][] rays=rayBeam.getRays();
         for(Ray[] i:rays){
             for(Ray j:i){

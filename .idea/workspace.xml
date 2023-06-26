@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="fixing order&#10;redesigning car">
+    <list default="true" id="54be8a47-8dc1-423f-8d61-257d13ba4836" name="Changes" comment="little change in ray beam">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unittests/carScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/carScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/RayBeam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/RayBeam.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBasicSoftShadows.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasicSoftShadows.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unittests/carScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/CarScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unittests/renderer/ReflectionRefractionTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/renderer/ReflectionRefractionTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unittests/renderer/ShadowTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/renderer/ShadowTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -142,7 +146,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShadowTests.boundrayAoutomatyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReflectionRefractionTests.reflectionCar" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="targil_1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="renderer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.ReflectionRefractionTests" />
+      <option name="METHOD_NAME" value="reflectionCar" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShadowTests.trianglesSphere" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="targil_1" />
       <extension name="coverage">
         <pattern>
@@ -152,7 +172,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="renderer" />
       <option name="MAIN_CLASS_NAME" value="renderer.ShadowTests" />
-      <option name="METHOD_NAME" value="boundrayAoutomatyTest" />
+      <option name="METHOD_NAME" value="trianglesSphere" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -160,10 +180,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ShadowTests.trianglesSphere" />
+        <item itemvalue="JUnit.ReflectionRefractionTests.reflectionCar" />
         <item itemvalue="JUnit.BoundraryTest.boundrayAoutomatyTest" />
         <item itemvalue="JUnit.BoundraryTest.boundrayTest" />
         <item itemvalue="JUnit.BoundraryTest.buildCar" />
-        <item itemvalue="JUnit.ShadowTests.boundrayAoutomatyTest" />
       </list>
     </recent_temporary>
   </component>
@@ -309,7 +330,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1687673823753</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL‎-00020" summary="truffic light added">
+      <created>1687697634018</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL‎-00020" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687697634018</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -346,7 +374,9 @@
     <MESSAGE value="little fixing in the car(now working yet)" />
     <MESSAGE value="anti aliasing&#10;soft shadows&#10;threads" />
     <MESSAGE value="fixing order&#10;redesigning car" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixing order&#10;redesigning car" />
+    <MESSAGE value="truffic light added" />
+    <MESSAGE value="little change in ray beam" />
+    <option name="LAST_COMMIT_MESSAGE" value="little change in ray beam" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

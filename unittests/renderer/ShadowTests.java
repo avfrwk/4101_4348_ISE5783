@@ -8,16 +8,8 @@ import geometries.*;
 import lighting.*;
 import primitives.*;
 import scene.Scene;
-import java.util.List;
-
-
-
-import static primitives.Util.isZero;
-
-import java.util.List;
 
 import primitives.Point;
-import primitives.Ray;
 import primitives.Vector;
 
 /** Testing basic shadows
